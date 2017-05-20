@@ -1,0 +1,21 @@
+/*md-tab-content{
+  height: 100vh;
+}*/
+/*md-input-container{
+      margin-top: 30px;
+}*/
+.demo-tab{
+  height:400px;
+}
+/*md-tabs{
+  height: 100vh;
+}*/
+.hidden{
+  display:none;
+}
+.categoryAddForm{
+  margin-top: 20px;
+}
+.categoryAddForm .md-button {
+  margin-top: 6px;
+}

@@ -1,0 +1,71 @@
+<div ng-include="'components/navbar/cart.html'"></div>
+<md-toolbar ng-show="!showSearch" class="md-whiteframe-2dp">
+  <div class="md-toolbar-tools navbar" layout="row" layout-align="space-between center">
+    <md-button ng-click="vm.openFilter()" aria-label="Left Menu" ng-hide="vm.hideLeftMenu" hide-gt-md>
+      <ng-md-icon icon="menu"></ng-md-icon>
+    </md-button>
+    <h3><a ui-sref="/">Mediabox</a></h3>
+    <div class="search" hide-xs>
+        <div class="searchbox">
+            <form ng-submit="$event.preventDefault()" flex>
+                <md-autocomplete
+                    md-selected-item="vm.selectedItem"
+                    md-search-text-change="vm.searchTextChange(vm.searchText)"
+                    md-search-text="vm.searchText"
+                    md-selected-item-change="vm.selectedItemChange(item)"
+                    md-items="item in vm.querySearch(vm.searchText)"
+                    md-item-text="item.name"
+                    md-min-length="1"
+                    placeholder="Search for anything here"
+                    md-menu-class="navbar-autocomplete">
+                    <md-item-template>
+                        <img ng-if="item.variants[0].image" 
+                        ng-src="{{item.variants[0].image}}" err-SRC="/assets/images/material-shop.jpg"/>
+						<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.name}}</span>
+                    </md-item-template>
+					<md-not-found>
+						No item matching "{{vm.searchText}}" were found.
+					</md-not-found>
+                </md-autocomplete>
+            </form>
+
+            <md-button aria-label="Search" ng-click="showSearch = !showSearch" class="md-raised md-warn">
+                <ng-md-icon icon="search"></ng-md-icon> Search
+            </md-button>
+        </div>
+    </div>
+    <md-button ng-click="vm.openCart()" aria-label="Left Menu" class="md-raised cart">
+      <ng-md-icon icon="shopping_cart"></ng-md-icon>
+      <span hide-xs>Cart ({{vm.cart.getTotalCount()}}) -</span> {{vm.cart.getTotalPrice() | currency:vm.Settings.currency.symbol}}  
+    </md-button>
+ <top-menu></top-menu> 
+  </div>
+</md-toolbar>
+
+<div id="wrapper">
+
+	<!-- begin nav -->
+	<nav>
+		<ul id="menu">
+			<li ng-repeat="c in vm.categories"><a href="#">{{c.name}}</a>
+				<div id="mega" style="z-index:10000">
+					
+					<ul ng-repeat="h in c.child">
+						<li><a href="/Category/{{h.slug}}/{{h._id}}" class="header">{{h.name}}</a>
+							
+							<ul>
+								<li ng-repeat="i in h.child"><a href="/Category/{{i.slug}}/{{i._id}}">{{i.name}}</a></li>
+							</ul>
+						
+						</li>
+						<!--<li ng-repeat="i in h.subcat"><a href="#">{{i.name}}</a></li>-->
+						
+					</ul>
+				
+				</div>
+			</li>
+		</ul>
+
+	</nav><!-- /nav -->
+	
+</div><!-- /wrapper -->

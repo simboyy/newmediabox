@@ -1,0 +1,44 @@
+<md-dialog aria-label="Create a new user" id="admin-user-create" layout="column" 
+flex-xs="100" 
+flex-sm = "75" 
+flex-md="50" 
+flex-lg="33" 
+flex-gt-lg="25" 
+md-whiteframe="24">
+    <md-toolbar class="md-accent" layout="row" layout-align="space-between center">
+      <h3 class="md-toolbar-tools">Change Password</h3>
+        <md-button class="md-icon-button" ng-click="cp.close()" aria-label="Close Change Password"><ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon></md-button>
+    </md-toolbar>
+<md-content flex layout="row" class="content" layout-align="start center">
+<section layout="column" layout-align="start center" flex>
+	<form name="form" ng-submit="cp.changePassword(form)" novalidate autocomplete="off">
+		<section class="section" layout="column">
+			<md-input-container md-is-error="form.password.$error.required && form.password.$dirty">
+				<label>Current Password</label>
+				<input name="password" type="password" ng-model="cp.user.oldPassword" required md-autofocus mongoose-error ng-minlength="3"/>
+				<div ng-messages="form.password.$error" ng-if="form.password.$dirty">
+					<div ng-message="required">Password is required</div>
+					<div ng-message="mongoose">Password is incorrect</div>
+					<div ng-message="minlength">Password must be at least 3 characters.</div>
+				</div>
+			</md-input-container>
+
+			<md-input-container flex class="last">
+				<label>New Password</label>
+				<input name="newPassword" type="password"  ng-model="cp.user.newPassword" required ng-minlength="3">
+				<div ng-messages="form.newPassword.$error" ng-if="form.newPassword.$dirty">
+					<div ng-message="required">Please repeat the new password</div>
+					<div ng-message="minlength">Password must be at least 3 characters.</div>
+				</div>
+			</md-input-container>
+
+			<p class="help-block" ng-if="cp.submitted"> {{cp.message}} </p>
+		</section>
+		<md-dialog-actions>
+			<submit-button loading="vm.loading" form="form" text="Change Password"></submit-button>
+		</md-dialog-actions>
+
+	</form>
+  </section>
+ </md-content>
+</md-dialog>

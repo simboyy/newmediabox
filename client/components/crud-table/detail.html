@@ -1,0 +1,94 @@
+<md-toolbar class="md-hue-1" id="user-detail-toolbar">
+	<span layout="row" layout-align="space-between" class="md-toolbar-tools md-toolbar-tools-top">
+		<md-button ng-click="detail.goBack();" aria-label="Close detail view">
+			<ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
+		</md-button>
+		<h3>Edit {{detail.header | labelCase}} - {{detail.item._id}}</h3>
+		<md-button aria-label="-">
+		</md-button>
+	</span>
+</md-toolbar>
+<md-content class="md-padding" flex id="user-detail-content">
+	<section class="section" layout="column">
+
+		<span class="section-title">Edit</span>
+
+<form name="detailForm" layout="column" layout-fill layout-align="space-between" ng-submit="detail.edit(detail.item);detail.goBack();" novalidate autocomplete="off">
+		<span layout="row" layout-sm="column" ng-repeat="i in detail.columns" ng-if="detail.columns" ng-switch="i.dataType">
+
+			<md-input-container flex ng-switch-when="parseFloat">
+				<label>{{i.heading | labelCase}}</label>
+				<input name="{{i.field}}" ng-model="detail.item[i.field]" ng-disabled="i.noEdit" only-numbers md-autofocus="$index === 0">
+			</md-input-container>
+
+			<md-input-container md-no-float class="md-block" flex ng-switch-when="image">
+				<label>{{i.heading | labelCase}} URL</label>
+				<input name="{{i.field}}" ng-model="detail.item[i.field]" ng-disabled="i.noEdit" md-autofocus="$index === 0">
+				<ng-md-icon icon="insert_photo" ng-click="detail.mediaLibrary()"></ng-md-icon>
+			</md-input-container>
+
+			<md-input-container flex ng-switch-when="boolean">
+				<section class="section slim" layout="column">
+					<span layout="row" layout-align="start center">
+						<span flex="33"><label>{{i.heading | labelCase}}</label></span>
+						<md-switch name="{{i.field}}" aria-label="active" ng-model="detail.item[i.field]"
+						ng-disabled="i.noEdit"></md-switch>
+					</span>
+				</section>
+				<span flex="33"></span>
+			</md-input-container>
+			<md-input-container flex ng-switch-when="date">
+				<label>{{i.heading | labelCase}}</label>
+				<input name="{{i.field}}" ng-model="detail.item[i.field]" type='calendar' ng-disabled="i.noEdit"/>
+
+			</md-input-container>
+
+			<md-input-container flex ng-switch-when="dropdown" class="dropdown">
+        <label>{{i.heading | labelCase}}</label>
+        <md-select ng-model="detail.item[i.field]">
+          <md-option ng-repeat="o in i.options" value="{{o}}">
+            {{o}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+			<md-input-container flex ng-switch-when="textarea">
+        <label>{{i.heading | labelCase}}</label>
+        <textarea name="{{i.field}}" ng-model="detail.item[i.field]" ng-disabled="i.field=='_id' || i.noEdit" md-autofocus="$index === 0"></textarea>
+      </md-input-container>
+
+			<md-input-container flex ng-switch-default>
+				<label>{{i.heading | labelCase}}</label>
+				<input name="{{i.field}}" ng-model="detail.item[i.field]" ng-disabled="i.field=='_id' || i.noEdit" md-autofocus="$index === 0">
+			</md-input-container>
+
+		</span>
+
+		<md-dialog-actions layout="row">
+			<span flex></span>
+			<md-button ng-disabled="detailForm.$invalid" type="submit" class="md-primary md-raised" aria-label="Save changes">Save</md-button>
+		</md-dialog-actions>
+		</form>
+
+	</section>
+
+	<section class="section" layout="column" ng-hide="detail.isRoot">
+
+		<span class="section-title">Record Information</span>
+		<span layout="row" layout-sm="column" class="detail-info">
+			<span flex="45">Modified</span>
+			<span flex ng-show="detail.item.updatedAt" class="subtitle">
+				<span am-time-ago="detail.item.updatedAt"></span>
+				<md-tooltip>{{detail.item.updatedAt | date:'dd. MMMM yyyy H:mm'}}</md-tooltip>
+				{{detail.item.modifiedBy && 'by ' + detail.item.modifiedBy}}
+			</span>
+		</span>
+
+		<span layout="row" layout-sm="column" class="detail-info">
+			<span flex="45">Created</span>
+			<span flex ng-show="detail.item.createdAt" class="subtitle">{{detail.item.createdAt | date:'dd. MMMM yyyy H:mm'}}</span>
+		</span>
+
+	</section>
+
+</md-content>

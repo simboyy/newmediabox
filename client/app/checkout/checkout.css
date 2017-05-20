@@ -1,0 +1,9 @@
+.checkout{
+    margin: 5px 20px;
+}
+.checkout .selected{
+    border:3px solid yellow;
+}
+.err{
+    color: red;
+}

@@ -1,0 +1,68 @@
+<navbar leftmenu="true"></navbar>
+<left-menu></left-menu>
+
+<md-content class="content md-padding" layout="column" layout-align="start center">
+      <section ng-if="campaign.campaigns.length >0" class="header" layout="column" layout-align="center center">
+        <h1>Your Campaigns</h1>
+        <md-input-container flex>
+          <label>Search Campaigns</label>
+          <input name="search" type="text" ng-model="campaign.search" md-autofocus/>
+        </md-input-container>
+      </section>
+
+      <!--When No Campaigns-->
+      <section ng-if="campaign.Campaigns.length===0" class="header" layout="column" layout-align="center stretch">
+        <h1>You have not run anything yet .Start using Mediabox to launch advertising campaigns anywhere .No back and forth</h1>
+        <md-button ui-sref="/" class="md-primary md-raised">
+        <ng-md-icon icon="shopping_cart"></ng-md-icon>Start Now
+
+        </md-buton>
+      </section>
+
+  <section layout="column" class="campaigns">
+  <md-card ng-repeat="o in campaign.campaigns | orderBy : 'campaignDate' : 'reverse' | filter:order.search">
+      <md-card-header>
+          <md-card-header-text>
+            <span class="">Campaign PLACED</span>
+            <span class="md-subhead">{{o.created_at | amCalendar}}</span>
+          </md-card-header-text>
+          <md-card-header-text>
+            <span class="">TOTAL</span>
+            <span class="md-subhead">{{o.amount.total | localPrice}}</span>
+          </md-card-header-text>
+          <md-card-header-text hide show-gt-sm>
+            <span class="">SHIP TO</span>
+            <span class="md-subhead">{{o.address.recipient_name}}</span>
+          </md-card-header-text>
+          <md-card-header-text>
+            <span class="">Campaign # </span>
+            <span class="md-subhead">{{o.campaignNo}}</span>
+          </md-card-header-text>
+      </md-card-header>
+      <md-card-content layout="column" layout-gt-sm="row" layout-align="space-between">
+          <md-list flex=40>
+            <div layout="row" ng-repeat="i in o.items">
+              <md-card-avatar>
+                  <img ng-src="{{i.url}}" err-SRC="/assets/images/150x150.png" alt="{{i.name}}" width="100px" hide show-gt-xs>
+              </md-card-avatar>
+              <div class="content">
+              <a >{{i.name}}</a><br/><br/>
+              <b>Amount:&nbsp;&nbsp;</b> {{i.price | currency}} * {{i.quantity}}&nbsp;=&nbsp;{{i.price * i.quantity | currency}}
+              
+              <br/>
+                <cart-buttons variant="i" product="o">
+              </div>
+            </div>
+          </md-list>
+            <md-list class="campaign-address" flex=30>
+                  <ng-md-icon icon="local_shipping"></ng-md-icon>&nbsp;Status
+                  <hr>
+                
+                  <p class="md-subhead">Campaign Status: &nbsp;{{o.status}}</p>
+                  
+           </md-list>
+      </md-card-content>
+  </md-card>
+  </section>
+</md-content>
+<footer></footer>

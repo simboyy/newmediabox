@@ -1,0 +1,84 @@
+<navbar leftmenu="true"></navbar>
+<left-menu></left-menu>
+<md-content flex class="content md-padding" layout="column" layout-align="start center">
+      <section class="header" layout="column" layout-align="center center">
+        <h2>Payment Successful</h2>
+        <md-input-container flex>
+          <label>Search Payments</label>
+          <input name="search" type="text" ng-model="payment.search" md-autofocus/>
+        </md-input-container>
+      </section>
+  <section layout="column" class="orders">
+  <md-card ng-repeat="o in payment.orders | orderBy : 'orderDate' : 'reverse' | filter:payment.search">
+      <md-card-header>
+          <md-card-header-text>
+            <span class="">ORDER PLACED</span>
+            <span class="md-subhead">{{o.created_at | amCalendar}}</span>
+          </md-card-header-text>
+          <md-card-header-text>
+            <span class="">TOTAL</span>
+            <span class="md-subhead">{{o.total | currency}}</span>
+          </md-card-header-text>
+          <md-card-header-text>
+            <span class="">SHIP TO</span>
+            <span class="md-subhead">{{o.name}}</span>
+          </md-card-header-text>
+          <md-card-header-text>
+            <span class="">Order # </span>
+            <span class="md-subhead">{{o.orderNo}}</span>
+          </md-card-header-text>
+      </md-card-header>
+      <md-card-content layout="row" layout-align="space-between">
+          <div flex>
+            <div layout="row" ng-repeat="i in o.items">
+              <md-card-avatar>
+                  <img ng-src="{{i.image}}" class="md-card-image" alt="i.name" width="100px">
+              </md-card-avatar>
+              
+              <div class="content">
+              <a ng-click="payment.navigate(i)">{{i.name}}</a><br/>
+              Size: <b>{{i.size}}</b><br/>
+              Amount: <b>{{i.price}} * {{i.quantity}}&nbsp;=&nbsp;{{i.price * i.quantity | currency: payment.Settings.currency.symbol}}</b>
+              <del ng-if="i.price!=i.mrp">{{i.mrp}}</del><br/>
+              <br/>
+                
+              </div>
+            </div>
+          </div>
+          <md-card-actions layout="column" class="content">
+            <md-list flex>
+              <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                  <h2 class="md-subhead"><ng-md-icon icon="local_shipping"></ng-md-icon>&nbsp;Address</h2>
+                  <hr>
+                  {{o.address}}<br/>
+                  {{o.city}}<br/>
+                  {{o.zip}}<br/>
+                  {{o.phone}}<br/>
+                </div>
+              </md-list-item>
+
+              <!--<md-list-item>
+                <div class="md-list-item-text">
+                  <p class="md-subhead">Payment Status: &nbsp;</p>
+                </div>
+                  <md-select ng-model="o.payment" placeholder="Payment Status" ng-change="payment.changeStatus(o)">
+                    <md-option ng-value="o" ng-repeat="o in payment.Settings.paymentStatus">{{o}}</md-option>
+                  </md-select>
+              </md-list-item>-->
+
+              <md-list-item>
+                <div class="md-list-item-text">
+                  <p  class="md-subhead">Order Status: &nbsp;</p>
+                </div>
+                  <md-select ng-model="o.status" placeholder="Order Status" ng-change="payment.changeStatus(o)" flex>
+                    <md-option ng-value="o" ng-repeat="o in payment.Settings.orderStatus">{{o}}</md-option>
+                  </md-select>
+              </md-list-item>
+           </md-list>
+          </md-card-actions>
+      </md-card-content>
+  </md-card>
+  </section>
+</md-content>
+<footer></footer>

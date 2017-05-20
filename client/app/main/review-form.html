@@ -1,0 +1,29 @@
+<div layout="row">
+<md-content flex layout="column">
+<section layout="column" flex layout-align="center center">
+  <h1>Rating & Review</h1>
+  <form name="form" ng-submit="save(review)" novalidate>
+  <section class="section" layout="column">
+    <rating rating="review.rating"></rating><br/>
+    <md-input-container md-is-error="(form.message.$error.required || form.message.$error.message) && form.message.$dirty">
+      <label>Message</label>
+      <textarea name="review" ng-model="review.message" md-autofocus></textarea>
+      <div ng-messages="form.message.$error" ng-if="form.message.$dirty">
+        <div ng-message="required">Message required</div>
+      </div>
+    </md-input-container>
+  </section>
+  <div class="md-dialog-actions" layout="column" layout-align="center center">
+    <div class="error" layout-align="center center">{{message}}</div>
+    <div layout="row">
+      <md-button type="submit" class="md-raised circular-progress-button md-primary" ng-disabled="!form.$valid || vm.loading" aria-label="Save Review">
+        <span ng-show="!vm.loading"><ng-md-icon icon="save"></ng-md-icon>Save</span>
+        <md-progress-circular md-mode="indeterminate" md-diameter="25" ng-show="vm.loading" class="md-accent md-hue-1"></md-progress-circular><span ng-show="vm.loading">Loading...</span>
+      </md-button>
+      <md-button class="btn btn-default btn-lg btn-register" ng-click="cancel()" aria-label="Cancel Review"> Cancel </md-button>
+    </div>
+  </div>
+  </form>
+</section>
+</md-content>
+</div>

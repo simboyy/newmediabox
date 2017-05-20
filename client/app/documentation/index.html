@@ -1,0 +1,1063 @@
+<style type="text/css">
+
+
+/*
+Bootstrap Image Carousel Slider with Animate.css
+Code snippet by Hashif (http://hashif.com) for Bootsnipp.com
+Image credits: unsplash.com
+*/
+@import url(https://fonts.googleapis.com/css?family=Quicksand:400,700);
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    font-weight:700;
+}
+
+
+
+
+
+/********************************/
+/*          Main CSS     */
+/********************************/
+
+
+#first-slider .main-container {
+  padding: 0;
+}
+
+
+#first-slider .slide1 h3, #first-slider .slide2 h3, #first-slider .slide3 h3, #first-slider .slide4 h3{
+    color: #fff;
+    font-size: 30px;
+      text-transform: uppercase;
+      font-weight:700;
+}
+
+#first-slider .slide1 h4,#first-slider .slide2 h4,#first-slider .slide3 h4,#first-slider .slide4 h4{
+    color: #fff;
+    font-size: 30px;
+      text-transform: uppercase;
+      font-weight:700;
+}
+#first-slider .slide1 .text-left ,#first-slider .slide3 .text-left{
+    padding-left: 40px;
+}
+
+
+#first-slider .carousel-indicators {
+  bottom: 0;
+}
+#first-slider .carousel-control.right,
+#first-slider .carousel-control.left {
+  background-image: none;
+}
+#first-slider .carousel .item {
+  min-height: 425px; 
+  height: 100%;
+  width:100%;
+}
+
+.carousel-inner .item .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+
+#first-slider h3{
+  animation-delay: 1s;
+}
+#first-slider h4 {
+  animation-delay: 2s;
+}
+#first-slider h2 {
+  animation-delay: 3s;
+}
+
+
+#first-slider .carousel-control {
+    width: 6%;
+        text-shadow: none;
+}
+
+
+#first-slider h1 {
+  text-align: center;  
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#first-slider .p {
+  padding-top: 125px;
+  text-align: center;
+}
+
+#first-slider .p a {
+  text-decoration: underline;
+}
+#first-slider .carousel-indicators li {
+    width: 14px;
+    height: 14px;
+    background-color: rgba(255,255,255,.4);
+  border:none;
+}
+#first-slider .carousel-indicators .active{
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+  border:none;
+}
+
+
+.carousel-fade .carousel-inner .item {
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+}
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  opacity: 0;
+}
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+
+.carousel-control .fa-angle-right, .carousel-control .fa-angle-left {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    display: inline-block;
+}
+.carousel-control .fa-angle-left{
+    left: 50%;
+    width: 38px;
+    height: 38px;
+    margin-top: -15px;
+    font-size: 30px;
+    color: #fff;
+    border: 3px solid #ffffff;
+    -webkit-border-radius: 23px;
+    -moz-border-radius: 23px;
+    border-radius: 53px;
+}
+.carousel-control .fa-angle-right{
+    right: 50%;
+    width: 38px;
+    height: 38px;
+    margin-top: -15px;
+    font-size: 30px;
+    color: #fff;
+    border: 3px solid #ffffff;
+    -webkit-border-radius: 23px;
+    -moz-border-radius: 23px;
+    border-radius: 53px;
+}
+.carousel-control {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+
+/********************************/
+/*       Slides backgrounds     */
+/********************************/
+#first-slider .slide1 {
+    background-image: url("../../assets/images/main-slider-3.jpg");
+      background-size: cover;
+    background-repeat: no-repeat;
+}
+#first-slider .slide2 {
+  background-image: url("../../assets/images/main-slider-3.jpg");
+      background-size: cover;
+    background-repeat: no-repeat;
+}
+#first-slider .slide3 {
+  background-image: url("../../assets/images/main-slider-3.jpg");
+      background-size: cover;
+    background-repeat: no-repeat;
+}
+#first-slider .slide4 {
+  background-image: url("../../assets/images/main-slider-3.jpg");
+      background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+
+
+/********************************/
+/*          Media Queries       */
+/********************************/
+@media screen and (min-width: 980px){
+      
+}
+@media screen and (max-width: 640px){
+      
+}
+
+    
+    body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 500;
+}
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-96 { font-size: 96px; }
+.material-icons.orange600 {color: #d9534f}
+
+.topnav {
+    font-size: 14px; 
+}
+
+.lead {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.intro-header {
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+   
+    background-size: cover;
+}
+
+.intro-message {
+    position: relative;
+    color: #333333;
+    padding-bottom: 5%;
+}
+
+.intro-message > h1 {
+    margin: 0;
+   
+    font-size: 5em;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+
+}
+
+@media(max-width:767px) {
+    .intro-message {
+        padding-bottom: 15%;
+    }
+
+    .intro-message > h1 {
+        font-size: 3em;
+    }
+
+    ul.intro-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.intro-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+
+    .intro-divider {
+        width: 100%;
+    }
+}
+
+.network-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.content-section-a {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+}
+
+.content-section-b {
+    padding: 50px 0;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.section-heading {
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.section-heading-spacer {
+    float: left;
+    width: 200px;
+    border-top: 3px solid #e7e7e7;
+}
+
+.banner {
+    padding: 100px 0;
+    color: #f8f8f8;
+    background: url(../img/banner-bg.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.banner h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 3em;
+}
+
+.banner ul {
+    margin-bottom: 0;
+}
+
+.banner-social-buttons {
+    float: right;
+    margin-top: 0;
+}
+
+@media(max-width:1199px) {
+    ul.banner-social-buttons {
+        float: left;
+        margin-top: 15px;
+    }
+}
+
+@media(max-width:767px) {
+    .banner h2 {
+        margin: 0;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+        font-size: 3em;
+    }
+
+    ul.banner-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.banner-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+}
+
+
+footer {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+} 
+
+.white-bg {
+    background-color: #fff;
+}
+
+
+
+@media (max-width: 767px)
+.space-80, .space-100 {
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+@media (max-width: 767px)
+.video-bg {
+    min-height: auto;
+}
+
+@media (max-width: 1200px)
+.theme-container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (max-width: 479px)
+.section-title, .caption-text .extra-bold-font {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.mask-overlay {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+}
+.mask-overlay, .theme-color-mask, .white-mask {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+.theme-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.white-color {
+    color: #fff;
+}
+.title-wrap {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.relative-div {
+    position: relative;
+}
+.slider-title-1 {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+secondery-font, .section-title, .title-1, .title-2, .title-3, .article-title > h2, .comment-reply-title, .comment-author .fn, .comment-metadata a, .theme-btn, .theme-btn-1, .theme-btn-2, .form-submit > input[type="submit"], .primary-navbar li a, .form-control, .countdown-amount, .countdown-period {
+    font-family: 'Montserrat', sans-serif;
+}
+white-color .section-title, .white-color p {
+    color: #fff;
+}
+
+.space-top-15 {
+    padding-top: 15px;
+}
+.section-title {
+    font-size: 54px;
+}
+.section-title, .title-1, .title-2, .title-3, .article-title > h2, .comment-reply-title, .comment-author .fn, .comment-metadata a {
+    color: #3c3d41;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+.devices-wrap .fa {
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+
+
+.space-50 {
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+.block-inline {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.theme-color, .hover-color:hover, .hover-color:focus, .navigation .dropdown-menu li a:hover, .navigation .dropdown-menu li a:focus, .breadcrumb-menubar > li > a:hover, .breadcrumb-menubar > li > a:focus {
+    color: #d80018;
+}
+
+.slider-form .submit-btn, .video-icon.fa, .price-box:hover .theme-btn-2, .price-box:focus .theme-btn-2, .title-devider .line-1, .theme-btn-1:hover, .theme-btn-1:focus, .widget-wrap.tag-cloud a:hover, .widget-wrap.tag-cloud a:focus, .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover, .pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover, .post-next:hover, .post-previous:hover, .post-next:focus, .post-previous:focus, .form-submit > input[type="submit"] {
+    border-color: #d80018;
+}
+trong { font-weight: 500; }
+
+a, a:hover, a:focus {
+    color: #e89a3e;
+    text-decoration: none;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+
+h1 {
+    margin-top: 10px;
+    font-size: 38px;
+    font-weight: 100;
+    color: #555;
+    line-height: 50px;
+}
+
+.medium-paragraph {
+    font-size: 18px;
+    line-height: 32px;
+}
+
+::-moz-selection { background: #e89a3e; color: #fff; text-shadow: none; }
+::selection { background: #e89a3e; color: #fff; text-shadow: none; }
+
+
+/***** Modal *****/
+
+.modal-backdrop.in {
+    filter: alpha(opacity=7);
+    opacity: 0.7;
+}
+
+.modal-content {
+    background: none;
+    border: 0;
+    -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+}
+
+.modal-body {
+    padding: 0 25px 25px 25px;
+}
+
+.modal-header {
+    padding: 25px 25px 15px 25px;
+    text-align: right;
+}
+
+.modal-header, .modal-footer {
+    border: 0;
+}
+
+.modal-header .close {
+    float: none;
+    margin: 0;
+    font-size: 36px;
+    color: #fff;
+    font-weight: 300;
+    text-shadow: none;
+    opacity: 1;
+}
+
+
+/***** Top content *****/
+
+.top-content {
+    height: 100%;
+    min-height: 100%;
+    padding: 120px 0;
+}
+
+.top-content .text,
+.top-content .text h1 {
+    color: #fff;
+}
+
+.top-content .text p {
+    margin: 20px 0 10px 0;
+    opacity: 0.8;
+}
+
+.top-content .text p a {
+    color: #fff;
+    border-bottom: 1px dotted #fff;
+}
+
+.top-content .text p a:hover,
+.top-content .text p a:focus {
+    color: #fff;
+    border: 0;
+}
+
+.video-link {
+    padding-top: 70px;
+}
+
+.video-link a:hover,
+.video-link a:focus {
+    outline: 0;
+}
+
+a .video-link-text {
+    color: #fff;
+    opacity: 0.8;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+
+a:hover .video-link-text, 
+a:focus .video-link-text {
+    outline: 0;
+    color: #fff;
+    opacity: 1;
+    border-bottom: 1px dotted #fff;
+}
+
+a .video-link-icon {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    background: #e89a3e;
+    color: #fff;
+    line-height: 50px;
+    -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+a .video-link-icon:after {
+    position: absolute;
+    content: "";
+    top: -6px;
+    left: -6px;
+    width: 66px;
+    height: 66px;
+    background: #444;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: -99;
+    -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;
+}
+
+a:hover .video-link-icon,
+a:focus .video-link-icon {
+    outline: 0;
+    background: #fff;
+    color: #e89a3e;
+}
+
+.social {
+    padding-top: 100px;
+    font-size: 28px;
+    line-height: 38px;
+}
+
+.social a {
+    margin: 5px 15px;
+    color: #fff;
+    color: rgba(255, 255, 255, 0.6);
+    vertical-align: middle;
+}
+
+.social a:hover,
+.social a:focus {
+    outline: 0;
+    color: #fff;
+}
+
+.social .divider-2 {
+    display: inline-block;
+    width: 1px;
+    height: 14px;
+    background: #fff;
+    background: rgba(255, 255, 255, 0.4);
+    vertical-align: middle;
+}
+
+
+/***** Media Queries *****/
+
+@media (min-width: 992px) and (max-width: 1199px) { }
+
+@media (min-width: 768px) and (max-width: 991px) {
+    
+    .top-content { padding-top: 60px; }
+    .social { padding-top: 80px; }
+
+}
+
+@media (max-width: 767px) {
+
+    .top-content { padding: 20px 0 20px 0; }
+    .video-link { padding-top: 40px; }
+    .social { padding-top: 50px; }
+
+}
+
+@media (max-width: 415px) {
+    
+    h1 { font-size: 32px; }
+    
+    .social .divider-2 { display: none; }
+
+}
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://cdn.bootcss.com/animate.css/3.5.1/animate.min.css">
+<div id="top">
+    <div class="container">
+        <div class="col-md-1">
+            <a  href="index.html">
+                <img src="/assets/img/logo.png"  class="hidden-xs">
+                <img src="/assets/img/logo.png"  class="visible-xs"><span class="sr-only"></span>
+            </a>
+        </div>
+         <div class="col-md-9 offer" style="padding-top:  15px" data-animate="fadeInDown">
+            
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We provide advertising inventory ? <a href="/">Get it here .</a>
+        </div>
+        <div class="col-md-2 pull-right" data-animate="fadeInDown">
+           <top-menu ng-if="!search.show"></top-menu> 
+        </div>
+    </div>
+   </div>
+
+<div id="first-slider">
+    <div id="carousel-example-generic" class="carousel slide carousel-fade">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <!-- Item 1 -->
+            <div class="item active slide1">
+                <div class="row"><div class="container">
+                    <div class="col-md-3 text-right">
+                        <img style="max-width: 200px;"  data-animation="animated zoomInLeft" src="http://s20.postimg.org/pfmmo6qj1/window_domain.png">
+                    </div>
+                    <div class="col-md-9 text-left">
+                        <h3  style="color:#333333;" data-animation="animated bounceInDown">Africa's first Online Market Place For Advertising Media!</h3>
+                        <h4 data-animation="animated bounceInUp"> </h4>             
+                     </div>
+                </div></div>
+             </div> 
+            <!-- Item 2 -->
+            <div class="item slide2">
+                <div class="row"><div class="container">
+                    <div class="col-md-7 text-left">
+                        <h3 style="color:#333333;"data-animation="animated bounceInDown"> Our Smart filters and Recommendations help you choose the right media option for you.</h3>
+                        
+                     </div>
+                    <div class="col-md-5 text-right">
+                        <img style="max-width: 200px;"  data-animation="animated zoomInLeft" src="http://s20.postimg.org/sp11uneml/rack_server_unlock.png">
+                    </div>
+                </div></div>
+            </div>
+            <!-- Item 3 -->
+            <div class="item slide3">
+                <div class="row"><div class="container">
+                    <div class="col-md-7 text-left">
+                        <h3 style="color:#333333;" data-animation="animated bounceInDown">Access Global Publishers</h3>
+                        <h4 style="color:#333333;" data-animation="animated bounceInUp">Do not be limited by border boundaries advertise anywhere , any time with MediaBox</h4>
+                     </div>
+                    <div class="col-md-5 text-right">
+                        <img style="max-width: 200px;"  data-animation="animated zoomInLeft" src="http://s20.postimg.org/eq8xvxeq5/globe_network.png">
+                    </div>     
+                </div></div>
+            </div>
+            <!-- Item 4 -->
+            <div class="item slide4">
+                <div class="row"><div class="container">
+                    <div class="col-md-7 text-left">
+                        <h3 style="color:#333333;" data-animation="animated bounceInDown">Plan</h3>
+                        <h4 style="color:#333333;" data-animation="animated bounceInUp">Build </h4>
+                        <h4 style="color:#333333;" data-animation="animated bounceInDown">Launch advertising campaigns anywhere ,anytime with Mediabox</h4>
+                     </div>
+                    <div class="col-md-5 text-right">
+                        <img style="max-width: 200px;"  data-animation="animated zoomInLeft" src="http://s20.postimg.org/9vf8xngel/internet_speed.png">
+                    </div>  
+                </div></div>
+            </div>
+            <!-- End Item 4 -->
+    
+        </div>
+        <!-- End Wrapper for slides-->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <i class="fa fa-angle-left"></i><span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <i class="fa fa-angle-right"></i><span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<!--emd slider-->
+<div class="intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h2 class="section-heading">We provide advertising inventory across Africa</h2>
+                        <h4 class="section-heading">by bringing together Advertisers and Publishers</h4>
+                        <hr class="intro-divider">
+                        <ul class="list-inline intro-social-buttons">
+                            <li>
+                                <a href="/" class="btn btn-danger btn-lg"></i> <span class="network-name">Start Using Mediabox -></span></a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+
+    <a  name="services"></a>
+    <div class="content-section-a">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading"><center>How Advertisers Benefit :</center></h2>
+                   <div class="row lead">
+                                <div class="hidden-xs space-top-15"></div>
+                                <div class="devices-wrap col-sm-6 space-top-30">
+                                    <ng-md-icon icon="swap_horiz" class="material-icons md-48 orange600"></ng-md-icon>
+                                    <h3 class="title-2">BUY DIRECTLY !</h3>
+                                    <p>Discover and buy advertising space through our platform .Orders and creative are submitted directly to publisher</p>
+                                </div>
+                                <div class="devices-wrap col-sm-6 space-top-30">
+                                    <ng-md-icon icon="language" class="material-icons md-48 orange600" style="font-size: 48px"></ng-md-icon>
+                                      <h3 class="title-2">ACCESS GLOBAL PUBLISHERS!</h3>
+                                       <p> Do not be limited by border boundaries  advertise  anywhere , any time with MediaBox </p>
+                                 </div>
+                                <div class="devices-wrap col-sm-6 space-top-30">
+                                       <ng-md-icon icon="alarm" class="material-icons md-48 orange600"></ng-md-icon>
+                                    <h3 class="title-2">SAVE TIME!</h3>
+                              <p>Plan ,negotiate and buy advertising space  at the comfort of your home or workplace ,No Back and Fourth</p>
+                                </div>
+                                <div class="devices-wrap col-sm-6 space-top-30">
+                                      <ng-md-icon icon="thump_up" class="material-icons md-48 orange600"></ng-md-icon>
+                                     <h3 class="title-2">RECOMMENDATIONS </h3>
+                <p>Help you to plan by giving you appropriate publishers that match your campaign objectives or budget</p>
+                                </div>
+                            </div>
+                </div>
+               
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div >
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading"><center>How Publishers benefit</center></h2>
+                     <div class="row lead ">
+                                <div class="hidden-xs space-top-15"></div>
+                                <div class="devices-wrap col-sm-6 space-top-30">
+                                <ng-md-icon icon="monetization_on" class="material-icons md-48 orange600"></ng-md-icon>
+                                  
+                                         <h3 class="title-2">INCREASE REVENUE !</h3>
+                                         <p>Access competition from around the globe</p>
+                                </div>
+                                <div class="devices-wrap col-sm-6 space-top-30">
+        
+                                    <ng-md-icon icon="language" class="material-icons md-48 orange600"></ng-md-icon>
+                                    <h3 class="title-2">ACCESS GLOBAL DEMAND!</h3>
+                                    <p>Do not be limited by border boundaries  advertise  anywhere any time with MediaBox </p>
+                                 </div>
+                                <div class="devices-wrap col-sm-6 space-top-30">
+                                      <ng-md-icon icon="alarm" class="material-icons md-48 orange600"></ng-md-icon>
+                                <h3 class="title-2">SAVE TIME!</h3>
+                                <p>Approve proposals and recieve orders directly from  advertisers through the platform
+</p>
+                                </div>
+                                <div class="devices-wrap col-sm-6 space-top-30">
+                                        <ng-md-icon icon="trending_up" class="material-icons md-48 orange600"></ng-md-icon>
+                                        <h3 class="title-2">EASY TRACKING AND REPORTING </h3>
+                                        <p>Analyzing sales and consumer data</p>
+                                </div>
+                            </div>
+                </div>
+             
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+
+
+    
+    <div class="content-section-a">
+
+               <section class="lead" style="margin:20px">
+                
+                    <div class="title-wrap space-bottom-45">
+                        <h3 class="section-heading">We provide you with the technology that will help you in managing your advertising content </h3><p>This automation translates to significant benefits for both advertisers and publishers in the form of </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-12 text-center feature-list">
+                            <div class="feature-wrap space-bottom-30">
+                                <i  style="font-size: 35px;" class="fa fa-dollar theme-color"></i>
+                    <h3 class="title-2">REDUCTION IN OPERATION COSTS </h3>
+                    <p>Publishers can free their sales teams to spend more time establishing high value relationships, whilst buyers can access a market of known publishers, known price and known availability, </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 text-center feature-list">
+                            <div class="feature-wrap space-bottom-30">
+                                <i  style="font-size: 35px;"  class="fa fa-calculator theme-color"></i>
+                    <h3 class="title-2">MATERIAL EFFICIENCY GAINS</h3>
+                    <p>Be a master of effiency with the all in one platform for all your advertising content.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-xs-12 text-center feature-list">
+                            <div class="feature-wrap space-bottom-30">
+                                 <i   style="font-size: 35px;"  class="fa fa-clock-o theme-color"></i>
+                    <h3 class="title-2">CONVINIENCE!</h3>
+                    <p>The only platform that manages the full advertising cycle, end to end.Media trading at the click of a button.</p>
+                            </div>
+                        </div>                    
+                    </div>
+                    
+                
+            </section>
+     
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+     </div>
+
+      <!--how it works video-->
+
+         <section id="work-video" class="white-bg">
+                 <div class="top-content">
+            <div class="container">
+            
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text">
+                        <h1><center>Mediabox How It Works</center></h1>
+                        <p>
+                            Find out how  Mediabox can help you discover where to put your ad 
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9 col-sm-offset-4 video-link medium-paragraph">
+                        <a href="#" class="launch-modal" data-modal-id="modal-video">
+                            <span class="video-link-icon"><i class="fa fa-play"></i></span>
+                            <span class="video-link-text">Launch  video</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 social">
+                        <a href="http://www.facebook.com/mediaboxzw"><i class="fa fa-facebook"></i></a> <span class="divider-2"></span>
+                        <a href="http://twitter.com/mediaboxzw"><i class="fa fa-twitter"></i></a> <span class="divider-2"></span>
+                        <a href="https://plus.google.com/mediaboxzw"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+            </section>
+    <!-- /.banner -->
+
+    <!-- Popup: Video Player -->
+           <!-- MODAL: How it works -->
+        <div class="modal fade" id="modal-video" tabindex="-1" role="dialog" aria-labelledby="modal-video-label">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  
+                    <div class="modal-body">
+                        <div class="modal-video">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/196655771?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;color=e89a3e" 
+                                            webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+<script type="text/javascript">
+    
+
+jQuery(document).ready(function() {
+    
+    /*
+        Background slideshow
+    */
+    $('.top-content').backstretch("../../assets/images/1.jpg");
+    
+    /*
+        Modals
+    */
+    $('.launch-modal').on('click', function(e){
+        e.preventDefault();
+        $( '#' + $(this).data('modal-id') ).modal();
+    });
+    
+});
+
+
+(function( $ ) {
+
+    //Function to animate slider captions 
+    function doAnimations( elems ) {
+        //Cache the animationend event in a variable
+        var animEndEv = 'webkitAnimationEnd animationend';
+        
+        elems.each(function () {
+            var $this = $(this),
+                $animationType = $this.data('animation');
+            $this.addClass($animationType).one(animEndEv, function () {
+                $this.removeClass($animationType);
+            });
+        });
+    }
+    
+    //Variables on page load 
+    var $myCarousel = $('#carousel-example-generic'),
+        $firstAnimatingElems = $myCarousel.find('.item:first').find("[data-animation ^= 'animated']");
+        
+    //Initialize carousel 
+    $myCarousel.carousel();
+    
+    //Animate captions in first slide on page load 
+    doAnimations($firstAnimatingElems);
+    
+    //Pause carousel  
+    $myCarousel.carousel('pause');
+    
+    
+    //Other slides to be animated on carousel slide event 
+    $myCarousel.on('slide.bs.carousel', function (e) {
+        var $animatingElems = $(e.relatedTarget).find("[data-animation ^= 'animated']");
+        doAnimations($animatingElems);
+    });  
+    $('#carousel-example-generic').carousel({
+        interval:3000,
+        pause: "false"
+    });
+    
+})(jQuery); 
+
+
+</script>
+
+
+    

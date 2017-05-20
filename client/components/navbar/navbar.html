@@ -1,0 +1,134 @@
+<div ng-include="'components/navbar/cart.html'"></div>
+<div >
+<!-- *** TOPBAR ***
+_________________________________________________________ -->
+<div id="top">
+    <div class="container">
+        <div class="col-md-1">
+            <a  href="index.html">
+                <img width="170px" height="60px" src="/assets/img/logo.png"  class="hidden-xs">
+                <img width="170px" height="60px" src="/assets/img/logo.png"  class="visible-xs"><span class="sr-only"></span>
+            </a>
+        </div>
+         <div class="col-md-9 offer" style="padding-top:  10px" data-animate="fadeInDown">
+            <div class="col-md-6"></div>
+            <div class="col-md-6"> <img src="/assets/img/payments-banner-bottom.png"></div>
+           
+             </a>
+        </div>
+        <div class="col-md-2 pull-right" data-animate="fadeInDown">
+           <top-menu ng-if="!search.show"></top-menu> 
+        </div>
+    </div>
+   </div>
+
+<!-- *** TOP BAR END *** -->
+
+<!-- *** NAVBAR ***
+_________________________________________________________ -->
+
+<div class="navbar navbar-default yamm" role="navigation" id="navbar">
+    <div class="container">
+  <div class="col-md-12">
+        <div class="navbar-header">
+
+            
+            <div class="navbar-buttons">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation" ng-click="isCollapsed1 = !isCollapsed1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-align-justify"></i>
+                </button>
+                
+               
+
+            </div>
+        </div>
+        <!--/.navbar-header -->
+
+        <div class="navbar-collapse collapse navbar-static-top megamenu pull-left" id="navigation">
+          <div collapse="isCollapsed1" class="navbar-collapse collapse" id="navbar-main2">
+            <ul class="nav navbar-nav navbar-left pull-right" ng-hide="isAdmin()">
+                <li class="dropdown yamm-fw" ng-repeat="p in vm.categories">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">{{p.name}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="yamm-content">
+                                <div class="row">
+                                    <div class="col-sm-3" ng-repeat="h in p.child">
+                                        <!-- <h5>All</h5> -->
+                                        <ul>
+                                            <div>
+                                                 <li ><a href="/Category/{{h.slug}}/{{h._id}}"><ng-md-icon icon="{{h.icon}}" md-menu-align-target></ng-md-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{h.name}}</a>
+                                                 </li>  
+                                            </div>
+                                      
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.yamm-content -->
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+          </div>
+        </div>
+        <!--/.nav-collapse -->
+
+        <div class="navbar-buttons pull-right">
+             <md-button ng-click="vm.openCart()" class="md-raised cart" ng-if="!search.show">
+                    <ng-md-icon icon="shopping_cart"></ng-md-icon>
+                    <span  show-gt-sm>Cart {{vm.cart.getTotalCount()}} Items  </span>
+                    <span hide show-gt-sm odometer="vm.cart.getTotalPrice()">
+                  </md-button>
+            <!--/.nav-collapse -->
+
+            <div class="navbar-collapse collapse right" id="search-not-mobile">
+                <button type="button" class="btn navbar-btn btn-danger" data-toggle="collapse" data-target="#search">
+                    <span class="sr-only">Toggle search</span>
+                     <ng-md-icon icon="search"></ng-md-icon>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="collapse clearfix" id="search">
+           <div class="search" layout="row" layout-align="center center" flex ng-if="search.show || vm.$mdMedia('gt-xs')">
+        <div class="searchbox" layout="row" layout-align="center center" flex>
+            <form ng-submit="$event.preventDefault()" flex>
+                <md-autocomplete
+                    ng-cloak
+                    md-selected-item="vm.selectedItem"
+                    md-search-text-change="vm.searchTextChange(vm.searchText)"
+                    md-search-text="vm.searchText"
+                    md-selected-item-change="vm.selectedItemChange(item)"
+                    md-items="item in vm.querySearch(vm.searchText)"
+                    md-item-text="item.name"
+                    md-min-length="1"
+                    placeholder="Search for publishers here"
+                    md-menu-class="navbar-autocomplete">
+                    <md-item-template>
+                        <img ng-if="item.logo[0].base64"  width="50px"  height="50px" 
+                        data-ng-src="data:image/png;base64,{{item.logo[0].base64}}" err-SRC="/assets/images/material-shop.jpg"/>
+            <span md-highlight-text="vm.searchText">{{item.name}}</span>
+                    </md-item-template>
+          <md-not-found>
+            No item matching "{{vm.searchText}}" were found.
+          </md-not-found>
+                </md-autocomplete>
+            </form>
+
+        </div>
+    </div>
+        </div>
+        <!--/.nav-collapse -->
+
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /#navbar -->
+</div>
+<!-- *** NAVBAR END *** -->
+</div>

@@ -1,0 +1,7 @@
+.wishlist .product-description h2{
+    margin-top: -8px;
+    cursor: pointer;
+}
+.wishlist .wish-content{
+    margin-left: 10px;
+}

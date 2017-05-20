@@ -1,0 +1,34 @@
+<navbar leftmenu="true"></navbar>
+<left-menu></left-menu>
+<md-content flex layout="column" class="content" layout-align="start center">
+<section layout="column" layout-align="start center">
+	<h1>Change Password</h1>
+	<form name="form" ng-submit="cp.changePassword(form)" novalidate autocomplete="off" autocomplete="off">
+		<section class="section" layout="column">
+			<md-input-container md-is-error="form.password.$error.required && form.password.$dirty">
+				<label>Current Password</label>
+				<input name="password" type="password" ng-model="cp.user.oldPassword" required md-autofocus mongoose-error ng-minlength="3"/>
+				<div ng-if="form.password.$error.mongoose" class="err">Password is incorrect</div>
+				<div ng-messages="form.password.$error" ng-if="form.password.$dirty">
+					<div ng-message="required">Password is required</div>
+					<div ng-message="mongoose">Password is incorrect</div>
+					<div ng-message="minlength">Password must be at least 3 characters.</div>
+				</div>
+			</md-input-container>
+
+			<md-input-container flex class="last">
+				<label>New Password</label>
+				<input name="newPassword" type="password"  ng-model="cp.user.newPassword" required ng-minlength="3">
+				<div ng-messages="form.newPassword.$error" ng-if="form.newPassword.$dirty">
+					<div ng-message="required">Please repeat the new password</div>
+					<div ng-message="minlength">Password must be at least 3 characters.</div>
+				</div>
+			</md-input-container>
+
+			<p class="help-block success" ng-if="cp.submitted && cp.message"> {{cp.message}} </p>
+		</section>
+		<submit-button loading="cp.loading" form="form" text="Change Password"></submit-button>
+	</form>
+</section>
+</md-content>
+<footer></footer>

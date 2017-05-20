@@ -1,0 +1,147 @@
+<a ng-click="main.create();">
+	<md-button  show-gt-xs class="md-fab md-accent md-fab-top-left fab-overlap md-button ng-scope md-blue-theme" aria-label="Create a new  {{list.header}}" ng-if="!list.no.add">
+		<ng-md-icon icon="add"></ng-md-icon>
+	</md-button>
+</a>
+<md-progress-linear md-mode="indeterminate" ng-show="list.loading"></md-progress-linear>
+
+ <!-- Add div For infinite scroll -->
+ <md-content class="scroll products">
+	<md-card infinite-scroll='list.loadMore()' infinite-scroll-disabled='list.busy' infinite-scroll-distance='1' ng-if="list.data.length">
+		<md-toolbar class="md-table-toolbar md-default" aria-hidden="false"
+		ng-hide="list.selected.length || filter.show || list.data.search">
+      <div class="md-toolbar-tools">
+				<h2 class="md-title">List of {{list.header | labelCase}}s</h2>
+			  <div flex></div>
+			  <md-button tabindex="0" ng-click="filter.show = true;" class="md-icon-button md-button md-default-theme" ng-show="!list.no.filter"
+				aria-label="Open filter box for {{list.header}}s table">
+			    <ng-md-icon icon="filter_list"></ng-md-icon>
+			  </md-button>
+				<md-menu md-position-mode="target-right target" ng-if="!list.no.export">
+	      <md-button aria-label="Open options menu" class="md-icon-button" ng-click="list.openMenu($mdOpenMenu, $event)">
+	        <ng-md-icon icon="inbox"></ng-md-icon>
+	      </md-button>
+	      <md-menu-content width="4">
+	        <md-menu-item>
+	          <md-button
+							ng-click="list.exportData('xls');"
+							aria-label="Export {{list.header}}s table as Excel">
+	            <ng-md-icon icon="receipt"></ng-md-icon>
+	            Excel
+	          </md-button>
+	        </md-menu-item>
+					<md-menu-divider></md-menu-divider>
+	        <md-menu-item>
+	          <md-button ng-click="list.exportData('json');" aria-label="Export {{list.header}}s table in JSON format">
+	            <ng-md-icon icon="account_balance_wallet"></ng-md-icon>
+	            JSON
+	          </md-button>
+	        </md-menu-item>
+	        <md-menu-divider></md-menu-divider>
+	        <md-menu-item>
+	          <md-button ng-click="list.exportData('txt');" aria-label="Export {{list.header}}s table in Text format">
+	            <ng-md-icon icon="text_format"></ng-md-icon>
+	            Text
+	          </md-button>
+	        </md-menu-item>
+	        <md-menu-divider></md-menu-divider>
+
+	      </md-menu-content>
+	    </md-menu>
+      </div>
+    </md-toolbar>
+
+		<md-toolbar class="md-table-toolbar md-default"
+			ng-show="filter.show || list.data.search"
+			aria-hidden="false">
+      <div class="md-toolbar-tools">
+				<ng-md-icon icon="search"></ng-md-icon>
+				<md-input-container flex class="mgt30">
+		      <label>Filter {{list.header}}s</label>
+		      <input ng-model="list.data.search" focus-me="filter.show">
+		    </md-input-container>
+				<ng-md-icon icon="close" ng-click="filter.show = false; list.data.search = '';" class="link"></ng-md-icon>
+			</div>
+		</md-toolbar>
+
+<div class="md-table-container">
+	<table md-colresize="md-colresize" class="md-table" id="exportable">
+		<thead>
+			<tr class="md-table-headers-row">
+				<th class="md-table-header"></th>
+				<th ng-repeat="h in list.cols track by $index" class="md-table-header">
+					<a href="#" ng-click="reverse=!reverse;list.order(h.field)" ng-if="!list.no.sort && !h.noSort">
+						{{h.heading | labelCase}}
+<ng-md-icon 	icon="arrow_downward"
+					options='{"rotation": "counterclock"}'
+					ng-show="reverse && h.field === list.sort.predicate"
+					class="s18"></ng-md-icon>
+<ng-md-icon 	icon="arrow_upwards"
+					ng-show="!reverse && h.field === list.sort.predicate"
+					options='{"rotation": "counterclock"}'></ng-md-icon>
+					</a>
+					<a href="#" ng-if="list.no.sort || h.noSort">
+						{{h.heading | labelCase}}
+					</a>
+				</th>
+				<th class="md-table-header"></th>
+
+			</tr>
+
+		</thead>
+
+		<tbody>
+
+			<tr ng-repeat="p in filtered = ((list.data | orderBy:list.sort.predicate:list.sort.reverse) | filter:q | filter:list.data.search | limitTo: list.l) track by p._id" id="{{p._id}}"
+					class="md-table-content-row"
+					ng-class="{'selected': list.isSelected(p)}">
+				<td>
+					<md-button class="md-icon-button" aria-label="More" ng-click="list.showInDetails(p);" ng-if="!list.no.edit">
+	      	  <ng-md-icon icon="edit"></ng-md-icon>
+	    	  </md-button>
+				</td>
+				<td>
+					<list-image ng-if="!p.logo.base64" string="{{p.name}}"></list-image>
+					<img ng-if="p.logo.base64" data-ng-src="data:image/png;base64,{{p.logo.base64}}" err-SRC="/assets/images/material-shop.jpg" />
+				</td>
+				<td>
+					<a ng-click="list.gotoDetail(p)">{{p.name}}</a>
+				</td>
+
+				<td>
+					<md-switch class="md-secondary" ng-model="p.active" ng-change="list.changeStatus(p)" aria-label="p.active"></md-switch>
+				</td>
+				<td>
+					<md-button class="md-icon-button" aria-label="Delete" ng-click="list.delete(p);" ng-if="!list.no.delete">
+	        	<ng-md-icon icon="delete"></ng-md-icon>
+					</md-button>
+				</td>
+			</tr>
+		</tbody>
+
+	</table>
+</div>
+ <div class="md-table-pagination">
+		<span>Filtered {{filtered.length}} of {{list.data.length}} {{list.header}}s</span>
+	</div>
+</md-card>
+ </md-content>
+
+<a ng-click="main.create();" ng-if="!list.no.add"> 
+	<md-button hide-gt-xs ui-sref="list.create" class="md-fab md-accent md-fab-bottom-left" aria-label="Create a new {{list.header}}" ng-if="!list.no.add">
+		<ng-md-icon icon="add"></ng-md-icon>
+	</md-button>
+</a>
+	<md-card ng-if="list.data.length===0 && !list.loading">
+	  <md-card-content>
+	    <h2>No {{list.header | labelCase}}s found</h2>
+	    <p class="mgl" hide-xs>
+				There are no {{list.header | labelCase}}s!
+	      <a ng-click="main.create();" href="">Create one!</a>
+	    </p>
+	    <p hide-gt-xs>
+				There are no {{list.header | labelCase}}s!
+	      <a ng-click="main.create();" href="">Create one!</a>
+	    </p>
+	  </md-card-content>
+	</md-card>

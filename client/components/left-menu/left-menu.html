@@ -1,0 +1,63 @@
+<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" ng-cloak ng-if="nav.isLoggedIn()">
+  <!-- md-is-locked-open="$mdMedia('gt-md')" -->
+      <md-toolbar class="md-tall md-hue-2 md-whiteframe-z2">
+        <span flex></span>
+        <md-list>
+          <md-list-item class="md-2-line md-toolbar-tools-bottom">
+            <user-avatar></user-avatar>
+            <div class="md-list-item-text" layout="column">
+              <span></span>
+              <div>{{left.currentUser.name}}</div>
+              <div>{{left.currentUser.email}}</div>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-toolbar>
+      <md-list>
+      </md-toolbar>
+      <md-list ng-if="left.menu">
+      <md-item ng-repeat="item in left.menu.auth" ui-sref-active="active" ng-if="!left.isLoggedIn()" ui-sref="{{item.url}}" ng-click="left.toggleLeft();" class=" md-whiteframe-z2">
+          <md-item-content md-ink-ripple layout="row" layout-align="start center" >
+            <div class="inset">
+              <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+            </div>
+            <div class="inset">{{item.text}}</div>
+          </md-item-content>
+        <md-divider ng-if="!$last"></md-divider>
+      </md-item>
+
+<!-- User Pages -->
+      <md-subheader ng-if="left.isLoggedIn()">Pages</md-subheader>
+      <md-item ng-repeat="item in left.menu.pages" ui-sref-active="active" ng-if="left.isLoggedIn() && item.authenticate && left.hasRole(item.role)" ui-sref="{{item.url}}" class=" md-whiteframe-z2">
+          <md-item-content md-ink-ripple layout="row" layout-align="start center" >
+            <md-button>
+                <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                {{item.text}}
+            </md-button>
+          </md-item-content>
+        <md-divider ng-if="!$last || !$first"></md-divider>
+      </md-item>
+
+<!-- Public Pages -->
+      <md-item ng-repeat="item in left.menu.pages" ui-sref-active="active" ng-if="!item.authenticate" ui-sref="{{item.url}}" class=" md-whiteframe-z2">
+          <md-item-content md-ink-ripple layout="row" layout-align="start center" >
+            <md-button>
+                <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                {{item.text}}
+            </md-button>
+          </md-item-content>
+        <md-divider ng-if="!$last || !$first"></md-divider>
+      </md-item>
+
+      <md-subheader ng-if="left.isLoggedIn()">Settings</md-subheader>
+      <md-item ng-repeat="item in left.menu.admin" ui-sref-active="active" ng-if="left.isLoggedIn()" ui-sref="{{item.url}}">
+          <md-item-content md-ink-ripple layout="row" layout-align="start center" >
+            <div class="inset">
+              <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+            </div>
+            <div class="inset">{{item.text}}</div>
+          </md-item-content>
+        <md-divider ng-if="!$last"></md-divider>
+      </md-item>
+    </md-list>
+    </md-sidenav>

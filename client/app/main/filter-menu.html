@@ -1,0 +1,53 @@
+<md-sidenav ng-cloak md-is-locked-open="$mdMedia('gt-md')" md-component-id="filtermenu" class="filter-menu">
+    <md-content>
+        <form>
+
+        <div layout-align="space-between top" class="md-whiteframe-z1" layout-padding>
+            <md-card >
+                <h4>Price Range</h4>
+            <md-content>
+                <rzslider 
+                rz-slider-model="main.priceSlider.min"
+                rz-slider-high="main.priceSlider.max" 
+                rz-slider-options="main.priceSlider.options"
+                ></rzslider>
+
+            </md-content>
+            </md-card>
+            
+            <md-card style="height: 500px;" ng-if="main.brands">
+                <md-input-container>
+                    <input ng-model="filterBrands" placeholder="Categories"/>
+                </md-input-container>
+                <md-content style="height: 500px">
+                <div   ng-repeat="item in main.brands | filter:filterBrands">
+                <md-checkbox
+                    ng-checked="main.exists(item, main.fl.brands)"
+                    ng-click="main.toggle(item, main.fl.brands)">
+                    {{ item.name }}
+                </md-checkbox>
+                </div>
+                </md-content>
+            </md-card>
+                <md-card ng-repeat="k in main.features | filter:filterFeatures">
+                    <md-input-container>
+                        <input ng-model="filterFeatures" placeholder="{{k.key}}"/>
+                    </md-input-container>
+            <md-content>
+                <input ng-init="main.fl.features[k.key] = []" type="hidden"/>
+                <div flex="50" ng-repeat="f in k.v | filter:filterFeatures">
+                    <md-checkbox
+                    ng-checked="main.exists(f, main.fl.features[k.key])"
+                    ng-click="main.toggle(f, main.fl.features[k.key])">
+                        {{ f }}
+                    </md-checkbox>
+                </div>
+            </md-content>
+            </md-card>
+        </div>
+        </form>
+    </md-content>
+  
+    
+    
+</md-sidenav>

@@ -1,0 +1,124 @@
+<navbar leftmenu="true"></navbar>
+<left-menu></left-menu>
+<md-content class="container " layout="column">
+    <section class="header" layout="column">
+        <div class="col-sm-12 ">
+            <div class="box">
+                <div class="row">
+                    <div class="col-xs-3 stats-graph">
+                        <md-input-container>
+                            <label>Campaign Name</label>
+                            <input value="{{vm.cart.campaignName}}" ng-model="vm.cart.campaignName" \>
+                        </md-input-container>
+                    </div>
+                    <div class="col-xs-6 stats-graph">
+                        <div class "col-md-12">
+                            <md-input-container>
+                                <label>Campaign Objective</label>
+                                <textarea name="objectives" cols="50" rows="2" ng-model="vm.cart.objectives" md-maxlength="150"></textarea>
+                                <div ng-messages="userForm.bio.$error" ng-show="userForm.bio.$dirty">
+                                    <div ng-message="required">This is required!</div>
+                                    <div ng-message="md-maxlength">That's too long!</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <div id="totalContainer" class="col-xs-3 stats-graph">
+                        <h4 class="section-header">Total Spend</h4> {{vm.cart.getTotalPrice() | currency}} - ({{vm.cart.getTotalCount()}} items)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="header" layout="column" padding>
+        <div>
+            <p>
+                <div>
+                    <div class="actions-continue">
+                        <input type="text" placeholder="Filter ..." class="form-control col-md-4" style="width:250px;margin-left:20px;" ng-model="filterCart" autofocus/>
+                        <button value="Proceed to Checkout →" name="proceed" class="btn btn-danger pull-right" ng-click="cart.createCampaign(vm.cart);" ng-disabled="vm.cart.getTotalCount() <= 0">Create Campaign/Advert →</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <br/>
+                    <table class="cart table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Publisher</th>
+                                <th>Media Option </th>
+                                <th style="width: 250px">Start and End Date</th>
+                                <th style="width: 100px">Upload Advert</th>
+                                <th>Price</th>
+                                <th>Inserts</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- empty cart message -->
+                            <tr ng-hide="vm.cart.getTotalCount() > 0">
+                                <td class="tdCenter" colspan="7">
+                                    Your MediaCart is empty. &nbsp;&nbsp;<a class="btn btn-primary" href="/" ng-click="vm.cancel();">Build Campaign</a>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="item in vm.cart.items track by $index ">
+                                <td>{{$index+1}}</td>
+                                <td class="product-thumbnail">
+                                    <a>
+                                        <img data-ng-src="data:image/png;base64,{{item.image}}" alt="{{item.publisher}}" style="width: 100px;">
+                                    </a>
+                                    <br> {{item.publisher}}
+                                </td>
+                                <td class="product-name">
+                                    {{item.name}}
+                                </td>
+                                <td class="product-name">
+                                    <div class="col-md-12 demo">
+                                        <div class="form-group has-feedback">
+                                            <label class="control-label">&nbsp;</label>
+                                            <input type="text" class="form-control" id="config-demo" name="daterange" value="" ng-model="item.category" placeholder="Start and End Date" ng-change="cart.querySearch(item.category,item)" />
+                                            <i class="glyphicon glyphicon-calendar form-control-feedback"></i>
+                                        </div>
+                                </td>
+                                <td>
+                                    <md-input-container flex>
+                                        <img style="width: 100px;" ng-src="{{item.creative}}" err-SRC="/assets/images/material-shop.jpg">
+                                    </md-input-container>
+                                    <div ng-hide="item.creative">
+                                        <button class="btn btn-danger" ng-hide="isAdmin()" ng-click="cart.mediaLibrary($index)"><i class="fa fa-image"></i><span class="glyphicon glyphicon-upload"></span></button>
+                                    </div>
+                                    <div ng-show="item.creative">
+                                        <button class="btn btn-success" ng-hide="isAdmin()" ng-click="cart.mediaLibrary($index)"><i class="fa fa-image"></i><span class="glyphicon glyphicon-upload"></span></button>
+                                    </div>
+                                </td>
+                                <td>{{item.price | currency}}</td>
+                                <td>
+                                    <md-button class="md-raised md-primary small-button md-icon-button" ng-click="vm.cart.addItem({sku:item.sku, name:item.name, slug:item.slug, mrp:item.mrp, price:item.price, weight:item.weight, vid:item.vid}, +1)" aria-label="Add to cart">
+                                        <ng-md-icon icon="add"></ng-md-icon>
+                                    </md-button>
+                                    <div class="md-raised" ng-disabled="true" aria-label="Cart quantity">{{vm.cart.getQuantity(item.sku, item.vid)}}</div>
+                                    <md-button class="md-raised md-primary small-button md-icon-button" ng-click="vm.cart.addItem({sku:item.sku, name:item.name, slug:item.slug, mrp:item.mrp, price:item.price, weight:item.weight, vid:item.vid}, -1)" aria-label="Remove from cart">
+                                        <ng-md-icon icon="remove"></ng-md-icon>
+                                    </md-button>
+                                </td>
+                                <td><span><strong>{{item.price * item.quantity | currency}}</strong></span></td>
+                                <td class="product-actions">
+                                    <a aria-label="Remove {{item.name}} from cart" ng-click="vm.cart.addItem({sku:item.sku, vid: item.vid}, -10000000);">
+                                        <ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <hr>
+                </div>
+</md-content>
+</section>
+</md-content>
+<footer></footer>
+<script type="text/javascript">
+$(function() {
+    $('input[name="daterange"]').daterangepicker();
+});
+</script>

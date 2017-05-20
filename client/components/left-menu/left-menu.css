@@ -1,0 +1,17 @@
+md-sidenav{
+    height: auto;
+}
+md-sidenav md-list md-item {
+  cursor: pointer;
+}
+md-sidenav md-list md-item.active {
+  color: #03a9f4;
+}
+.user-avatar{
+  margin-right: 10px;
+}
+md-sidenav md-item .md-button {
+  color: inherit;
+  text-align: left;
+  width: 100%;
+}

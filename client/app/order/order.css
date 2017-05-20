@@ -1,0 +1,12 @@
+.orders md-select{
+       margin: 0; 
+}
+.orders{
+  max-width:1000px;
+}
+.orders .content{
+  min-width: 280px;
+}
+.order-address{
+    padding-left: 20px;
+}

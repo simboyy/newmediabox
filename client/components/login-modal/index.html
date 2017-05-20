@@ -1,0 +1,27 @@
+<md-dialog aria-label="Create a new user" id="admin-user-create" layout="column" 
+flex-xs="100" 
+flex-sm = "75" 
+flex-md="75" 
+flex-lg="66" 
+flex-gt-lg="50" 
+md-whiteframe="24">
+<div ng-cloak ng-controller="tabsCtrl as tabs">
+  <md-content layout="row" layout-align="end start">
+    <md-tabs md-dynamic-height md-border-bottom flex md-selected="selectedIndex">
+      <md-tab label="Login" ng-click="tabs.onTabSelected('login')">
+        <md-content ng-controller="LoginModalController as vm" ng-include="'components/login-modal/login.html'" class="md-padding" flex></md-content>
+      </md-tab>
+      <md-tab label="Signup" ng-click="tabs.onTabSelected('signup')">
+        <md-content ng-controller="SignUpModalController as signup" class="md-padding" flex> 
+          <div ng-if="tabs.tab=='signup'" ng-include="'components/login-modal/signup.html'"></div>
+        </md-content>
+      </md-tab>
+      <md-tab></md-tab> <!--This is necessary to maintain the Login and Signup alignment-->
+    </md-tabs>
+    <a aria-label="Cancel Login" ng-click="vm.close()" ng-controller="LoginModalController as vm">
+        <ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
+    </a>
+  </md-content>
+</div>
+<oauth-buttons></oauth-buttons>
+</md-dialog>

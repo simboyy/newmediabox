@@ -1,0 +1,339 @@
+<navbar></navbar>
+<md-card ng-if="checkout.payment.msg">
+      <md-card-header style="background:pink">
+          <md-card-header-text>
+            <h3 ng-if="">Payment Failed </h3>
+            <span class="md-subhead" >
+                <div ng-if="checkout.payment.id">ID: {{checkout.payment.id}}</div>
+                <b>Error:</b> 
+                    <div ng-repeat="m in checkout.payment.msg">{{m.field}} {{m.issue}} </div>
+            </span>
+          </md-card-header-text>
+          
+      </md-card-header>
+</md-card>
+
+<div flex layout="column" layout-gt-xs="row" layout-align="center stretch" class="checkout">
+
+<md-card>
+      <md-card-header>
+          <md-card-header-text>
+            <h3>PROCESS ORDER</h3>
+            
+            <span class="md-subhead" ></span>
+          </md-card-header-text>
+          
+      </md-card-header>
+      <md-card-content>
+  <div class="md-table-container">
+      <form name="orderForm" ng-submit="checkout.checkout(checkout.addr,checkout.options,true);" novalidate>
+      
+	<table md-colresize="md-colresize" class="md-table" id="exportable">
+		<tbody>
+
+			<tr class="md-table-content-row" >
+				<td>Order Total:</td>
+			    <td>{{checkout.Cart.cart.getTotalPrice() | currency : checkout.Settings.currency.symbol}}</td>
+			</tr>
+            <tr class="md-table-content-row">
+				<td>Handling Fee: </td>
+			    <td >
+                    {{checkout.Cart.cart.getHandlingFee()| currency : checkout.Settings.currency.symbol}}
+                </td>
+			</tr>
+            <tr class="md-table-content-row">
+				<td>Total Amount:&nbsp;&nbsp;&nbsp;</td>
+			    <td>{{checkout.Cart.cart.getTotalPrice() + checkout.Cart.cart.getHandlingFee() - checkout.coupon.amount | currency : checkout.Settings.currency.symbol}}</td>
+			</tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr class="md-table-content-row">
+
+				
+			    <td colspan="2"><h4>Select Payment Method</h4>
+                       <div class="row">
+                            <div class="col-md-6 short">
+                                <div class="payment-logo">
+                                  <img width="200px"  height="60px" data-ng-src="./assets/images/paypal.png" alt="">
+                                </div>
+                                <label class="payment-label" for="r1">
+                                                          
+                                    <div class="payment-selector" id="isNotMasterCard">
+                                        <input type="radio" name="payment_method_id"   ng-model="checkout.options.paymentMethod.name" value="PayPal" id="r1"> 
+                                    </div>
+                                    <span class="payment-type-name">PayPal</span>
+                                                  
+                                                          
+                                </label>
+
+                            </div>
+                        <div class="col-md-6 short">
+                            <div class="payment-logo">
+                              <img width="200px"  height="60px" data-ng-src="./assets/images/paynow.png" alt="">
+                            </div>
+                              <label class="payment-label" for="r1">
+                                                          
+                                  <div class="payment-selector" id="isNotMasterCard">
+                                      <input type="radio" name="payment_method_id"   ng-model="checkout.options.paymentMethod.name" value="PayNow" id="r1"> 
+                                  </div>
+                                  <span class="payment-type-name">PayNow</span>
+                                                  
+                                                          
+                             </label>
+                        </div>
+                       </div>
+                        <div class="row">
+                        <div class="col-md-6 short">
+                            <div class="payment-logo">
+                              <img width="200px"  height="60px" data-ng-src="./assets/images/flocash.png" alt="">
+                            </div>
+                           <label class="payment-label" for="r1">
+                                                      
+                                <div class="payment-selector" id="isNotMasterCard">
+                                    <!--<input type="radio" name="payment_method_id"   ng-model="checkout.options.paymentMethod.name" value="FloCash" id="r1">--> 
+                                </div>
+                                <span class="payment-type-name">FloCash(coming soon)</span>
+                                              
+                                                      
+                              </label>
+                        </div>
+                        <div class="col-md-6 short">
+                            <div class="payment-logo">
+                              <img width="200px"  height="60px" data-ng-src="./assets/images/Stripe.png" alt="">
+                            </div>
+                            <label class="payment-label" for="r1">
+                                                        
+                                <div class="payment-selector" id="isNotMasterCard">
+                                   <!-- <input type="radio" name="payment_method_id"  ng-model="checkout.options.paymentMethod.name"  value="Stripe" id="r1">--> 
+                                </div>
+                                <span class="payment-type-name">Stripe(coming soon)</span>
+                                                
+                                                        
+                            </label>
+                        </div>
+                       </div>
+                
+                    </div><div ng-messages="orderForm.paymentMethod.name.$error" ng-if="orderForm.paymentMethod.name.$dirty">
+                        <div ng-message="required">Payment Method is required</div>
+                    </div>
+</td>
+			</tr>
+            <tr class="md-table-content-row" ng-if="checkout.options.paymentMethod.name==='Stripe'">
+				<td>Card No:</td>
+			    <td>
+                    <md-input-container md-is-error="(form.number.$error.required || form.number.$error.number) && form.number.$dirty" md-no-float>
+                        <input name="number" type="text" ng-model="checkout.stripeToken.number"
+                        placeholder="Credit Card Number"
+                        autocomplete="off"
+                        ng-minlength="16"
+                        ng-maxlength="16"/>
+                        <small class="errorMessage" ng-show="orderForm.number.$dirty && orderForm.number.$invalid"> Credit Card number is invalid.
+                        </small>
+                        <div ng-messages="orderForm.number.$error" ng-if="orderForm.number.$dirty">
+                            <div ng-message="required">Number is required</div>
+                        </div>
+                    </md-input-container>
+                </td>
+			</tr>
+            <tr class="md-table-content-row" ng-if="checkout.options.paymentMethod.name==='Stripe'">
+				<td>CVC:</td>
+			    <td>
+                    <md-input-container md-is-error="(form.cvc.$error.required || form.cvc.$error.cvc) && form.cvc.$dirty" md-no-float>
+                        <input name="cvc" type="text" ng-model="checkout.stripeToken.cvc"
+                        placeholder="Credit Card CVC"
+                        autocomplete="off"
+                        ng-minlength="3"
+                        ng-maxlength="3"/>
+                        <small class="errorMessage" ng-show="orderForm.cvc.$dirty && orderForm.cvc.$invalid"> Credit Card cvc is invalid.
+                        </small>
+                        <div ng-messages="orderForm.cvc.$error" ng-if="orderForm.cvc.$dirty">
+                            <div ng-message="required">CVC is required</div>
+                        </div>
+                    </md-input-container>
+                </td>
+			</tr>
+            <tr class="md-table-content-row" ng-if="checkout.options.paymentMethod.name==='Stripe'">
+				<td>Expiry Month:</td>
+			    <td>
+                    <md-input-container md-is-error="(form.exp_month.$error.required || form.exp_month.$error.exp_month) && form.exp_month.$dirty" md-no-float>
+                        <input name="exp_month" type="text" ng-model="checkout.stripeToken.exp_month"
+                        placeholder="Credit Card Expiry Month"
+                        autocomplete="off"
+                        ng-pattern="'(0[1-9]|1[012])'" />
+                        <small class="errorMessage" ng-show="orderForm.exp_month.$dirty && orderForm.exp_month.$invalid"> Credit Card exp_month is invalid.
+                        </small>
+                        <div ng-messages="orderForm.exp_month.$error" ng-if="orderForm.exp_month.$dirty">
+                            <div ng-message="required">Expiry Month is required</div>
+                        </div>
+                    </md-input-container>
+                </td>
+			</tr>
+            <tr class="md-table-content-row" ng-if="checkout.options.paymentMethod.name==='Stripe'">
+				<td>Expiry Year:</td>
+			    <td>
+                    <md-input-container md-is-error="(form.exp_year.$error.required || form.exp_year.$error.exp_year) && form.exp_year.$dirty" md-no-float>
+                        <input name="exp_year" type="text" ng-model="checkout.stripeToken.exp_year"
+                        placeholder="Credit Card Expiry Month"
+                        autocomplete="off"
+                        ng-pattern="'^(20)\\d{2}$'"/>
+                        <small class="errorMessage" ng-show="orderForm.exp_year.$dirty && orderForm.exp_year.$invalid"> Credit Card exp_year is invalid.
+                        </small>
+                        <div ng-messages="orderForm.exp_year.$error" ng-if="orderForm.exp_year.$dirty">
+                            <div ng-message="required">Expiry Year is required</div>
+                        </div>
+                    </md-input-container>
+                </td>
+			</tr>
+            <tr class="md-table-content-row">
+	
+				<td><h3>Discount Coupon:</h3></td>
+			    <td>
+                    <md-input-container md-is-error="(form.name.$error.required || form.name.$error.name) && form.name.$dirty" md-no-float>
+                        <input name="coupon" type="text" ng-model="checkout.options.coupon" ng-change="checkout.checkCoupon(checkout.options.coupon, checkout.Cart.cart.getTotalPrice())"
+                        placeholder="Discount Coupon"
+                        autocomplete="off"/>
+                        <span class="text-muted text-success" ng-if="checkout.coupon.code">{{checkout.coupon.type}} of {{checkout.coupon.amount | currency : checkout.Settings.currency.symbol}} was applied to the cart</span>
+                        <small class="errorMessage" ng-show="orderForm.coupon.$dirty && orderForm.coupon.$invalid"> Discount coupon was expired.
+                        </small>
+                        <div ng-messages="orderForm.coupon.$error" ng-if="orderForm.coupon.$dirty">
+                            <div ng-message="required">Coupon is expired</div>
+                        </div>
+                    </md-input-container>
+                    <input type="hidden" ng-model="checkout.cartValid" validate-cart>
+                    <div class="hidden">{{orderForm.$valid = !(vm.shipping.best['charge'] === undefined)}}</div>
+                </td>
+			</tr>
+		</tbody>
+
+	</table>
+      <br/>
+
+    <div layout="column" layout-align="center stretch">
+        <md-button type="submit" class="md-raised circular-progress-button md-primary" 
+        ng-disabled="orderForm.number.$invalid || orderForm.exp_month.$invalid || orderForm.exp_year.$invalid || orderForm.cvc.$invalid || checkout.loading || checkout.Cart.cart.getTotalPrice()===0 || !checkout.addr" aria-label="Place Order" layout="row" layout-align="center center"> 
+            <div flex></div>
+            <ng-md-icon icon="local_shipping" ng-hide="checkout.loading"></ng-md-icon>
+            <md-progress-circular md-mode="indeterminate" md-diameter="25" ng-show="checkout.loading" class="md-accent md-hue-1"></md-progress-circular>
+            <span>&nbsp;Place Order</span>
+            <div flex></div>
+        </md-button>
+    </div>
+
+	</form>
+</div>
+</md-card-content>
+</md-card>
+
+<div layout="column" layout-gt-sm="row">
+<!--Address box-->
+
+<md-card ng-show="checkout.showAddressForm">
+    <md-card-content>
+	<p ng-show="checkout.error" class="md-warn">{{checkout.error.message}}</p>
+	<h3>SELECTED ADDRESS</h3>
+	<form name="form" ng-submit="checkout.saveAddress(checkout.addr);new.address=false;checkout.addr = checkout.address[0];" novalidate layout="column">
+		<md-input-container md-is-error="(form.name.$error.required || form.name.$error.name) && form.name.$dirty">
+			<label>Company Name</label>
+			<input name="name" type="name" ng-model="checkout.addr.name" required autofocus>
+			<div ng-messages="form.name.$error" ng-if="form.name.$dirty">
+				<div ng-message="required">Company Name is required</div>
+			</div>
+		</md-input-container>
+        
+        <md-input-container md-is-error="(form.addr.$error.required || form.addr.$error.addr) && form.addr.$dirty">
+			<label>Company Address</label>
+			<input name="address" type="address" ng-model="checkout.addr.address" required/>
+			<div ng-messages="form.address.$error" ng-if="form.address.$dirty">
+				<div ng-message="required">Address is required</div>
+			</div>
+		</md-input-container>
+        
+        <md-input-container md-is-error="(form.city.$error.required || form.city.$error.city) && form.city.$dirty">
+			<label>City</label>
+			<input name="city" type="city" ng-model="checkout.addr.city" required/>
+			<div ng-messages="form.city.$error" ng-if="form.city.$dirty">
+				<div ng-message="required">City is required</div>
+			</div>
+		</md-input-container>
+
+        <md-input-container md-is-error="(form.zip.$error.required || form.zip.$error.zip) && form.zip.$dirty">
+			<label>Zip</label>
+			<input name="zip" type="zip" ng-model="checkout.addr.zip" required only-numbers/>
+			<div ng-messages="form.zip.$error" ng-if="form.zip.$dirty">
+				<div ng-message="required">Zip code is required</div>
+			</div>
+		</md-input-container>
+        
+        <md-input-container md-is-error="(form.state.$error.required || form.state.$error.state) && form.state.$dirty">
+			<label>State</label>
+			<input name="state" type="state" ng-model="checkout.addr.state" required/>
+			<div ng-messages="form.state.$error" ng-if="form.state.$dirty">
+				<div ng-message="required">State is required</div>
+			</div>
+		</md-input-container>
+        
+        <md-input-container md-is-error="(form.phone.$error.required || form.phone.$error.phone) && form.phone.$dirty">
+			<label>Phone</label>
+			<input name="phone" type="phone" ng-model="checkout.addr.phone" required/>
+			<div ng-messages="form.phone.$error" ng-if="form.phone.$dirty">
+				<div ng-message="required">Phone number is required</div>
+			</div>
+		</md-input-container>
+
+        <!--<md-input-container md-is-error="(form.country.$error.required || form.country.$error.country) && form.country.$dirty">
+            <label>Country</label>
+            <input ng-model="checkout.addr.country" ng-value="checkout.Settings.country.name" disabled/>
+            <div ng-messages="form.country.$error" ng-if="form.country.$dirty">
+				<div ng-message="required">Country required</div>
+			</div>
+		</md-input-container>-->
+        <div layout="row">
+            <md-button type="submit" class="md-raised md-primary" 
+            ng-disabled="!form.$valid || checkout.loadingAddress" aria-label="Save Address" layout="row">
+                <ng-md-icon icon="save" ng-hide="checkout.loadingAddress"></ng-md-icon>
+                <md-progress-circular md-mode="indeterminate" md-diameter="25" ng-show="checkout.loadingAddress" class="md-accent md-hue-1"></md-progress-circular>
+                Save <span hide show-gt-xs>as Primary Address</span>
+            </md-button>
+            <md-button ng-click="checkout.cancelForm(checkout.addr);new.address=false;">Cancel</md-button>
+	   </div>
+       </form>
+    </md-card-content>
+</md-card>
+<div layout="column">
+<md-button class="md-raised" ng-click="checkout.addressForm(true);checkout.new.address=true; checkout.addr={country: checkout.Settings.country.name}">
+    <ng-md-icon icon="location_on"></ng-md-icon>Add New Address
+</md-button>
+
+<md-card  
+ng-repeat="a in checkout.address" 
+ng-click="new.address=false; checkout.addressForm(true);checkout.switchAddress(a)" 
+style="min-width:300px" 
+ng-class="{'selected':(a==checkout.addr)} "
+>
+      <md-card-header layout="row" layout-align="space-between start">
+          <md-card-header-text>
+            <h3>BILLING ADDRESS - {{$index+1}}</h3>
+          </md-card-header-text>
+          	<div>
+				  <md-button ng-click="checkout.delete(a)" aria-label="Delete Address"><ng-md-icon icon="delete"></ng-md-icon></md-button>  
+			</div>				  
+      </md-card-header>
+	  
+      <md-card-content layout="column" layout-align="start start">
+			{{a.name}}<br/>
+            {{a.address}}<br/>
+            {{a.city}}<br/>
+            {{a.state}}<br/>
+            {{a.zip}}<br/>
+            {{a.phone}}
+      </md-card-content>
+      
+</md-card>
+</div><!--Address box-->
+</div>
+
+
+</div>
+<footer></footer>

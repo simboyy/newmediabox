@@ -1,0 +1,30 @@
+<md-dialog aria-label="Media Library" ng-cloak flex="95">
+  <md-toolbar class="md-warn">
+    <div class="md-toolbar-tools">
+      <h2>Media Library</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-dialog-content>
+      <div class="md-dialog-content"  class="md-whiteframe-z2">
+          <md-grid-list class="media-list" md-cols-xs ="3" md-cols-sm="4" md-cols-md="5" md-cols-lg="7" md-cols-gt-lg="10" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="12px" md-gutter-gt-sm="8px" layout="row" layout-align="center center">
+            <md-grid-tile ng-repeat="i in media" class="md-whiteframe-z2" ng-click="ok(i.path)">
+          		<div class="thumbnail">
+          				<img ng-src="{{i.path}}" draggable="false" alt="{{i.name}}">
+          		</div>
+              <md-grid-tile-footer><h3>{{i.name}}</h3></md-grid-tile-footer>
+            </md-grid-tile>
+          </md-grid-list>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions layout="row">
+    <span flex></span>
+    <md-button ng-click="addNewImage()" class="md-warn md-raised">
+     Add new Image
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

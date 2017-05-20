@@ -1,0 +1,66 @@
+md-dialog md-input-container{
+  margin: 0;
+}
+md-input-container.dropdown{
+  margin-bottom: 20px;
+}
+.full-width{
+  width: 100%;
+}
+.mb-datepicker{
+  width: 90%;
+}
+.mb-datepicker {
+  margin-top: 1px;
+}
+mb-datepicker{
+  margin: 20px;
+}
+.mb-datepicker table{
+  width: 100%;
+}
+.testClass > input {
+    border-style: none none solid;
+    width: 100%;
+}
+md-backdrop.md-opaque.md-blue-theme {
+    background-color: rgba(0,0,0,0.9);
+}
+md-dialog md-content {
+     padding: 20px !important;
+}
+md-dialog md-content {
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+    padding: 24px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.modal-primary .modal-header,
+.modal-info .modal-header,
+.modal-success .modal-header,
+.modal-warning .modal-header,
+.modal-danger .modal-header {
+  color: #fff;
+  border-radius: 5px 5px 0 0;
+}
+.modal-primary .modal-header {
+  background: #428bca;
+}
+.modal-info .modal-header {
+  background: #5bc0de;
+}
+.modal-success .modal-header {
+  background: #5cb85c;
+}
+.modal-warning .modal-header {
+  background: #f0ad4e;
+}
+.modal-danger .modal-header {
+  background: #d9534f;
+}
+.datetime-picker-dropdown > li.date-picker-menu div > table .btn-default {
+    border: 0;
+}

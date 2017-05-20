@@ -1,0 +1,50 @@
+<md-button aria-label="Login / Signup" ng-click="topmenu.showLogin()" ng-if="!topmenu.isLoggedIn()" style="color:#fff">
+    <ng-md-icon icon="person" md-menu-align-target></ng-md-icon>
+    <span hide-xs>Login / Signup</span>
+</md-button>
+
+<!-- Dropdown Menu Starts here -->
+   <md-menu style="color:#fff">
+    <md-button ng-click="topmenu.openMenu($mdOpenMenu, $event)"  ng-show="topmenu.isLoggedIn()">
+      <ng-md-icon icon="face" md-menu-align-target></ng-md-icon>
+      <!--<md-icon class="avatar-icon" md-svg-icon="avatar:svg-{{ (0 + 1) % 11 }}"></md-icon>-->
+      <span hide-xs>{{topmenu.Auth.getCurrentUser().name | labelCase}}</span>
+      <ng-md-icon icon="more_vert"></ng-md-icon>
+    </md-button>
+    <md-menu-content width="4" class="navMenu" ng-show="topmenu.menu">
+<!-- // Auth items -->
+      <md-menu-item ng-repeat="item in topmenu.menu.auth" ui-sref-active="active" ng-if="!topmenu.isLoggedIn()" ui-sref="{{item.url}}">
+        <md-button aria-label="{{item.text}}">
+          <ng-md-icon icon="{{item.icon}}" md-menu-align-target></ng-md-icon>
+          {{item.text}}
+        </md-button>
+      </md-menu-item>
+
+<!-- // Admin Pages -->
+      <md-subheader ng-if="topmenu.isLoggedIn()">Pages</md-subheader>
+      <md-menu-item ng-repeat="item in topmenu.menu.pages" ui-sref-active="active" ng-if="topmenu.isLoggedIn() && item.authenticate && topmenu.hasRole(item.role)" ui-sref="{{item.url}}">
+        <md-button aria-label="{{item.text}}">
+          <ng-md-icon icon="{{item.icon}}" md-menu-align-target></ng-md-icon>
+          {{item.text}}
+        </md-button>
+      </md-menu-item>
+
+<!-- // Public Pages -->
+      <md-menu-item ng-repeat="item in topmenu.menu.pages" ui-sref-active="active" ng-if="!item.authenticate" ui-sref="{{item.url}}">
+        <md-button aria-label="{{item.text}}">
+          <ng-md-icon icon="{{item.icon}}" md-menu-align-target></ng-md-icon>
+          {{item.text}}
+        </md-button>
+      </md-menu-item>
+
+<!-- // User Management -->
+      <md-subheader ng-if="topmenu.isLoggedIn()"> User</md-subheader>
+      <md-menu-item ng-repeat="item in topmenu.menu.user" ui-sref-active="active" ng-if="topmenu.isLoggedIn() && topmenu.hasRole(item.role)" ui-sref="{{item.url}}">
+        <md-button aria-label="{{item.text}}">
+          <ng-md-icon icon="{{item.icon}}" md-menu-align-target></ng-md-icon>
+          {{item.text}}
+        </md-button>
+      </md-menu-item>
+
+    </md-menu-content>
+  </md-menu>

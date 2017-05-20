@@ -1,0 +1,58 @@
+<section layout="column" layout-align="start center">
+	
+  <div class="row">
+    <div class="col-md-6">
+      <div class="box">
+       <p class="lead">Already our customer?</p>
+            <p class="text-muted" translate>
+              Be a master of effiency with the all in one platform for all your advertising content.
+              </p>
+            </p>
+      </div>
+    </div>
+
+    
+    <div class="col-md-6">
+        <div style="width: 80%">
+
+           <p ng-show="vm.error" class="md-warn">{{vm.error.message}}</p>
+
+				<form name="form" ng-submit="vm.login(form)" autocomplete="off" novalidate flex>
+				<section class="section" layout="column">
+					<md-input-container md-is-error="(form.email.$error.required || form.email.$error.email) && form.email.$dirty">
+						<label>Email</label>
+						<input name="email" type="email" ng-model="vm.user.email" required md-autofocus/>
+						<div ng-messages="form.email.$error" ng-if="form.email.$dirty">
+							<div ng-message="required">Email ID is required</div>
+							<div ng-message="email">Please enter valid email address.</div>
+						</div>
+					</md-input-container>
+
+					<md-input-container md-is-error="form.password.$error.required && form.password.$dirty">
+						<label>Password</label>
+						<input name="password" type="password" ng-model="vm.user.password" required/>
+						<div ng-messages="form.password.$error">
+							<div ng-message="required">Password is required</div>
+							
+						</div>
+					</md-input-container>
+
+			    <div class="form-group has-error">
+			    <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && vm.submitted">
+			       Please enter your email and password.
+			    </p>
+
+			    </div>
+			</section>
+
+			<submit-button loading="vm.loading" form="form" text="Secure Login"></submit-button>
+			<div class="err">{{ vm.errors.other }}<br/>
+			+<a ng-click="vm.goForgot({ email: vm.user.email})" href="#">Forgot Password</a></div>
+				
+	</form>
+        </div>
+    </div>
+    
+  </div>
+
+</section>

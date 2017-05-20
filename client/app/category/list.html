@@ -1,0 +1,127 @@
+<style>
+	.b { flex: 1; text-align: center; }
+	.pull-right{
+		margin-left:auto;
+	}
+</style>
+<md-progress-linear md-mode="indeterminate" ng-show="list.loading"></md-progress-linear>
+
+<!-- Nested node template -->
+<script type="text/ng-template" id="nodes_renderer.html">
+  <div ui-tree-handle class="tree-node tree-node-content" layout="row">
+    <a class="btn btn-success btn-xs" ng-if="node.child && node.child.length > 0" data-nodrag ng-click="list.toggle(this)">
+      <ng-md-icon icon="chevron_right" ng-if="collapsed"></ng-md-icon>
+      <ng-md-icon icon="expand_more" ng-if="!collapsed"></ng-md-icon>
+    </a>
+    <div flex>{{node.name}}</div>
+		<a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="list.remove(this,node)">
+			<ng-md-icon icon="delete"></ng-md-icon>
+		</a>
+  </div>
+  <ol ui-tree-nodes="" ng-model="node.child" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.child" ui-tree-node ng-include="'nodes_renderer.html'" ng-show="visible(node)">
+    </li>
+  </ol>
+</script>
+
+
+ <!-- Add div For infinite scroll -->
+	<md-card infinite-scroll='list.loadMore()' infinite-scroll-disabled='list.busy' infinite-scroll-distance='1'>
+		<md-toolbar class="md-table-toolbar md-default" aria-hidden="false"
+		ng-hide="list.selected.length || filter.show || list.data.search">
+      <div class="md-toolbar-tools">
+				<h2 class="md-title">List of Categories</h2>
+			  <div flex></div>
+
+
+				<form layout layout-align="center" layout-padding ng-submit="list.addTab(category)" class="categoryAddForm">
+					<div layout="row" flex>
+							<md-input-container class="md-block" layout="row" layout-align="center end">
+							<label >Add New Category</label>
+							<input type="text" ng-model="category.name">
+						</md-input-container>
+							<div>
+								<md-button class="md-primary md-raised" ng-disabled="!category" type="submit">Add</md-button>
+							</div>
+					</div>  
+			</form>
+
+			  <md-button tabindex="0" ng-click="filter.show = true;" class="md-icon-button md-button md-default-theme" ng-show="!list.no.filter"
+				aria-label="Open filter box for {{list.header}}s table">
+			    <ng-md-icon icon="filter_list"></ng-md-icon>
+			  </md-button>
+				<md-menu md-position-mode="target-right target" ng-if="!list.no.export">
+	      <md-button aria-label="Open options menu" class="md-icon-button" ng-click="list.openMenu($mdOpenMenu, $event)">
+	        <ng-md-icon icon="inbox"></ng-md-icon>
+	      </md-button>
+	      <md-menu-content width="4">
+	        <md-menu-item>
+	          <md-button
+							ng-click="list.exportData('xls');"
+							aria-label="Export {{list.header}}s table as Excel">
+	            <ng-md-icon icon="receipt"></ng-md-icon>
+	            Excel
+	          </md-button>
+	        </md-menu-item>
+					<md-menu-divider></md-menu-divider>
+	        <md-menu-item>
+	          <md-button ng-click="list.exportData('json');" aria-label="Export {{list.header}}s table in JSON format">
+	            <ng-md-icon icon="account_balance_wallet"></ng-md-icon>
+	            JSON
+	          </md-button>
+	        </md-menu-item>
+	        <md-menu-divider></md-menu-divider>
+	        <md-menu-item>
+	          <md-button ng-click="list.exportData('txt');" aria-label="Export {{list.header}}s table in Text format">
+	            <ng-md-icon icon="text_format"></ng-md-icon>
+	            Text
+	          </md-button>
+	        </md-menu-item>
+	        <md-menu-divider></md-menu-divider>
+
+	      </md-menu-content>
+	    </md-menu>
+      </div>
+    </md-toolbar>
+
+		<md-toolbar class="md-table-toolbar md-default"
+			ng-show="filter.show || list.data.search"
+			aria-hidden="false">
+      <div class="md-toolbar-tools">
+				<ng-md-icon icon="search"></ng-md-icon>
+				<md-input-container flex class="mgt30">
+		      <label>Filter {{list.header}}</label>
+		      <input ng-model="list.data.search" focus-me="filter.show" ng-change="findNodes()">
+		    </md-input-container>
+				<ng-md-icon icon="close" ng-click="filter.show = false; list.data.search = '';" class="link"></ng-md-icon>
+			</div>
+		</md-toolbar>
+
+<div layout="row">
+    <div ui-tree="treeOptions" id="tree-root" flex>
+      <ol ui-tree-nodes="" ng-model="list.data">
+        <li ng-repeat="node in list.data" ui-tree-node ng-include="'nodes_renderer.html'" ng-show="visible(node)">{{node}}</li>
+      </ol>
+    </div>
+</div>
+
+<a id="bottom"></a><!--When a new category added, page should scroll to this point-->
+ 
+ <div class="md-table-pagination">
+		<span>Filtered {{filtered.length}} of {{list.data.length}} {{list.header}}s</span>
+	</div>
+</md-card>
+
+<md-card ng-if="!list.data.length && !list.loading">
+	  <md-card-content>
+	    <h2>No {{list.header | labelCase}}s found</h2>
+	    <p class="mgl" hide-xs>
+				There are no {{list.header | labelCase}}s!
+	      <a ng-click="main.create();" href="">Create one!</a>
+	    </p>
+	    <p hide-gt-xs>
+				There are no {{list.header | labelCase}}s!
+	      <a ng-click="main.create();" href="">Create one!</a>
+	    </p>
+	  </md-card-content>
+	</md-card>

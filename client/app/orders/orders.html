@@ -1,0 +1,482 @@
+<navbar leftmenu="true"></navbar>
+<left-menu></left-menu>
+
+<div class="container">
+    <section  ng-controller="OrdersController as tab">
+  
+    <div class="row" style="margin-left: 20px;margin-bottom: 10px">
+       <ul class="nav nav-pills" >
+          <li ng-class="{active:tab.isSet(1)}"><a href ng-click="tab.setTab(1)">Orders</a></li>
+          <li ng-class="{active:tab.isSet(2)}"><a href ng-click="tab.setTab(2)">Reports</a></li>
+          
+      </ul>
+                                 
+    </div>
+        
+        
+        
+        <div ng-if="tab.isSet(1)">
+             <div class="container">
+               <!--When No Orders-->
+                    <section ng-if="order.orders.total===0" class="header" layout="column" layout-align="center stretch">
+                      <h1>You have not recieved any payments yet</h1>
+                      <md-button ui-sref="/" class="md-primary md-raised">
+                      <ng-md-icon icon="shopping_cart"></ng-md-icon>Shop Now
+
+                      </md-buton>
+                    </section>
+              <div class="box">
+                      <div class="row">
+                      
+                            <div class="col-sm-4" style="border-right: bold">
+                              <h3 >Orders Total :<br> &nbsp;<br>{{orders.orders.total | currency}}</h3>
+                            </div>
+                            <div class="col-sm-4"><h3>How You get paid</h3><br><small><a href="/profile">manage</a></small></div>
+                             <div class="col-sm-4"><h3><a href="/profile">Advertising Profile</a></h3><br><p>Company:{{orders.Auth.getCurrentUser().company}}<br>Contact Name:{{user.name}}<b/><br>Phone :{{orders.Auth.getCurrentUser().phone}}<br>Email: {{orders.Auth.getCurrentUser().email}}</div>
+                        
+                      </div>
+               </div>
+              <div class="box">
+                <div style="margin-top:20px" class="small" dw-loading="orders" dw-loading-options="{active: true, text: '', className: 'custom-loading', spinnerOptions: {lines: 12, length: 20, width: 6, radius: 20, color: '#d9534f', direction: -1, speed: 3}}"></div>
+                  
+                    <div ng-controller = "OrdersController as vm">
+                  <kendo-grid options="vm.mainGridOptions">
+
+                  <div k-detail-template>
+
+
+                      <kendo-tab-strip>
+                      <ul>
+                          <li class="k-state-active">ORDER DETAILS</li>
+                          <li>ADVERTISER</li>
+                      </ul>
+                      <div>
+                          <div kendo-grid k-options="vm.detailGridOptions(dataItem)"></div>
+                      </div>
+                      <div>
+                          <ul class="contact-info-form">
+                          <li><label>Name:</label> {{dataItem.address.recipient_name}}</li>
+                              <li><label>Address:</label>{{dataItem.address.line1}}</li>
+                               <li><label>&nbsp;</label>{{dataItem.address.city}}</li>
+                               <li><label>&nbsp;</label>{{dataItem.address.country_code}}</li>
+                              <li><label>Email:</label> {{dataItem.email}}</li>
+                              <li><label>Phone:</label> {{dataItem.phone}}</li>
+                                        
+                          </ul>
+                      </div>
+                      </kendo-tab-strip>
+                  </div>
+              </kendo-grid>
+              </div>
+
+               
+              </div>
+              </div>
+
+        </div>
+        <div ng-if="tab.isSet(2)">
+                   <md-content class="container" layout="column">
+                        <md-tabs md-dynamic-height md-border-bottom>
+                          <md-tab label="SALES STATUS">
+                            <md-content >
+                                <section >
+                       
+                                  <md-content ng-controller="RegionalSalesController as regionalSales">
+                                       <!--open main column-->
+                                            <div id="main-section-header" class="row" >
+                                                <h2 id="team-efficiency" class="col-xs-3">Regional sales status</h2>
+                                                <div id="dateFilter" class="col-xs-9">
+                                                    <div class="period-wrapper">
+                                                        <label for="start-date" class="select-period">Stats from</label>
+                                                        <input id="start-date" kendo-date-picker k-ng-model="regionalSales.startDate">
+                                                        <span class="k-invalid-msg" data-for="start-date"></span>
+                                                    </div>
+                                                    <div class="period-wrapper">
+                                                        <label for="end-date" class="select-period">To</label>
+                                                        <input id="end-date" kendo-date-picker k-ng-model="regionalSales.endDate">
+                                                        <span class="k-invalid-msg" data-for="end-date" ></span>
+                                                    </div>
+                                                </div>
+                                                <div style="clear:both;"></div>
+                                            </div>
+
+                                            <div id="regional-sales" class="main-section-content row">
+                                                <div id="map-wrapper" class="row">
+                                                    <div id="map-details" class="col-xs-2">
+                                                        <h3 class="section-header">Pick a Country to view stats</h3>
+                                                        <h3 class="section-header">COUNTRY</h3>
+                                                        <h3 id="countryName">{{regionalSales.selectedCountry}}</h3>
+                                                        <h3 class="section-header">CUSTOMERS</h3>
+                                                        <div id="countryCustomers">
+                                                            <span>{{regionalSales.currentCustomers.join(", ")}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div id="map-container" class="col-xs-10">
+                                                        <div id="map" kendo-map
+                                                            k-layers="regionalSales.mapLayers"
+                                                            k-center="[50.00, 0]"
+                                                            k-zoom="2"
+                                                            k-zoomable="false"
+                                                            k-on-shape-created="regionalSales.shapeCreated(kendoEvent)"
+                                                            k-on-shape-mouse-enter="regionalSales.shapeMouseEnter(kendoEvent)"
+                                                            k-on-shape-mouse-leave="regionalSales.shapeMouseLeave(kendoEvent)"
+                                                            k-on-shape-click="regionalSales.shapeClick(kendoEvent)"
+                                                            ></div>
+                                                    </div>
+                                                </div>
+
+                                                <div id="statsContainer" class="row">
+                                                    <div id="marketShareContainer" class="col-xs-3 stats-graph">
+                                                        <h3 class="section-header">Market share</h3>
+                                                        <span id="market-share-label">{{ regionalSales.percentage }}</span>
+                                                        <div class="sparkline-container">
+                                                            <div id="market-share"
+                                                                style="height: 100px; visibility:{{ regionalSales.currentOrders.length > 0 ? 'visible': 'hidden' }}"
+                                                                kendo-chart
+                                                                k-theme="'metro'"
+                                                                k-legend="{visible:false}"
+                                                                k-data-source="regionalSales.marketDataSource"
+                                                                k-series-defaults="{type:'donut'}"
+                                                                k-series="[{field:'sales', categoryField:'country'}]"
+                                                                k-tooltip="{visible:true, template:'#= dataItem.country #: #= kendo.toString(dataItem.sales, \'c2\') #'}"
+                                                            ></div>
+                                                            <div id="market-share-no-data" class="overlay" ng-hide="regionalSales.currentOrders.length > 0">
+                                                                <div>No data available</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="revenueContainer" class="col-xs-3 stats-graph">
+                                                        <h3 class="section-header">Revenue</h3>
+                                                        <span id="revenue-label">{{ regionalSales.revenue }}</span>
+                                                        <div class="sparkline-container">
+                                                            <div id="revenue"
+                                                                style="height: 100px; visibility:{{ regionalSales.currentOrders.length > 0 ? 'visible': 'hidden' }}"
+                                                                kendo-sparkline
+                                                                k-theme="'metro'"
+                                                                k-data-source="regionalSales.revenueDataSource"
+                                                                k-type="'column'"
+                                                                k-series="[{categoryField:'date',aggregate:'sum',color:'#1996e4',gap:0.2,field:'value'}]"
+                                                                k-category-axis="{type: 'date', baseUnit: 'months'}"
+                                                                k-tooltip="{template: '#=kendo.toString(value, \'c2\')#'}"
+                                                            ></div>
+                                                            <div id="revenue-no-data" class="overlay" ng-hide="regionalSales.currentOrders.length > 0">
+                                                                <div>No data available</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="ordersContainer" class="col-xs-3 stats-graph">
+                                                        <h3 class="section-header">Orders</h3>
+                                                        <span id="orders-label">{{regionalSales.currentOrders.length}}</span>
+                                                        <div class="sparkline-container">
+                                                            <div id="orders" style="height:100px"
+                                                                style="height: 100px; visibility:{{ regionalSales.currentOrders.length > 0 ? 'visible': 'hidden' }}"
+                                                                kendo-sparkline
+                                                                k-theme="'metro'"
+                                                                k-data-source="regionalSales.ordersDataSource"
+                                                                k-type="'column'"
+                                                                k-series="[{categoryField:'date',aggregate:'sum',color:'#1996e4',gap:0.2,field:'value'}]"
+                                                                k-category-axis="{type: 'date', baseUnit: 'months'}"
+                                                            ></div>
+                                                            <div id="orders-no-data" class="overlay" ng-hide="regionalSales.currentOrders.length > 0">
+                                                                <div>No data available</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="customersContainer" class="col-xs-3 stats-graph">
+                                                        <h3 class="section-header">Customers</h3>
+                                                        <span id="customers-label">{{regionalSales.currentCustomers.length}}</span>
+                                                        <div class="sparkline-container">
+                                                            <div id="customers"
+                                                                style="height: 100px; visibility:{{ regionalSales.currentCustomers.length > 0 ? 'visible': 'hidden' }}"
+                                                                kendo-sparkline
+                                                                k-theme="'metro'"
+                                                                k-data-source="regionalSales.customersDataSource"
+                                                                k-type="'column'"
+                                                                k-series="[{categoryField:'date',aggregate:'sum',color:'#1996e4',gap:0.2,field:'value'}]"
+                                                                k-category-axis="{type: 'date', baseUnit: 'months'}"
+                                                            ></div>
+                                                            <div id="customers-no-data" class="overlay" ng-hide="regionalSales.currentCustomers.length > 0">
+                                                                <div>No data available</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div id="topProductsContainer">
+                                                    <h3 class="section-header">Top selling products</h3>
+                                                    <div id="top-selling-products"
+                                                         style="height: 260px; visibility:{{ regionalSales.currentTopSellingProducts.length > 0 ? 'visible': 'hidden' }}"
+                                                         kendo-chart
+                                                         k-theme="'metro'"
+                                                         k-data-source="regionalSales.topSellingProductsDataSource"
+                                                         k-legend="{visible:true, position:'top'}"
+                                                         k-chart-area="{background:'#eeeeee'}"
+                                                         k-series-defaults="{type: 'line',style: 'smooth'}"
+                                                         k-series="[{field:'quantity',markers:{visible:false}}]"
+                                                         k-category-axis="[{majorGridLines:{visible:false},line:{width:0},labels:{visible:false}}]"
+                                                         k-value-axis="{majorUnit:50,majorTicks:{visible:false},majorGridLines:{visible:false},line:{visible:false},labels:{visible:false}}"
+                                                         k-tooltip="{visible:true,template:'#=data.series.name.replace(data.series.field, data.value)#'}"
+                                                    ></div>
+                                                    <div id="products-no-data" class="overlay" ng-hide="regionalSales.currentTopSellingProducts.length > 0">
+                                                        <div>No data available</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                    <div flex></div>
+                                  </md-content>
+                           
+                            </section>
+                            </p>
+                          </md-content>
+                          </md-tab>
+                           <md-tab label="PRODUCT ORDERS">
+                            <md-content >
+                               <section >
+                       
+                                <md-content ng-controller="ProductsOrdersController as productsOrders">
+                                     <!--open main column-->
+                                      <div id="main-section-header" class="row" >
+                                          <h2 id="team-efficiency" class="col-xs-3">PRODUCTS & ORDERS</h2>
+                                          <div style="clear:both;"></div>
+                                      </div>
+                                      <div id="orders"
+                                          kendo-grid
+                                          k-data-source="productsOrders.ordersDataSource"
+                                          k-columns="productsOrders.ordersColumns"
+                                          k-sortable="true"
+                                          k-pageable="true"
+                                          k-navigatable="true"
+                                          k-filterable="true"
+                                          k-selectable="'column'"
+
+
+                                      >
+                                      <div k-detail-template>
+                                          <h4>Details for order {{ dataItem.OrderID }} </h4>
+                                          <div class="tabstrip" kendo-tab-strip>
+                                              <ul>
+                                                  <li class="k-state-active">
+                                                      PRODUCTS
+                                                  </li>
+                                                  <li>
+                                                      CUSTOMER DETAILS
+                                                  </li>
+                                              </ul>
+                                              <div class="details-grid"
+                                                  style="height: 200px"
+                                                  kendo-grid
+                                                  k-columns="productsOrders.productsColumns"
+                                                  k-data-source="productsOrders.productDataSource(dataItem.OrderID)">
+                                                  <div k-detail-template>
+                                                      <div class="product-details-wrapper row">
+                                                          <div class="product-details col-xs-3">
+                                                              <img src="./Content/Products/{{dataItem.ProductID}}.jpg" class="product-details-image">
+                                                              <div class="product-name-cat">
+                                                                  <div class="product-name">{{productsOrders.product(dataItem.ProductID).ProductName}}</div>
+                                                                  <div class="product-category">{{productsOrders.product(dataItem.ProductID).Category}}</div>
+                                                              </div>
+                                                          </div>
+                                                          <div class="product-details col-xs-3">
+                                                              <h5>Orders QTY.</h5>
+                                                              <div class="sparkline-container">
+                                                                  <!-- escape template to prevent the grid from executing it -->
+                                                                  <div class="details-sparkline"
+                                                                      kendo-sparkline
+                                                                      k-theme="'metro'"
+                                                                      k-type="'column'"
+                                                                      k-data-source="productsOrders.productSalesDataSource(dataItem.ProductID)"
+                                                                      k-series="[{categoryField:'Date',aggregate:'count',gap:0.2,field:'Quantity',tooltip:{template:'QUANTITY: \\\\#= value \\\\#'}}]"
+                                                                      k-category-axis="{type:'date',visible:true,labels:{visible:false},majorTicks:{visible:false},baseUnit:'months',line:{visible:true,color:'black'}}"
+                                                                      k-value-axis="{line:{visible:true}}">
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                          
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div>
+                                                   <div class='shipping-details'>
+                                                       <ul>
+                                                           <li><label>Name:</label>{{dataItem.ShipName}}</li>
+                                                           <li><label>Country:</label>{{dataItem.ShipCountry}}</li>
+                                                           <li><label>City:</label>{{dataItem.ShipCity}}</li>
+                                                           <li><label>Address:</label>{{dataItem.ShipAddress}}</li>
+                                                           <li><label>Postal Code:</label>{{dataItem.ShipPostalCode}}</li>
+                                                       </ul>
+                                                   </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      </div>
+                               <div flex></div>
+                              </md-content>
+                                
+                            </section>
+                            </md-content>
+                          </md-tab>
+
+                             <md-tab label="PRODUCT EFFICIENCY">
+                            <md-content >                              
+                              <section >                       
+                              <md-content ng-controller="ProductEfficiencyController as productEfficiency" >
+                                  <div id="main-section-header" class="row"  >
+                                      <h2 id="team-efficiency" class="col-xs-3">Product efficiency</h2>
+                                      <div id="dateFilter" class="col-xs-9">
+                                          <div class="period-wrapper">
+                                              <label for="StartDate" class="select-period">Stats from</label>
+                                              <input id="start-date" kendo-date-picker k-ng-model="productEfficiency.startDate">
+                                          </div>
+                                          <div class="period-wrapper">
+                                              <label for="EndDate" class="select-period">To</label>
+                                              <input id="end-date" kendo-date-picker k-ng-model="productEfficiency.endDate">
+                                          </div>
+                                      </div>
+                                      <div style="clear:both;"></div>
+                                  </div>
+
+                                  <div class="main-section-content row" style="">
+                                      <div id="employee-list" class="col col-xs-2">
+                                          <h3>PRODUCTS /SITES</h3>
+                                          <div id="employees-list"
+                                              kendo-list-view
+                                              k-selectable="'single'"
+                                              k-data-source="productEfficiency.employeeListDataSource"
+                                              k-on-change="productEfficiency.changeCurrentEmployee(dataItem)"
+                                          >
+                                             <div class="employee" k-template>
+                                                 <div class="employee-wrapper">
+                                                     <img ng-src="./Content/Employees/{{dataItem.EmployeeID}}-t.png" class="img-responsive employee-list-image"/>
+                                                     <dl class="employee-list-details">
+                                                         
+                                                         <dd class="title">{{dataItem.Title}}</dd>
+                                                     </dl>
+                                                 </div>
+                                             </div>
+                                          </div>
+                                      </div>
+                                      <div id="employee-details-wrapper" class="col col-xs-10">
+                                          <div id="employee-details" class="row">
+                                              <div id="employee-about" class="col-xs-12 placeholder">
+                                                  <div class="row">
+                                                      <div id="employeeBio" class="col-xs-12 col-sm-4">
+                                                          <div>
+                                                              <h3>ABOUT</h3>
+                                                              <img ng-src="./Content/Employees/{{productEfficiency.currentEmployee.EmployeeID}}.png" class="img-responsive employee-details-image" />
+                                                              <dl class="employee-bio-details">
+                                                                  
+                                                                  <dd class="title">{{productEfficiency.currentEmployee.Title}}</dd>
+                                                                  <dd class="phone"><span class="icon icon-mobile"></span>{{productEfficiency.currentEmployee.HomePhone}}</dd>
+                                                             </dl>
+                                                          </div>
+                                                      </div>
+                                                      <div class="col-xs-12 col-sm-4">
+                                                          <h3>Quarter to date sales</h3>
+                                                          <span id="employee-quarter-sales-label">{{productEfficiency.currentEmployeeQuarterSales | currency }}</span>
+                                                          <div class="sparkline-container">
+                                                              <div id="employee-quarter-sales" style="height:30px"
+                                                                  kendo-chart
+                                                                  k-theme="'metro'"
+                                                                  k-tooltip="true"
+                                                                  k-data-source="productEfficiency.employeeQuarterSalesDataSource"
+                                                                  k-series="[{type:'bullet',currentField:'Current',targetField:'Target'}]"
+                                                                  k-legend="{visible:false}"
+                                                                  k-category-axis="{labels:{visible:true},majorGridLines:{visible:false}}"
+                                                                  k-value-axis="{type:'numeric',labels:{visible:false},majorTicks:{visible:false},majorGridLines:{visible:false}}">
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <div class="col-xs-12 col-sm-4">
+                                                          <h3>Monthly Average Sales</h3>
+                                                          <span id="employee-average-sales-label">{{productEfficiency.currentEmployeeAverageSalesNumber | currency }}</span>
+                                                          <div class="sparkline-container">
+                                                              <div id="employee-average-sales" style="height:30px"
+                                                                  kendo-chart
+                                                                  k-theme="'metro'"
+                                                                  k-series="[{type:'line',field:'EmployeeSales',width:1.5,markers:{visible:false}}]"
+                                                                  k-category-axis="{type:'date',field:'Date',visible:false,majorGridLines:{visible:false},majorTicks:{visible:false}}"
+                                                                  k-legend="{visible:false}"
+                                                                  k-data-source="productEfficiency.employeeAverageSalesDataSource"
+                                                                  k-value-axis="{type:'numeric',visible:false,labels:{visible:false},majorGridLines:{visible:false},majorTicks:{visible:false}}">
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div id="employeeStats" class="col-xs-12">
+                                                  <div id="team-sales" style="height:200px"
+                                                      kendo-chart
+                                                      k-theme="'metro'"
+                                                      k-title="{text:'REPRESENTATIVE SALES VS. TOTAL SALES',align:'left',font:'11px',color:'#35373d'}"
+                                                      k-data-source="productEfficiency.employeeTeamSalesDataSource"
+                                                      k-legend="{position:'bottom'}"
+                                                      k-series="[{field:'EmployeeSales',categoryField:'Date',name:'Product Sales',aggregate:'sum'},{field:'TotalSales',categoryField:'Date',name:'All Sales',aggregate:'sum'}]"
+                                                      k-category-axis="{type:'date',baseUnit:'months',majorGridLines:{visible:false}}"
+                                                      k-value-axis="{labels:{format:'{0:c2}',visible:false},majorUnit:250,line:{visible:false},majorGridLines:{visible:false}}"
+                                                      k-tooltip="{visible:true,format:'{0:c2}'}">
+                                                  </div>
+                                              </div>
+                                           
+                                          </div>
+                                      </div>
+                                  </div>
+
+                              </md-content>
+                                
+                            </section>
+                            </p>
+                          </md-content>
+                          </md-tab>
+                         
+                        </md-tabs>
+                      </md-content>  
+               
+        </div>
+        
+    </section>
+</div>
+
+
+<footer></footer>
+<style type="text/css" media="screen">
+   li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: white;
+    background-color: ##d9534f;
+}
+</style>
+
+<script>
+        /*
+            This demo renders the grid in "DejaVu Sans" font family, which is
+            declared in kendo.common.css. It also declares the paths to the
+            fonts below using <tt>kendo.pdf.defineFont</tt>, because the
+            stylesheet is hosted on a different domain.
+        */
+        kendo.pdf.defineFont({
+            "DejaVu Sans"             : "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "//kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+        });
+    </script>
+    <script type="text/x-kendo-template" id="template">
+                <div class="toolbar">
+                    <label class="category-label" for="category">Show products by category:</label>
+                    <input type="search" id="category" style="width: 150px"/>
+                </div>
+            </script>
+
+    <script type="x/kendo-template" id="page-template">
+      <div class="page-template">
+        <div class="header">
+          <div style="float: right">Page #: pageNum # of #: totalPages #</div>
+          A Taste for convinience
+        </div>
+        <div class="watermark">MEDIABOX</div>
+        <div class="footer">
+          Page #: pageNum # of #: totalPages #
+        </div>
+      </div>
+    </script>
+

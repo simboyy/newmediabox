@@ -1,0 +1,114 @@
+<md-toolbar class="md-hue-1" id="user-detail-toolbar">
+	<span layout="row" layout-align="space-between" class="md-toolbar-tools md-toolbar-tools-top">
+		<md-button ng-click="detail.goBack();" aria-label="Close detail view">
+			<ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
+		</md-button>
+		<h3>Edit {{detail.header | labelCase}} - {{detail.category._id}}</h3>
+		<md-button aria-label="-">
+		</md-button>
+	</span>
+</md-toolbar>
+
+<md-content class="md-padding" flex layout-fill ng-cloak id="user-detail-content">
+  <section layout="column">
+      <span layout="row">
+        <md-input-container flex>
+          <label>Name</label>
+          <input name="name" ng-model="detail.category.name" md-autofocus>
+        </md-input-container>
+
+        <md-input-container flex>
+          <label>Slug</label>
+          <input name="slug" ng-model="detail.category.slug"/>
+        </md-input-container>
+        <md-input-container flex>
+          <label>Category</label>
+          <input name="category" ng-model="detail.category.category"/>
+        </md-input-container>
+      </span>
+  </section>
+	<section class="section" layout="row">
+<form name="form" layout="column" layout-fill layout-align="space-between" ng-submit="detail.save(detail.cat);" novalidate autocomplete="off">
+		<span layout="column" layout-sm="column">
+		  <md-content>
+			    <section>
+			      <md-subheader class="md-accent">Sub Categories </md-subheader>
+
+						<table md-colresize="md-colresize" class="md-table" id="exportable">
+							<thead>
+								<tr class="md-table-headers-row">
+									<th class="md-table-header">#</th>
+									<th class="md-table-header">Name</th>
+									<th class="md-table-header">Active</th>
+									<th class="md-table-header"></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr ng-repeat="v in detail.category.child track by $index" id="{{v._id}}"
+										class="md-table-content-row"
+										ng-class="{'selected': detail.isSelected(v)}">
+									<td>{{$index+1}}</td>
+									<td>
+										<md-input-container flex>
+											<input name="name" ng-model="v.name" aria-label="Name"/>
+										</md-input-container>
+									</td>
+                  <td>
+										<md-input-container flex>
+											<md-switch class="md-secondary" ng-model="v.active" aria-label="Activate Category"></md-switch>
+										</md-input-container>
+									</td>
+									<td>
+										<md-button class="md-icon-button" aria-label="Delete Feature"   ng-click="detail.deleteVariants($index,cat);"><ng-md-icon icon="delete"></ng-md-icon></md-button>
+									</td>
+								</tr>
+								<tr class="md-table-content-row"
+										ng-class="{'selected': detail.isSelected(p)}">
+									<td>{{$index}}</td>
+									<td>
+										<md-input-container flex>
+											<input name="name" ng-model="detail.category.newSubCat.name" aria-label="Variant Weight" placeholder="New Name"/>
+										</md-input-container>
+									</td>
+									<td>
+									</td>
+								</tr>
+							</tbody>
+			      </table>
+			    </section>
+
+			  </md-content>
+
+		<md-dialog-actions layout="row">
+			<span flex></span>
+			<md-button ng-disabled="detailForm.$invalid" type="submit" class="md-primary md-raised" aria-label="Save changes">Save</md-button>
+		</md-dialog-actions>
+		</form>
+
+	</section>
+
+	<section class="section" layout="column" ng-hide="detail.isRoot">
+
+		<span class="section-title">Record Information</span>
+		<span layout="row" layout-sm="column" class="detail-info">
+			<span flex="45">Modified</span>
+			<span flex ng-show="detail.category.updatedAt" class="subtitle">
+				<span am-time-ago="detail.category.updatedAt"></span>
+				<md-tooltip>{{detail.category.updatedAt | date:'dd. MMMM yyyy H:mm'}}</md-tooltip>
+				{{detail.category.modifiedBy && 'by ' + detail.category.modifiedBy}}
+			</span>
+		</span>
+
+		<span layout="row" layout-sm="column" class="detail-info">
+			<span flex="45">Created</span>
+			<span flex ng-show="detail.category.createdAt" class="subtitle">{{detail.category.createdAt | date:'dd. MMMM yyyy H:mm'}}</span>
+		</span>
+
+	</section>
+
+</md-content>
+
+<md-button class="md-fab md-accent md-fab-bottom-right fab-overlap md-button ng-scope md-blue-theme" aria-label="Save Category" ng-if="form.$dirty" ng-click="detail.save(detail.cat);">
+	<ng-md-icon icon="save"></ng-md-icon>
+</md-button>

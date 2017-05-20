@@ -1,0 +1,130 @@
+md-content.scroll{
+     max-height:100vh; 
+}
+.mgl{
+  margin-left: 60px;
+}
+md-input-container.mgt30{
+  margin-top: 30px;
+}
+.md-button.md-fab.md-fab-bottom-right {
+  position: fixed;
+  bottom: 10px;
+  right: 5%;
+}
+.virtualRepeatdemoInfiniteScroll #vertical-container {
+  height: 292px;
+  width: 100%; }
+
+.virtualRepeatdemoInfiniteScroll .repeated-item {
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+  height: 40px;
+  padding-top: 10px; }
+
+.virtualRepeatdemoInfiniteScroll md-content {
+  margin: 16px; }
+
+.virtualRepeatdemoInfiniteScroll md-virtual-repeat-container {
+  border: solid 1px grey; }
+
+.virtualRepeatdemoInfiniteScroll .md-virtual-repeat-container .md-virtual-repeat-offsetter {
+  padding-left: 16px; }
+
+tbody tr img{
+ /* width: 52px;*/
+  margin: 0 10px 0 0;
+  padding:1px;
+  border: 1px solid #eee;
+  background-color: #fff;
+}
+button.md-button.md-fab.fab-overlap.md-fab-top-right, button.md-button.md-fab.fab-overlap.md-fab-top-left {
+    top: 75px;
+}
+/*button.md-button.md-fab.fab-overlap.md-fab-top-left {
+    left: 28px;
+}*/
+tr.selected {
+    background: #e3f2fd;
+}
+md-content{
+  /*overflow-x: hidden;*/
+}
+md-content#detail-content{
+  margin-left: -15px;
+}
+.md-table {
+  min-width: 100%;
+  border-collapse: collapse;
+}
+
+/*.md-table tbody tr:hover, .md-table tbody tr:focus {
+  cursor:pointer;
+  background-color:rgba(63,81,181,0.2);
+}*/
+
+.md-table-header {
+  border-bottom: 1px solid rgb(230,230,230);
+  color: rgb(130,130,130);
+  text-align: left;
+  font-size: 0.75em;
+  font-weight: 700;
+  padding: 16px 16px 16px 0;
+}
+
+.md-table-header a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.md-table-content {
+  white-space: nowrap;
+  font-size: 0.8em;
+}
+
+.md-table tr td{
+  border-bottom: 1px solid rgb(230,230,230);
+}
+.md-table-td-more {
+  max-width:72px;
+  width:72px;
+  padding:16px;
+}
+
+.md-table-thumbs {
+  max-width: 104px;
+  width: 104px;
+  padding: 16px 32px;
+}
+
+.md-table-thumbs div {
+  overflow:hidden;
+  width: 40px;
+  height:40px;
+  border-radius:20px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background-size:cover;
+  box-shadow: 0 8px 10px rgba(0,0,0,.3);
+  -webkit-box-shadow: 0 8px 10px rgba(0,0,0,.1);
+}
+
+.md-table-footer {
+  height:40px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.md-table-count-info {
+  line-height:40px;
+  font-size:.75em;
+}
+
+.md-table-footer-item {
+  width: 40px;
+  height: 40px;
+  vertical-align:middle;
+}
+
+/*.md-table-active-page {
+  font-weight: 700;
+}*/

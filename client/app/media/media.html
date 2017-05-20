@@ -1,0 +1,44 @@
+<navbar leftmenu="true"></navbar>
+<left-menu></left-menu>
+<div class="container">
+<div layout-align="start center" layout="column">
+<h2 class="md-title">Media Library</h2>
+<md-progress-linear md-mode="determinate" value="{{progress}}" class="md-warn" ng-show="progress >= 0"></md-progress-linear>
+<!-- <span class="progress">
+	<div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+</span> -->
+</div>
+<div layout="column">
+	<div ngf-drop ngf-select ng-model="files" class="drop-box"
+			ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+			accept="image/*"
+			ngf-pattern="'image/*'">Drop images here to upload<br/>
+			or <br/>
+		<md-button tabindex="0"
+		class="md-button md-default-theme md-warn md-raised"
+		ngf-multiple="true"
+		aria-label="Open file select panel"
+		ngf-select="upload($files)">
+			<ng-md-icon icon="cloud"></ng-md-icon> Select Files
+		</md-button>
+	</div>
+
+	<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+
+	<md-grid-list md-cols-xs ="1" md-cols-sm="3" md-cols-md="5" md-cols-lg="6" md-cols-gt-lg="10" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="12px" md-gutter-gt-sm="8px">
+
+		<md-grid-tile ng-repeat="i in data" class="md-whiteframe-z2" ng-click="imageDetails(i)">
+
+			<div class="thumbnail">
+					<img ng-if="i.type=='image/png'" ng-src="{{i.path}}" draggable="false" alt="{{i.name}}">
+					<audio ng-if="i.type=='audio/mp3'" controls ng-src="{{i.path}}"></audio>
+                  <video ng-if="i.type=='video/mp4'" controls ng-src="{{i.path}}"></video>
+			</div>
+			<md-grid-tile-footer><h3>{{i.name}}</h3></md-grid-tile-footer>
+		</md-grid-tile>
+	</md-grid-list>
+
+	<pre ng-if="files[0].$error">Upload Log: {{f.$error}} {{f.$errorParam}}</pre>
+</div>
+</div>
+<footer></footer>

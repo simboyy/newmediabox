@@ -1,0 +1,90 @@
+<md-dialog aria-label="Create a new user" id="admin-user-create" layout="column" 
+flex-xs="100" 
+flex-sm = "50" 
+flex-md="50" 
+flex-lg="33" 
+flex-gt-lg="33" 
+class="md-whiteframe-z1">
+
+	<md-toolbar class="md-accent">
+		<h3 class="md-toolbar-tools">
+			Create a new {{create.title}}
+		</h3>
+	</md-toolbar>
+		<form name="createForm" layout="column" layout-fill layout-align="space-between" ng-submit="create.create(createForm)" novalidate  autocomplete="off">
+
+	<md-content layout-padding class="md-blue-theme">
+			<section class="section" layout="column">
+				<span layout="row" layout-sm="column" ng-repeat="i in create.options.columns" ng-if="create.options.columns" ng-switch="i.dataType" >
+					<!-- When the field is Integer type restrict it only to float values -->
+					<md-input-container ng-cloak flex ng-switch-when="parseFloat" >
+						<label>{{i.heading | labelCase}}</label>
+						<input name="{{i.field}}" ng-model="create.item[i.field]" ng-disabled="i.noAdd" only-numbers md-autofocus="$index===0">
+					</md-input-container>
+
+					<!-- When the field is Image type add URL postfix to labels -->
+					<md-input-container ng-cloak flex ng-switch-when="image" >
+						<label>{{i.heading | labelCase}} URL</label>
+						<input name="{{i.field}}" ng-model="create.item[i.field]" ng-disabled="i.noAdd" md-autofocus="$index===0">
+					</md-input-container>
+
+					<!-- When boolean type add an switch -->
+					<md-input-container ng-cloak flex ng-switch-when="boolean">
+							<section class="section slim" layout="column">
+								<span layout="row" layout-align="start center">
+									<span flex="33"><label>{{i.heading | labelCase}}</label></span>
+									<md-switch name="{{i.field}}" aria-label="active" ng-model="create.item[i.field]"
+									ng-disabled="i.noAdd"
+									class="no-label"></md-switch>
+								</span>
+							</section>
+							<span flex="33"></span>
+
+					</md-input-container>
+
+					<!-- When datatype is date, integrate an calendar into it -->
+					<div ng-switch-when="date" ng-cloak class="full-width">
+						<mb-datepicker element-id='date1'
+										 input-class="testClass"
+										 input-name="testName"
+										 arrows="arrows"
+										 calendar-header="header"
+										 date="date"
+										 date-format="YYYY-MM-DD"
+										 placeholder="{{i.heading | labelCase}}"
+										 ></mb-datepicker>
+					</div>
+
+					<!-- When the required type is dropdown, add an dropdown menu with select options -->
+					<md-input-container ng-cloak flex ng-switch-when="dropdown" class="dropdown">
+		        <label>{{i.heading | labelCase}}</label>
+		        <md-select ng-model="create.item[i.field]">
+		          <md-option ng-repeat="o in i.options" value="{{o}}">
+		            {{o}}
+		          </md-option>
+		        </md-select>
+		      </md-input-container>
+
+					<!-- When textarea type add an multiline input -->
+					<md-input-container ng-cloak flex ng-switch-when="textarea">
+						<label>{{i.heading | labelCase}}</label>
+						<textarea name="{{i.field}}" ng-model="create.item[i.field]" ng-disabled="i.field=='_id' || i.noAdd" md-autofocus="$index === 0"></textarea>
+					</md-input-container>
+
+					<!-- When datatype of field is not defined add textbox instead -->
+					<md-input-container ng-cloak flex ng-switch-default>
+						<label>{{i.heading | labelCase}}</label>
+						<input name="{{i.field}}" ng-model="create.item[i.field]" ng-disabled="i.field=='_id' || i.noAdd" md-autofocus="$index === 0">
+					</md-input-container>
+
+			</span>
+			</section>
+	</md-content>
+
+	<md-dialog-actions layout="row">
+		<md-button ng-click="create.close()" aria-label="Close Add Modal">Cancel</md-button>
+		<md-button ng-disabled="createForm.$invalid" type="submit" class="md-primary md-raised" aria-label="Insert a new {{create.title}}"> Create </md-button>
+	</md-dialog-actions>
+		</form>
+
+</md-dialog>

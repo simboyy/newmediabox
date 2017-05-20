@@ -1,0 +1,81 @@
+<navbar leftmenu="true"></navbar>
+<div class="container">
+    <div layout="row">
+        <div ng-include="'app/main/filter-menu.html'"></div>
+        <!--<md-content flex layout="column">-->
+        <section layout="column" layout-fill flex>
+            <div class="sort-products md-whiteframe-z2">
+                <div class="products-list-meta" ng-if="main.$mdMedia('gt-md')" flex>
+                    Showing {{main.products.items.length}} products of {{main.products.count}} in: {{vm.Settings.currency.symbol}}<strong>{{main.priceSlider.min}}</strong> &nbsp;-&nbsp; {{vm.Settings.currency.symbol}}<strong>{{main.priceSlider.max}}</strong>
+                </div>
+                <section layout="row" layout-align="center center">
+                    <div>Sort: &nbsp;</div>
+                    <md-button class="groupX left" ng-click="main.sortNow('variants.price')">{{main.Settings.currency.symbol}}
+                        <ng-md-icon icon="arrow_downward" style="fill:#888"></ng-md-icon>
+                    </md-button>
+                    <md-button class="groupX middle" ng-click="main.sortNow('-variants.price')">{{main.Settings.currency.symbol}}
+                        <ng-md-icon icon="arrow_upwards" style="fill:#888"></ng-md-icon>
+                    </md-button>
+                    <md-button class="groupX middle" ng-click="main.sortNow('name')">A-Z
+                        <ng-md-icon icon="arrow_downward" style="fill:#888"></ng-md-icon>
+                    </md-button>
+                    <md-button class="groupX right" ng-click="main.sortNow('-name')">Z-A
+                        <ng-md-icon icon="arrow_upwards" style="fill:#888"></ng-md-icon>
+                    </md-button>
+                </section>
+            </div>
+            <div layout="row">
+                <div ng-repeat="b in main.fl.brands">
+                    <md-button class="md-raised" ng-click="main.removeBrand(b);" aria-label="Remove Brand Filter">
+                        <ng-md-icon icon="verified_user" md-menu-align-target></ng-md-icon>
+                        {{b.name}}
+                        <ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
+                    </md-button>
+                </div>
+                <md-button ng-show="main.fl.categories.length > 0" class="md-raised">
+                    <ng-md-icon icon="subject" md-menu-align-target></ng-md-icon>
+                    {{main.fl.categories[0].name}}
+                </md-button>
+                <div ng-repeat="(k,features) in main.fl.features">
+                    <md-button ng-show="features" ng-repeat="f in features" class="md-raised" ng-click="main.removeFeatures(features,k,f);" aria-label="Remove {{f}} Filter">
+                        <ng-md-icon icon="format_shapes" md-menu-align-target></ng-md-icon>
+                        {{f}}
+                        <ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
+                    </md-button>
+                </div>
+            </div>
+            <div style="margin-top: 10px" infinite-scroll='main.scroll()' infinite-scroll-disabled='main.products.busy' infinite-scroll-distance='1' layout-align="center center">
+                <div dw-loading="products" dw-loading-options="{text: ''}"></div>
+                <div layout="row" layout-wrap layout-align="start start">
+                    <div class="col-md-4 col-sm-6" ng-repeat="product in main.products.items" layout="column" layout-align="space-between center">
+                        <div class="product" style="height: 400px">
+                            <div class="img-logo" style="margin: 15px">
+                                <center>
+                                    <img ng-click="main.gotoDetail(product)" width="150px" height="130px" data-ng-src="data:image/png;base64,{{product.logo[0].base64}}" data-err-src="images/png/avatar.png" />
+                                </center>
+                            </div>
+                            <div class="text text-center" style="margin-top: 10px;height: 250px">
+                                <a href="" ng-click="main.gotoDetail(product)"><h5>{{product.name}}</h5></a>
+                                <br><a ng-href="http://{{product.website}}"> {{product.website}}</a>
+                                <div style="margin: 7px">
+                                    <ol class="rounded-list">
+                                        <li ng-repeat="f in product.stats"><a href="#">{{f.key}} : {{f.val}}</a></li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div style="text-align:bottom;vertical-align: bottom;text-align: center;margin-bottom: 0px">
+                                <span><small>Category:<a href="/Category/{{product.category.slug}}/{{product.category._id}}">{{product.endDate}}</a></small>
+                      
+                     </span>
+                            </div>
+                            <!-- /.text -->
+                        </div>
+                        <!-- /.product -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--</md-content>-->
+    </div>
+</div>
+<footer></footer>

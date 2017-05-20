@@ -1,0 +1,94 @@
+ /* COPY & PASTE the following into your stylesheet */
+ 
+#zaposphere-table-clarity { background: transparent; font:300 14px/1.5em Arial, sans-serif; color:#666; border-spacing:0; margin:0px 0;}
+#zaposphere-table-clarity caption { padding:0 0 14px; text-align:left; margin:0 0 15px; font-weight:bold; }
+#zaposphere-table-clarity thead td { font:600 14px/1.5em Arial, sans-serif; color:#666; vertical-align:top; letter-spacing:0; padding:7px 15px 15px 0; border-bottom:1px solid #bbb; }
+#zaposphere-table-clarity td { font:300 14px/1.5em Arial, sans-serif; vertical-align:top; padding:20px 15px 0 0; color:#666; }
+#zaposphere-table-clarity thead td p { font:600 1em/1.5em Arial, sans-serif; color:#666; }
+#zaposphere-table-clarity td p { font:300 1em/1.5em Arial, sans-serif; color:#666; } }
+
+span.slash {
+color: #7f7f7f;
+font-size: 10px;
+text-decoration: line-through;
+font-style: normal;
+font-weight: normal;
+}
+
+ol {
+    counter-reset: li; /* Initiate a counter */
+    list-style: none; /* Remove default numbering */
+    *list-style: decimal; /* Keep using default numbering for IE6/7 */
+    /*font: 15px 'trebuchet MS', 'lucida sans';*/
+    padding: 0;
+    margin-bottom: 4em;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+ol ol {
+    margin: 0 0 0 2em; /* Add some left margin for inner lists */
+}
+.img-logo{
+    width: 90%;
+    height: 20%;
+}
+.rounded-list a{
+    position: relative;
+    display: block;
+    padding: .3em .3em .3em 1em;
+    *padding: .4em;
+    margin: .5em 0;
+    background: #ddd;
+    color: #444;
+    text-decoration: none;
+    border-radius: .3em;
+    transition: all .3s ease-out;   
+}
+
+
+
+
+.container .custom {
+    height: inherit;
+}
+
+.larger {
+    font-size: 32px
+}
+
+p.price .text-muted{
+  font-size: 20px;
+}
+.product .text{
+    min-height: 170px;
+}
+.product a.invisible{
+    min-height: 300px;
+}
+.product .flip-container{
+    height:40px;
+}
+.product .flip-container img.img-responsive {
+    min-height: 350px;
+    max-height: 350px;
+    width: auto;
+}
+.products .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    height: 330px;
+}
+/*div.front {
+    text-align: center;
+}*/
+em {
+    padding: 2px 4px;
+    color: #EA1F00;
+    background-color: #F7F7F7;
+    border: 1px solid #E1E1E8;
+    font-style: normal;
+    font-weight: 600;
+    border-radius: 3px;
+    letter-spacing: 1.5px;
+}
+.brand-filter-panel{
+   height:300px;overflow:auto;
+}

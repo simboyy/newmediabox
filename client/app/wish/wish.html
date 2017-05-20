@@ -1,0 +1,45 @@
+<navbar></navbar>
+<div layout="column" layout-align="center center">
+<div layout="column" layout-align="center stretch" flex-xs="100" flex-gt-xs="75" flex-gt-md="50">
+<md-card ng-repeat="w in wish.wishes" class="wishlist" layout="row" layout-align="space-between top">
+    
+    <md-card-title>
+        <md-card-title-media>
+            <div class="md-media-lg card-media">
+                <img src="{{w.variant.image}}" alt="{{w.product.name}}">
+            </div>
+        </md-card-title-media>
+        <md-card-title-text>
+            <div class="product-description">
+                <h2 class="name" ng-click="wish.gotoDetail(w)">{{w.product.name}}</a></h2>
+                <md-divider></md-divider><br/>
+            </div>
+            <div layout="row" class="wish-content">
+                <div class="price" flex=50>
+                    <div class="price">Price: <span class="text-muted">{{w.variant.price | currency : vm.Settings.currency.symbol}}</span></div>
+                    <del ng-if="w.variant.price!=w.variant.mrp">
+                        MRP: {{w.variant.mrp | currency : vm.Settings.currency.symbol}}
+                    </del>   (Size: {{w.variant.size}})
+                    <br/>
+                    <div layout="row" layout-align="start center">    
+                        <cart-buttons pid= "w.product._id" variant="w.variant" product="w.product"></cart-buttons>
+                    </div>
+                </div>
+                <div flex>
+                    <div ng-if="w.product.keyFeatures.length>0">
+                        <b>Key Features:</b>
+                        <ul>
+                            <li ng-repeat="k in w.product.keyFeatures"><b>{{k.key}}</b> : {{k.val}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </md-card-title-text>
+    </md-card-title>
+    <a aria-label="Remove {{w.product.name}} from wishlist" ng-click="wish.remove(w)">
+        <ng-md-icon icon="close"></ng-md-icon>
+    </a>
+</md-card>
+</div>
+</div>
+<footer></footer>

@@ -1,0 +1,31 @@
+<navbar></navbar>
+<md-content flex layout="column">
+<section layout="column" flex layout-align="center center">
+	<h1>Forgot Password</h1>
+
+	<p class="md-warn message" ng-show="forgot.errors.message">{{forgot.errors.message}}</p>
+
+	<form name="form" ng-submit="forgot.forgot(form)" novalidate>
+		<section class="section" layout="column">
+			<md-input-container md-is-error="(form.email.$error.required || form.email.$error.email || forgot.errors.other) && form.email.$dirty">
+				<label>Email</label>
+				<input name="email" type="email" ng-model="forgot.user.email" required md-autofocus/>
+				<div ng-messages="form.email.$error" ng-if="form.email.$dirty">
+					<div ng-message="required">Email ID is required</div>
+					<div ng-message="email">Please enter valid email address.</div>
+					<div ng-if="forgot.errors.email">{{forgot.errors.email}}</div>
+				</div>
+			</md-input-container>
+		</section>
+		<div layout="column" layout-align="center center">
+			<md-button type="submit" class="md-raised circular-progress-button md-primary" ng-disabled="forgot.loading" aria-label="Forgot password" layout="row" layout-align="center center">
+				<ng-md-icon icon="email" ng-hide="forgot.loading"></ng-md-icon> 
+				<md-progress-circular md-mode="indeterminate" md-diameter="25" ng-show="forgot.loading" class="md-accent md-hue-1"></md-progress-circular>
+				<span>&nbsp;Reset Password</span>
+			</md-button>
+		</div>
+	</form>
+
+</section>
+</md-content>
+<footer></footer>

@@ -1,0 +1,120 @@
+
+#wrapper {
+  /*width: 980px;*/
+  margin: 0 auto;
+}
+
+nav {
+  position: relative;
+  height: 50px;
+  /*margin: 0 2px;*/
+  background: rgb(33,150,243);
+}
+
+header, nav { 
+  display: block;
+}
+
+nav ul#menu {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: 0;
+} 
+
+nav ul#menu li {
+  position: relative;
+  display: inline-block;
+}
+
+nav ul#menu li a {
+  display: block;
+  height: 50px;
+  font-size: 1em;
+  line-height: 50px;
+  color: #fff;
+  text-decoration: none;
+  padding: 0 15px;
+}
+
+nav ul#menu li a:hover, nav ul#menu li:hover > a {
+  background: #333;
+}
+
+nav ul#menu li:hover > #mega {
+  display: block;
+}
+
+#mega {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100vw;
+  height: auto;
+  padding: 20px 30px;
+  background: #333;
+  display: none;
+}
+
+ul#menu ul {
+  float: left;
+  width: 23%;
+  margin: 0 2% 15px 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul#menu ul li {
+  display: block;
+}
+
+ul#menu ul li a {
+  float: left;
+  display: block;
+  width: 100%;
+  height: auto;
+  line-height: 1.3em;
+  color: #888;
+  text-decoration: none;
+  padding: 6px 0;
+}
+
+ul#menu ul li a.header {
+  font-size: 1.2em;
+  color: rgb(33,150,243);
+}
+
+ul#menu ul li a:hover {
+  color: #fff;
+  background: none;
+}
+
+ul#menu ul li:first-child a:hover {
+  color: #fff;
+}
+
+/* clearfix */
+nav ul:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+nav ul {
+  display: inline-block;
+} 
+
+html[xmlns] nav ul {
+  display: block;
+}
+ 
+* html nav ul {
+  height: 1%;
+}
+
+#content {
+  padding: 30px 0;
+}

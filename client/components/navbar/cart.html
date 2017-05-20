@@ -1,0 +1,52 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="cart" style="width: 500px">
+  <md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">Cart Details</h1>
+  </md-toolbar>
+  <md-content class="cart-content">
+    <form>
+      <div layout="row" layout-align="space-between start" ng-repeat="item in vm.cart.items" class="cart-item md-whiteframe-z1">
+            <img  class="md-whiteframe-z1" width="80px" height="100%" data-ng-src="data:image/png;base64,{{item.image}}" err-SRC="/assets/images/50x50.png"  alt="{{item.name}}" />
+            <div layout="column" flex style="margin: 7px">
+                <div >{{ item.name }} <span ng-if="item.size">(Size: {{item.size}})</span></div>
+                <div ng-if="item.price">{{ item.price | currency:vm.Settings.currency.symbol }} * {{item.quantity}} = 
+                <strong>{{item.price * item.quantity | currency:vm.Settings.currency.symbol}}</strong></div>
+                <div layout="row" layout-align="center center">
+ <!--Cart buttons-->
+        <md-button class="md-raised md-primary small-button md-icon-button" 
+              ng-click="vm.cart.addItem({sku:item.sku, name:item.name, slug:item.slug, mrp:item.mrp, price:item.price, weight:item.weight, vid:item.vid}, -1)" 
+              aria-label="Remove from cart">
+                  <ng-md-icon icon="remove"></ng-md-icon>
+        </md-button>
+        <div class="md-raised"  ng-disabled="true" aria-label="Cart quantity">{{vm.cart.getQuantity(item.sku, item.vid)}}</div>
+        <md-button class="md-raised md-primary small-button md-icon-button" ng-click="vm.cart.addItem({sku:item.sku, name:item.name, slug:item.slug, mrp:item.mrp, price:item.price, weight:item.weight, vid:item.vid}, +1)" aria-label="Add to cart">
+                  <ng-md-icon icon="add"></ng-md-icon>
+        </md-button>
+ <!--Cart buttons-->
+
+      </div>
+            </div>
+            <a aria-label="Remove {{item.name}} from cart" ng-click="vm.cart.addItem({sku:item.sku, vid: item.vid}, -10000000);vm.openCart()">
+                <ng-md-icon icon="close" aria-label="Close dialog"></ng-md-icon>
+            </a>
+      </div>
+    </form>
+    <div layout="column" flex style="margin: 7px" ng-if="vm.cart.getTotalPrice()>0"><b>Handling Fee:</b> 
+      
+      <span >{{vm.cart.getHandlingFee() | currency:vm.Settings.currency.symbol}}</span>
+    </div>
+    <div layout="column" flex style="margin: 7px" ng-if="vm.cart.getTotalPrice()>0"><b>Sub Total:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> {{vm.cart.getTotalPrice()  | currency:vm.Settings.currency.symbol}}</div>
+    <div class="md-dialog-actions" layout="row" layout-align="space-between center">
+        <md-button  ng-hide="vm.cart.flag" ui-sref="cart" class="md-raised circular-progress-button md-primary" aria-label="Checkout" ng-disabled="vm.cart.items.length <= 0">
+            <span ng-show="!vm.loading"><ng-md-icon icon="local_grocery_store" hide-xs></ng-md-icon>Configure Campaign →</span>
+            <md-progress-circular md-mode="indeterminate" md-diameter="25" ng-show="vm.loading" class="md-accent md-hue-1"></md-progress-circular><span ng-show="vm.loading">Loading...</span>
+        </md-button>
+        <md-button  ng-show="vm.cart.flag" ui-sref="checkout" class="md-raised circular-progress-button md-primary" aria-label="Checkout" ng-disabled="vm.cart.items.length <= 0">
+            <span ng-show="!vm.loading"><ng-md-icon icon="local_grocery_store" hide-xs></ng-md-icon>Proceed To Payment →</span>
+            <md-progress-circular md-mode="indeterminate" md-diameter="25" ng-show="vm.loading" class="md-accent md-hue-1"></md-progress-circular><span ng-show="vm.loading">Loading...</span>
+        </md-button>
+        <md-button class="btn btn-default btn-lg btn-register" ng-click="vm.close()"  aria-label="Cancel Cart Menu"> Close </md-button>
+    </div>
+  </md-content>
+</md-sidenav>
+
+

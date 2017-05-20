@@ -1,0 +1,23 @@
+<navbar leftmenu="true"></navbar>
+<left-menu></left-menu>
+<md-content flex layout="column" class="content">
+<section layout="row">
+
+		<div ui-view="content" layout="column" flex></div>
+
+		<md-content
+			ui-view="detail"
+			id="detail-content"
+			toggle-component
+			md-component-id="categories.detailView"
+			layout="column"
+			flex-xs="100"
+			flex-sm = "90"
+			flex-md="90"
+			flex-lg="50"
+			flex-gt-lg="50"
+			class="md-whiteframe-z1">
+		</md-content>
+</section>
+</md-content>
+<footer></footer>

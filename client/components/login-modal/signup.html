@@ -1,0 +1,101 @@
+<section layout="column" layout-align="start center">
+	
+  <div class="row">
+    <div class="col-md-6">
+      <div class="box">
+       <p class="lead">Already our customer?</p>
+            <p class="text-muted" translate>
+              Be a master of effiency with the all in one platform for all your advertising content.
+              </p>
+            </p>
+      </div>
+    </div>
+
+    
+    <div class="col-md-6">
+        <div style="width: 80%">
+<form name="form" ng-submit="signup.register(form)" autocomplete="off" novalidate flex>
+
+			<section class="section" layout="column">
+				<md-input-container md-is-error="form.name.$error.required && form.name.$dirty">
+					<label>Full Name</label>
+					<input name="name" ng-model="signup.user.name" required md-autofocus/>
+					<div ng-messages="form.name.$error" ng-if="form.name.$dirty">
+						<div ng-message="required">Full Name is required</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container flex md-is-error="(form.email.$error.email || form.email.$error.required || form.email.$error.mongoose || form.email.$error.remote-unique) && form.email.$dirty">
+					<label>Email ID</label>
+					<input type="email" name="email" ng-model="signup.user.email"
+								 ng-model-options="{updateOn: 'default blur', debounce: {'default': 500, 'blur': 0}}"
+								 required mongoose-error>
+					<div ng-messages="form.email.$error" ng-if="form.email.$dirty">
+						<div ng-message="email">Please enter a valid email address.</div>
+						<div ng-message="required">Email is required</div>
+						<div ng-message="mongoose">Email already in use</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container md-is-error="form.phone.$error.required && form.phone.$dirty">
+					<label>Phone</label>
+					<input name="phone" ng-model="signup.user.phone" required md-autofocus/>
+					<div ng-messages="form.phone.$error" ng-if="form.phone.$dirty">
+						<div ng-message="required">Phone is required</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container md-is-error="form.company.$error.required && form.company.$dirty">
+					<label>Company</label>
+					<input name="company" ng-model="signup.user.company" required md-autofocus/>
+					<div ng-messages="form.company.$error" ng-if="form.company.$dirty">
+						<div ng-message="required">Company is required</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container md-is-error="form.website.$error.required && form.website.$dirty">
+					<label>Website</label>
+					<input name="website" ng-model="signup.user.website" required md-autofocus/>
+					<div ng-messages="form.website.$error" ng-if="form.website.$dirty">
+						<div ng-message="required">Website is required</div>
+					</div>
+				</md-input-container>
+				<md-input-container md-is-error="form.website.$error.required && form.website.$dirty">
+				<md-checkbox value="user">
+                    Advertiser
+                </md-checkbox>
+                <md-checkbox  value="admin" ng-model="signup.user.role">
+                    Publisher
+                </md-checkbox>
+				</md-input-container>
+ 
+
+				<md-input-container md-is-error="(form.password.$error.required ||  form.password.$error.mongoose || form.password.$error.minlength) && form.password.$dirty">
+					<label>Password</label>
+					<input name="password" type="password" ng-model="signup.user.password" required mongoose-error ng-minlength="3"/>
+					<div ng-messages="form.password.$error" ng-if="form.password.$dirty">
+						<div ng-message="required">Password is required</div>
+						<div ng-message="mongoose">{{ errors.password }}</div>
+						<div ng-message="minlength">Password must be at least 3 characters.</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container flex class="last" md-is-error="(form.passwordRepeat.$error.required ||  form.passwordRepeat.$error.minlength || form.passwordRepeat.$error.repeat-input) && form.passwordRepeat.$dirty">
+					<label>Repeat Password</label>
+					<input name="passwordRepeat" type="password"  ng-model="signup.user.passwordRepeat" required repeat-input="signup.user.password" ng-minlength="3">
+					<div ng-messages="form.passwordRepeat.$error" ng-if="form.passwordRepeat.$dirty">
+						<div ng-message="required">Please repeat the new password</div>
+						<div ng-message="minlength">Password must be at least 3 characters.</div>
+						<div ng-message="repeat-input">The passwords do not match</div>
+					</div>
+				</md-input-container>
+
+			</section>
+		<submit-button loading="signup.loading" form="form" text="Create your account"></submit-button>
+	</form>
+        </div>
+    </div>
+    
+  </div>
+
+</section>

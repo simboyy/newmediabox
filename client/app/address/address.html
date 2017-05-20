@@ -1,0 +1,115 @@
+<navbar></navbar>
+<div flex layout="column" layout-gt-xs="row" layout-align="center stretch">
+
+<div layout="column" layout-gt-sm="<column></column>">
+<!--Address box-->
+<md-card ng-show="address.showAddressForm">
+    <md-card-content>
+	<p ng-show="address.error" class="md-warn">{{address.error.message}}</p>
+	<h3>SELECTED ADDRESS</h3>
+	<form name="form" ng-submit="address.saveAddress(address.addr);new.address=false;address.addr = address.address[0];" novalidate layout="column">
+		<md-input-container md-is-error="(form.name.$error.required || form.name.$error.name) && form.name.$dirty">
+			<label>Name</label>
+			<input name="name" type="name" ng-model="address.addr.name" required autofocus>
+			<div ng-messages="form.name.$error" ng-if="form.name.$dirty">
+				<div ng-message="required">Name is required</div>
+			</div>
+		</md-input-container>
+        
+        <md-input-container md-is-error="(form.addr.$error.required || form.addr.$error.addr) && form.addr.$dirty">
+			<label>Address</label>
+			<input name="address" type="address" ng-model="address.addr.address" required/>
+			<div ng-messages="form.address.$error" ng-if="form.address.$dirty">
+				<div ng-message="required">Address is required</div>
+			</div>
+		</md-input-container>
+        
+        <md-input-container md-is-error="(form.city.$error.required || form.city.$error.city) && form.city.$dirty">
+			<label>City</label>
+			<input name="city" type="city" ng-model="address.addr.city" required/>
+			<div ng-messages="form.city.$error" ng-if="form.city.$dirty">
+				<div ng-message="required">City is required</div>
+			</div>
+		</md-input-container>
+
+        <md-input-container md-is-error="(form.zip.$error.required || form.zip.$error.zip) && form.zip.$dirty">
+			<label>Zip</label>
+			<input name="zip" type="zip" ng-model="address.addr.zip" required only-numbers/>
+			<div ng-messages="form.zip.$error" ng-if="form.zip.$dirty">
+				<div ng-message="required">Zip code is required</div>
+			</div>
+		</md-input-container>
+        
+        <md-input-container md-is-error="(form.state.$error.required || form.state.$error.state) && form.state.$dirty">
+			<label>State</label>
+			<input name="state" type="state" ng-model="address.addr.state" required/>
+			<div ng-messages="form.state.$error" ng-if="form.state.$dirty">
+				<div ng-message="required">State is required</div>
+			</div>
+		</md-input-container>
+        
+        <md-input-container md-is-error="(form.phone.$error.required || form.phone.$error.phone) && form.phone.$dirty">
+			<label>Phone</label>
+			<input name="phone" type="phone" ng-model="address.addr.phone" required/>
+			<div ng-messages="form.phone.$error" ng-if="form.phone.$dirty">
+				<div ng-message="required">Phone number is required</div>
+			</div>
+		</md-input-container>
+
+        <!--<md-input-container md-is-error="(form.country.$error.required || form.country.$error.country) && form.country.$dirty">
+            <label>Country</label>
+            <input ng-model="address.addr.country" ng-value="address.Settings.country.name" disabled/>
+            <div ng-messages="form.country.$error" ng-if="form.country.$dirty">
+				<div ng-message="required">Country required</div>
+			</div>
+		</md-input-container>-->
+
+        <div layout="row">
+            <md-button type="submit" class="md-raised md-primary" 
+            ng-disabled="!form.$valid || address.loadingAddress" aria-label="Save Address" layout="row">
+                <ng-md-icon icon="save" ng-hide="address.loadingAddress"></ng-md-icon>
+                <md-progress-circular md-mode="indeterminate" md-diameter="25" ng-show="address.loadingAddress" class="md-accent md-hue-1"></md-progress-circular>
+                Save <span hide show-gt-xs>as Primary Address</span>
+            </md-button>
+            <md-button ng-click="address.cancelForm(address.addr);new.address=false;">Cancel</md-button>
+	   </div>
+       </form>
+    </md-card-content>
+</md-card>
+<div layout="column">
+<md-button class="md-raised" ng-click="address.addressForm(true);address.new.address=true; address.addr={country: address.Settings.country.name}">
+    <ng-md-icon icon="location_on"></ng-md-icon>Add New Address
+</md-button>
+<div layout="row" layout-align="start start" layout-wrap>
+
+<md-card  
+ng-repeat="a in address.address" 
+ng-click="new.address=false; address.addressForm(true);address.switchAddress(a)" 
+style="min-width:300px" 
+ng-class="{'selected':(a==address.addr)} "
+>
+      <md-card-header layout="row" layout-align="space-between start">
+          <md-card-header-text>
+            <h3>ADDRESS - {{$index+1}}</h3>
+          </md-card-header-text>
+          	<div>
+				  <md-button ng-click="address.delete(a)" aria-label="Delete Address"><ng-md-icon icon="delete"></ng-md-icon></md-button>  
+			</div>				  
+      </md-card-header>
+	  
+      <md-card-content layout="column" layout-align="start start">
+			{{a.name}}<br/>
+            {{a.address}}<br/>
+            {{a.city}}<br/>
+            {{a.state}}<br/>
+            {{a.zip}}<br/>
+            {{a.phone}}
+      </md-card-content>
+      
+</md-card>
+</div><!--Address box-->
+</div>
+</div>
+
+</div>
+<footer></footer>

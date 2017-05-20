@@ -1,0 +1,276 @@
+<navbar leftmenu="true"></navbar>
+<div class="container">
+    <div layout="row" class="wrapper">
+        <div ng-include="'components/navbar/cart.html'"></div>
+        <md-content flex layout="column">
+            <section layout="column" layout-fill flex>
+                <div class="sort-products md-whiteframe-z2" style="margin-left:10px;margin-right:10px">
+                    <div>
+                        Home > <a ui-sref="/">Publishers</a> > {{single.product.name}}
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top: 10px">
+                            <div class="row" id="productMain">
+                                <div class="col-sm-3">
+                                    <div id="mainImage" style="height: 60%" class="md-whiteframe-z1">
+                                        <img data-ng-src="data:image/png;base64,{{single.product.logo[0].base64}}" err-SRC="/assets/images/486x325.png" alt="{{single.product.name}}" class="img-responsive">
+                                    </div>
+                                    <md-divider md-inset></md-divider>
+                                    <div layout="column">
+                                        <div class="total-rating" layout="column" layout-align="space-between">
+                                            <p>
+                                                <div layout="row" layout-align="start start" class="total"> {{single.rating.avg}}
+                                                    <ng-md-icon icon="star"></ng-md-icon>
+                                                </div>
+                                                <div>{{single.rating.count}} Ratings</div>
+                                                <div>{{single.reviewCount}} Reviews</div>
+                                            </p>
+                                        </div>
+                                        <div class="rating-signal">
+                                            <div layout="row" layout-align="start center">5&nbsp;
+                                                <ng-md-icon icon="star" style="fill:rgb(33,150,243)"></ng-md-icon>
+                                                <md-progress-linear md-mode="determinate" value="{{single.rating.r5*100 / single.rating.count}}"></md-progress-linear>{{single.rating.r5}}</div>
+                                            <div layout="row" layout-align="start center">4&nbsp;
+                                                <ng-md-icon icon="star" style="fill:rgb(33,150,243)"></ng-md-icon>
+                                                <md-progress-linear md-mode="determinate" value="{{single.rating.r4*100 / single.rating.count}}"></md-progress-linear>{{single.rating.r4}}</div>
+                                            <div layout="row" layout-align="start center">3&nbsp;
+                                                <ng-md-icon icon="star" style="fill:rgb(33,150,243)"></ng-md-icon>
+                                                <md-progress-linear md-mode="determinate" value="{{single.rating.r3*100 / single.rating.count}}"></md-progress-linear>{{single.rating.r3}}</div>
+                                            <div layout="row" layout-align="start center">2&nbsp;
+                                                <ng-md-icon icon="star" style="fill:rgb(255,87,34)"></ng-md-icon>
+                                                <md-progress-linear class="md-warn" md-mode="determinate" value="{{single.rating.r2*100 / single.rating.count}}"></md-progress-linear>{{single.rating.r2}}</div>
+                                            <div layout="row" layout-align="start center">1&nbsp;
+                                                <ng-md-icon icon="star" style="fill:rgb(255,87,34)"></ng-md-icon>
+                                                <md-progress-linear class="md-warn" md-mode="determinate" value="{{single.rating.r1*100 / single.rating.count}}"></md-progress-linear>{{single.rating.r1}}</div>
+                                        </div>
+                                    </div>
+                                    <md-button ng-click="single.reviewForm()" class="md-raised md-primary">Review this publisher</md-button>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="box" style="margin-right: 20px">
+                                        <h3 class="text-center">{{single.product.name}} </h3>
+                                        <div ng-if="single.product.info">
+                                            <h4>Details</h4>
+                                            <blockquote>
+                                                <p>{{single.product.info }}</p>
+                                            </blockquote>
+                                            <div ng-if="single.product.stats.length>0">
+                                                <div class="row">
+                                                    <div class="col-xs-6 col-md-2" ng-repeat="f in single.product.stats">
+                                                        <div class="mythumbnail">
+                                                            <p>
+                                                                <h6><center>{{f.key}}</h6></center>
+                                                                <div>
+                                                                    <center>
+                                                                        <h4>{{f.val}}</h4></center>
+                                                                </div>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <md-list layout-gt-xs="row" layout="column">
+                                                    <md-list-item class="md-2-line" ng-if="single.product.brand">
+                                                        <ng-md-icon icon="verified_user" md-menu-align-target></ng-md-icon>
+                                                        <div class="md-list-item-text">
+                                                            <h3> Category </h3>
+                                                            <p> {{single.product.brand.name}} </p>
+                                                        </div>
+                                                    </md-list-item>
+                                                    <md-list-item class="md-2-line" ng-if="single.product.category">
+                                                        <ng-md-icon icon="subject" md-menu-align-target></ng-md-icon>
+                                                        <div class="md-list-item-text">
+                                                            <h3> Platform </h3>
+                                                            <p> {{single.product.category.name}} </p>
+                                                        </div>
+                                                    </md-list-item>
+                                                    <md-list-item class="md-2-line" ng-if="single.product.category">
+                                                        <div class="md-list-item-text">
+                                                            <h3>Contact Details</h3>
+                                                            <p style="margin: 10px"><span> <ng-md-icon icon="email" md-menu-align-target></ng-md-icon>{{single.product.email}}<br></span></p>
+                                                            <p style="margin: 10px"><span> <ng-md-icon icon="perm_phone_msg" md-menu-align-target></ng-md-icon></span>{{single.product.phone}}</p>
+                                                        </div>
+                                                    </md-list-item>
+                                                </md-list>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6 col-md-3" ng-repeat="f in single.product.keyFeatures">
+                                                <div>
+                                                    <p>
+                                                        <h6><center>{{f.key}}</h6></center>
+                                                        <div>
+                                                            <center>
+                                                                <h6 style="color:red">{{f.val}}</h6></center>
+                                                        </div>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="goToDescription">
+                                            <a href="#div" class="scroll-to">Scroll to publisher media options</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box" id="div" style="margin-right: 20px">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <summary ng-if="single.name"><small>{{single.name}} &nbsp; {{single.formart}} &nbsp;{{single.size}}</small></summary>
+                                        <div style="height: 450px">
+                                            <img ng-hide="single.image" src="/assets/img/preview.png" width="100%">
+                                            <div ng-if="single.image" style="height: 330px">
+                                                <div ng-if="single.image.progress &amp;&amp; single.image.progress &lt; 1" class="progress">
+                                                    <div role="progressbar" aria-valuenow="{{single.image.progress}}" aria-valuemin="0" aria-valuemax="1" style="width:{{single.image.progress*100}}%" class="progress-bar"></div>
+                                                </div>
+                                                <ng-pintura ngp-src="single.image.src" ngp-scaling="single.image.scaling" ngp-position="single.image.position" ngp-max-scaling="single.image.maxScaling" ngp-scale-step="single.image.scaleStep" ngp-move-step="single.image.moveStep" ngp-mw-scale-step="single.image.mwScaleStep" ngp-fit-inview="single.image.fitInview" ngp-fit-onload="single.image.fitOnload" ngp-progress="single.image.progress">
+                                                    <div id="zoomslider">
+                                                        <input ng-model="slider.value" ng-change="sliderChange()" orient="vertical" type="range" min="0" max="100" step="1" ng-disabled="scalingDisabled">
+                                                    </div>
+                                                    <button id="zoomin" ng-click="zoomIn()" ng-disabled="scalingDisabled" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                                                    <button id="zoomout" ng-click="zoomOut()" ng-disabled="scalingDisabled" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>
+                                                    <button id="moveup" ng-click="moveUp()" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></button>
+                                                    <button id="movedown" ng-click="moveDown()" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                                                    <button id="moveleft" ng-click="moveLeft()" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                                                    <button id="moveright" ng-click="moveRight()" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"></span></button>
+                                                    <button id="movecenter" ng-click="fitInView()" class="btn btn-default"><span class="glyphicon glyphicon-screenshot"></span></button>
+                                                </ng-pintura>
+                                            </div>
+                                            <br>
+                                            <p>
+                                                <br/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7" style="height: 420px;overflow:scroll">
+                                        <p>
+                                            <table class="table table-striped" id="zaposphere-table-clarity">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Media Options </th>
+                                                        <th>Pricing</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr data-ng-repeat="adspace in single.product.variants"  ng-click="single.preview(adspace)">
+                                                        <td>{{$index+1}}</td>
+                                                        <td>{{adspace.name}}
+                                                            <br><span><small>{{adspace.size}} &nbsp;{{adspace.maxSize}}<br/> &nbsp;{{adspace.formart}}</small></span></td>
+                                                        <td> {{adspace.price | currency}}
+                                                            <br><small>{{adspace.model}}</small></td>
+                                                        <td><small> 
+                                                          <div layout="row" layout-align="start center">
+                                                          <cart-buttons variant="adspace" product="single.product"></cart-buttons>
+                                                          
+                                                      </div>
+                                                 
+                                                </small></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </p>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            <!--div-->
+                            <div>
+                                <div class="col-md-12">
+                                    <div class="col-md-4">
+                                        <div layout="rows" layout-align="center center" ng-if="single.reviews.length==0 ">
+                                            <br/>
+                                            <md-divider></md-divider>
+                                            <br/>
+                                            <md-button ng-click="single.reviewForm()" class="md-raised md-primary">Be the first to review this publisher</md-button>
+                                        </div>
+                                        <div class="reviews" ng-if="single.reviews.length>0 ">
+                                            <!--<h3>Reviews</h3>-->
+                                            <div class="reviews-header" layout="column">
+                                                <div flex layout="row" layout-align="center center">
+                                                    <md-button ng-click="single.reviewForm()" class="md-primary md-raised">Rate & Review</md-button>
+                                                </div>
+                                            </div>
+                                            <md-card ng-repeat="review in single.reviews | orderBy: '-created'">
+                                                <md-card-header>
+                                                    <md-card-avatar>
+                                                        <list-image string="{{review.message || review.rating}}"></list-image>
+                                                    </md-card-avatar>
+                                                    <md-card-header-text>
+                                                        <span class="md-subhead" ng-if="review.rating">
+                              <div class="rating-button">{{review.rating}} <ng-md-icon icon="star" size="15"></ng-md-icon></div>
+                          </span>
+                                                        <span class="md-title" style="white-space: pre;margin-left: 10px;">{{review.message}}</span>
+                                                    </md-card-header-text>
+                                                </md-card-header>
+                                                <!--<md-card-content>Good product within 7000</md-card-content>-->
+                                                <md-card-actions layout="row" layout-align="space-between center">
+                                                    <span layout="row" layout-align="start center">
+                          <ng-md-icon icon="person" size="15"></ng-md-icon>&nbsp;{{review.reviewer}}&nbsp;
+                          <ng-md-icon icon="access_time" size="15"></ng-md-icon>&nbsp;{{review.created | amCalendar}}
+                      </span>
+                                                    <md-button ng-if="single.myReview(review)" class="md-icon-button" ng-click="single.deleteReview(review)" aria-label="Delete Review">
+                                                        <ng-md-icon icon="delete" style="fill: #aaa"></ng-md-icon>&nbsp;
+                                                    </md-button>
+                                                </md-card-actions>
+                                            </md-card>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <h3 class="col-md-2">Learn</h3> <img style="width:150px;height:100px" src="assets/img/learn.png" class="responsive-img col-md-4">
+                                        </div>
+                                        <div ng-if="single.magazines">
+                                            <div ng-include="'components/messages/magazines.html'"></div>
+                                        </div>
+                                        <div ng-if="single.airline">
+                                            <div ng-include="'components/messages/airline.html'"></div>
+                                        </div>
+                                        <div ng-if="single.emailMarketing">
+                                            <div ng-include="'components/messages/email.html'"></div>
+                                        </div>
+                                        <div ng-if="single.cinema">
+                                            <div ng-include="'components/messages/cinema.html'"></div>
+                                        </div>
+                                        <div ng-if="single.newspapers">
+                                            <div ng-include="'components/messages/newspapers.html'"></div>
+                                        </div>
+                                        <div ng-if="single.radio">
+                                            <div ng-include="'components/messages/radio.html'"></div>
+                                        </div>
+                                        <div ng-if="single.television">
+                                            <div ng-include="'components/messages/tv.html'"></div>
+                                        </div>
+                                        <div ng-if="single.default">
+                                            <div ng-include="'components/messages/nontraditional.html'"></div>
+                                        </div>
+                                        <div ng-if="single.billboards">
+                                            <div ng-include="'components/messages/outdoor.html'"></div>
+                                        </div>
+                                        <div ng-if="single.banner">
+                                            <div ng-include="'components/messages/nontraditional.html'"></div>
+                                        </div>
+                                        <div ng-if="single.socialMedia">
+                                            <div ng-include="'components/messages/nontraditional.html'"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+        </md-content>
+        </div>
+    </div>
+    <footer></footer>
+    <script>
+    $("#adspace").click(function() {
+        alert('clicked row');
+        $("#movecenter").click();
+    });
+    </script>

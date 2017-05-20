@@ -1,0 +1,18 @@
+.angular-material-rating .button {
+  cursor: pointer; 
+}
+.angular-material-rating .button ng-md-icon {
+  font-size: 30px; 
+}
+.angular-material-rating {
+  text-shadow: 0.06em .04em #000000; 
+}
+.angular-material-rating .button.star-on ng-md-icon {
+  color: limegreen; 
+}
+.angular-material-rating .button.star-off ng-md-icon {
+  color: #ddd; 
+}
+.error{
+  color: mediumvioletred;
+}
