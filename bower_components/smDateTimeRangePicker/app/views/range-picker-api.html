@@ -1,0 +1,158 @@
+<md-content  class="md-whiteframe-z2" layout-padding>
+	<div>
+	Attributes Details
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Attribute</th>
+					<th>Value</th>
+					<th>Desription</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>fname</td>
+					<td>Field name</td>
+					<td>Field Name</td>				
+				</tr>
+				<tr>
+					<td>lable</td>
+					<td>truthly value</td>
+					<td>removes floating label</td>				
+				</tr>
+				<tr>
+					<td>no-floating-label</td>
+					<td>form control name</td>
+					<td>form control name</td>				
+				</tr>
+				<tr>
+					<td>ng-Model</td>
+					<td>ng-Model</td>
+					<td>ng-Model value here</td>				
+				</tr>
+				<tr>
+					<td>mode</td>
+					<td>select mode either date or dateTime</td>
+					<td>date or date-time</td>				
+				</tr>		
+				<tr>
+					<td>format</td>
+					<td>date format</td>
+					<td>Moment Js accepted date format</td>				
+				</tr>
+				<tr>
+					<td>divider</td>
+					<td>Divider between two dates</td>
+					<td>Defalt value is 'To' </td>				
+				</tr>				
+				<tr>
+					<td>is-required</td>
+					<td>is field is required</td>
+					<td>True or false</td>				
+				</tr>		
+				<tr>
+					<td>show-custom	</td>
+					<td>start range picker with custome date mode</td>
+					<td>True or false</td>				
+				</tr>		
+				<tr>
+					<td>custom-to-home</td>
+					<td>Go back to Defualt view from Custom view</td>
+					<td>True or false</td>				
+				</tr>		
+				<tr>
+					<td>on-range-select</td>
+					<td>call back function that return selected range as object with startDate (string), endDate (string), startDateAsMoment (object) and endDateAsMoment (object)</td>
+					<td>on-range-select="vm.yourCallbackFun(date)"</td>				
+				</tr>	
+				<tr>
+					<td>custom-list</td>
+					<td>Override specific range picker instance default list using this attribute</td>
+					<td>pass array of object  like this </br>[</br>&nbsp;{ position:index,</br> &nbsp;&nbsp;label:'new label name', </br>&nbsp;&nbsp;startDate: start Date moment Object(),</br>&nbsp;&nbsp;endDate: End Date moment Object() </br>&nbsp;}</br>]</td>				
+				</tr>					
+
+									
+			</tbody>
+		</table>
+	</div>
+	<div>
+		Support Swipe left and right for date movement.
+	</div>
+	<div>
+		<code>
+			<p>
+			&lt;sm-range-picker-input</br> 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fname="joiningDate"</br> 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lable="Date of Joining"</br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;form="empForm" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="vm.employee.joiningDate" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flex-size="100"</br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-required="{{true}}" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format="MM-DD-YYYY" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on-range-select="vm.yourCallbackFun(date)"</br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;divider="To"&gt;</br>
+            &lt;/sm-range-picker-input&gt;</br>
+            </p>
+		</code>
+	</div>
+	<div>
+		<code>
+			<p>
+			&lt;sm-range-picker-input</br> 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fname="joiningDate"</br> 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lable="Date of Joining"</br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;form="empForm" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="vm.employee.joiningDate" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flex-size="100"</br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-required="{{true}}" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format="MM-DD-YYYY" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;custom-to-home="'true'" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show-custom="'true'"</br>                
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;divider="To"&gt;</br>
+
+            &lt;/sm-range-picker-input&gt;</br>
+            </p>
+		</code>
+	</div>
+
+	<div>
+		Override Default list for specific instance. This will override options overriden in config module.
+		Index will change first Six item in Default list
+		pass Object in your contoller. set via custom-list attribut in directive
+	</div>
+	<div>
+		<code>
+			<p>
+			&lt;sm-range-picker-input</br> 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fname="joiningDate"</br> 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lable="Date of Joining"</br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;form="empForm" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="vm.employee.joiningDate" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flex-size="100"</br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is-required="{{true}}" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format="MM-DD-YYYY" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;custom-to-home="'true'" </br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show-custom="'true'"</br>                
+	            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;custom-list="vm.overrideList"</br>                    
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;divider="To"&gt;</br>
+            &lt;/sm-range-picker-input&gt;</br>
+            </p>
+		</code>
+	</div>
+	<div>
+		<code>
+			<p>app.controller('YourControllerName',function(){</br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vm.overrideList = [{</br>
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  position:1,</br>
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  label:'Custom',</br>
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  startDate: moment(),</br>
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  endDate: moment()</br>
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]</br>
+	        &nbsp;});
+	      </p>
+	    </code>    
+	</div>
+
+</md-content>
