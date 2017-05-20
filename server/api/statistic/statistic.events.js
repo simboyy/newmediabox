@@ -4,9 +4,19 @@
 
 'use strict';
 
-import {EventEmitter} from 'events';
-import Statistic from './statistic.model';
-var StatisticEvents = new EventEmitter();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _events = require('events');
+
+var _statistic = require('./statistic.model');
+
+var _statistic2 = _interopRequireDefault(_statistic);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var StatisticEvents = new _events.EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 StatisticEvents.setMaxListeners(0);
@@ -20,14 +30,15 @@ var events = {
 // Register the event emitter to the model events
 for (var e in events) {
   var event = events[e];
-  Statistic.schema.post(e, emitEvent(event));
+  _statistic2.default.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function(doc) {
+  return function (doc) {
     StatisticEvents.emit(event + ':' + doc._id, doc);
     StatisticEvents.emit(event, doc);
-  }
+  };
 }
 
-export default StatisticEvents;
+exports.default = StatisticEvents;
+//# sourceMappingURL=statistic.events.js.map

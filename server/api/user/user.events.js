@@ -4,9 +4,19 @@
 
 'use strict';
 
-import {EventEmitter} from 'events';
-import User from './user.model';
-var UserEvents = new EventEmitter();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _events = require('events');
+
+var _user = require('./user.model');
+
+var _user2 = _interopRequireDefault(_user);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var UserEvents = new _events.EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 UserEvents.setMaxListeners(0);
@@ -20,14 +30,15 @@ var events = {
 // Register the event emitter to the model events
 for (var e in events) {
   var event = events[e];
-  User.schema.post(e, emitEvent(event));
+  _user2.default.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function(doc) {
+  return function (doc) {
     UserEvents.emit(event + ':' + doc._id, doc);
     UserEvents.emit(event, doc);
-  }
+  };
 }
 
-export default UserEvents;
+exports.default = UserEvents;
+//# sourceMappingURL=user.events.js.map

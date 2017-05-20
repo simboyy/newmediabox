@@ -4,9 +4,19 @@
 
 'use strict';
 
-import {EventEmitter} from 'events';
-import Review from './review.model';
-var ReviewEvents = new EventEmitter();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _events = require('events');
+
+var _review = require('./review.model');
+
+var _review2 = _interopRequireDefault(_review);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ReviewEvents = new _events.EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 ReviewEvents.setMaxListeners(0);
@@ -18,16 +28,17 @@ var events = {
 };
 
 // Register the event emitter to the model events
-for(var e in events) {
-  let event = events[e];
-  Review.schema.post(e, emitEvent(event));
+for (var e in events) {
+  var event = events[e];
+  _review2.default.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function(doc) {
+  return function (doc) {
     ReviewEvents.emit(event + ':' + doc._id, doc);
     ReviewEvents.emit(event, doc);
   };
 }
 
-export default ReviewEvents;
+exports.default = ReviewEvents;
+//# sourceMappingURL=review.events.js.map

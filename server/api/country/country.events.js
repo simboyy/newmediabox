@@ -4,9 +4,19 @@
 
 'use strict';
 
-import {EventEmitter} from 'events';
-import Country from './country.model';
-var CountryEvents = new EventEmitter();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _events = require('events');
+
+var _country = require('./country.model');
+
+var _country2 = _interopRequireDefault(_country);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CountryEvents = new _events.EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 CountryEvents.setMaxListeners(0);
@@ -20,14 +30,15 @@ var events = {
 // Register the event emitter to the model events
 for (var e in events) {
   var event = events[e];
-  Country.schema.post(e, emitEvent(event));
+  _country2.default.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function(doc) {
+  return function (doc) {
     CountryEvents.emit(event + ':' + doc._id, doc);
     CountryEvents.emit(event, doc);
-  }
+  };
 }
 
-export default CountryEvents;
+exports.default = CountryEvents;
+//# sourceMappingURL=country.events.js.map

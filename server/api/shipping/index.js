@@ -14,3 +14,4 @@ router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 
 module.exports = router;
+//# sourceMappingURL=index.js.map

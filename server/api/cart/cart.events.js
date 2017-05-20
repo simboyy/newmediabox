@@ -4,9 +4,19 @@
 
 'use strict';
 
-import {EventEmitter} from 'events';
-import Cart from './cart.model';
-var CartEvents = new EventEmitter();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _events = require('events');
+
+var _cart = require('./cart.model');
+
+var _cart2 = _interopRequireDefault(_cart);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CartEvents = new _events.EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 CartEvents.setMaxListeners(0);
@@ -20,14 +30,15 @@ var events = {
 // Register the event emitter to the model events
 for (var e in events) {
   var event = events[e];
-  Cart.schema.post(e, emitEvent(event));
+  _cart2.default.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function(doc) {
+  return function (doc) {
     CartEvents.emit(event + ':' + doc._id, doc);
     CartEvents.emit(event, doc);
-  }
+  };
 }
 
-export default CartEvents;
+exports.default = CartEvents;
+//# sourceMappingURL=cart.events.js.map

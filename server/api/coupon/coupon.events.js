@@ -4,9 +4,19 @@
 
 'use strict';
 
-import {EventEmitter} from 'events';
-import Coupon from './coupon.model';
-var CouponEvents = new EventEmitter();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _events = require('events');
+
+var _coupon = require('./coupon.model');
+
+var _coupon2 = _interopRequireDefault(_coupon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CouponEvents = new _events.EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 CouponEvents.setMaxListeners(0);
@@ -20,14 +30,15 @@ var events = {
 // Register the event emitter to the model events
 for (var e in events) {
   var event = events[e];
-  Coupon.schema.post(e, emitEvent(event));
+  _coupon2.default.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function(doc) {
+  return function (doc) {
     CouponEvents.emit(event + ':' + doc._id, doc);
     CouponEvents.emit(event, doc);
-  }
+  };
 }
 
-export default CouponEvents;
+exports.default = CouponEvents;
+//# sourceMappingURL=coupon.events.js.map

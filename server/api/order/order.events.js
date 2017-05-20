@@ -4,9 +4,19 @@
 
 'use strict';
 
-import {EventEmitter} from 'events';
-import Order from './order.model';
-var OrderEvents = new EventEmitter();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _events = require('events');
+
+var _order = require('./order.model');
+
+var _order2 = _interopRequireDefault(_order);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var OrderEvents = new _events.EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 OrderEvents.setMaxListeners(0);
@@ -20,14 +30,15 @@ var events = {
 // Register the event emitter to the model events
 for (var e in events) {
   var event = events[e];
-  Order.schema.post(e, emitEvent(event));
+  _order2.default.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function(doc) {
+  return function (doc) {
     OrderEvents.emit(event + ':' + doc._id, doc);
     OrderEvents.emit(event, doc);
-  }
+  };
 }
 
-export default OrderEvents;
+exports.default = OrderEvents;
+//# sourceMappingURL=order.events.js.map

@@ -4,12 +4,21 @@
 
 'use strict';
 
-import KeyFeatureEvents from './keyfeature.events';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.register = register;
+
+var _keyfeature = require('./keyfeature.events');
+
+var _keyfeature2 = _interopRequireDefault(_keyfeature);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Model events to emit
 var events = ['save', 'remove'];
 
-export function register(socket) {
+function register(socket) {
   // Bind model events to socket events
   for (var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
@@ -20,15 +29,15 @@ export function register(socket) {
   }
 }
 
-
 function createListener(event, socket) {
-  return function(doc) {
+  return function (doc) {
     socket.emit(event, doc);
   };
 }
 
 function removeListener(event, listener) {
-  return function() {
-    KeyFeatureEvents.removeListener(event, listener);
+  return function () {
+    _keyfeature2.default.removeListener(event, listener);
   };
 }
+//# sourceMappingURL=keyfeature.socket.js.map

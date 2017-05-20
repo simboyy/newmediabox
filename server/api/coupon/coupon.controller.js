@@ -9,12 +9,28 @@
 
 'use strict';
 
-import _ from 'lodash';
-import Coupon from './coupon.model';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.index = index;
+exports.show = show;
+exports.create = create;
+exports.update = update;
+exports.destroy = destroy;
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _coupon = require('./coupon.model');
+
+var _coupon2 = _interopRequireDefault(_coupon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function(entity) {
+  return function (entity) {
     if (entity) {
       res.status(statusCode).json(entity);
     }
@@ -22,28 +38,26 @@ function respondWithResult(res, statusCode) {
 }
 
 function saveUpdates(updates) {
-  return function(entity) {
-    var updated = _.merge(entity, updates);
-    return updated.save()
-      .then(updated => {
-        return updated;
-      });
+  return function (entity) {
+    var updated = _lodash2.default.merge(entity, updates);
+    return updated.save().then(function (updated) {
+      return updated;
+    });
   };
 }
 
 function removeEntity(res) {
-  return function(entity) {
+  return function (entity) {
     if (entity) {
-      return entity.remove()
-        .then(() => {
-          res.status(204).end();
-        });
+      return entity.remove().then(function () {
+        res.status(204).end();
+      });
     }
   };
 }
 
 function handleEntityNotFound(res) {
-  return function(entity) {
+  return function (entity) {
     if (!entity) {
       res.status(404).end();
       return null;
@@ -54,58 +68,45 @@ function handleEntityNotFound(res) {
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function(err) {
+  return function (err) {
     res.status(statusCode).send(err);
   };
 }
 function isJson(str) {
   try {
-      str = JSON.parse(str);
+    str = JSON.parse(str);
   } catch (e) {
-      str = str;
+    str = str;
   }
-  return str
+  return str;
 }
 
 // Get list of coupons
-export function index(req, res) {
+function index(req, res) {
   var q = isJson(req.query.where);
-  return Coupon.find(q).exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  return _coupon2.default.find(q).exec().then(respondWithResult(res)).catch(handleError(res));
 }
 
 // Gets a single Coupon from the DB
-export function show(req, res) {
-  return Coupon.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+function show(req, res) {
+  return _coupon2.default.findById(req.params.id).exec().then(handleEntityNotFound(res)).then(respondWithResult(res)).catch(handleError(res));
 }
 
 // Creates a new Coupon in the DB
-export function create(req, res) {
-  return Coupon.create(req.body)
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+function create(req, res) {
+  return _coupon2.default.create(req.body).then(respondWithResult(res, 201)).catch(handleError(res));
 }
 
 // Updates an existing Coupon in the DB
-export function update(req, res) {
+function update(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  return Coupon.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  return _coupon2.default.findById(req.params.id).exec().then(handleEntityNotFound(res)).then(saveUpdates(req.body)).then(respondWithResult(res)).catch(handleError(res));
 }
 
 // Deletes a Coupon from the DB
-export function destroy(req, res) {
-  return Coupon.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+function destroy(req, res) {
+  return _coupon2.default.findById(req.params.id).exec().then(handleEntityNotFound(res)).then(removeEntity(res)).catch(handleError(res));
 }
+//# sourceMappingURL=coupon.controller.js.map

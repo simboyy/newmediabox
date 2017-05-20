@@ -1,8 +1,16 @@
 'use strict';
 
-import mongoose from 'mongoose';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var CouponSchema = new mongoose.Schema({
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CouponSchema = new _mongoose2.default.Schema({
   code: String,
   amount: Number,
   type: { type: String, default: 'Discount' },
@@ -11,4 +19,5 @@ var CouponSchema = new mongoose.Schema({
   minimumCartValue: Number
 });
 
-export default mongoose.model('Coupon', CouponSchema);
+exports.default = _mongoose2.default.model('Coupon', CouponSchema);
+//# sourceMappingURL=coupon.model.js.map

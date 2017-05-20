@@ -1,10 +1,19 @@
 'use strict';
 
-import mongoose from 'mongoose';
-var Schema = mongoose.Schema,
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Schema = _mongoose2.default.Schema,
     ObjectId = Schema.ObjectId;
-    
-var ReviewSchema = new mongoose.Schema({
+
+var ReviewSchema = new _mongoose2.default.Schema({
   pid: ObjectId,
   pname: String,
   pslug: String,
@@ -13,7 +22,8 @@ var ReviewSchema = new mongoose.Schema({
   message: String,
   rating: Number,
   active: { type: Boolean, default: true },
-  created: {type: Date, default: Date.now}
+  created: { type: Date, default: Date.now }
 });
 
-export default mongoose.model('Review', ReviewSchema);
+exports.default = _mongoose2.default.model('Review', ReviewSchema);
+//# sourceMappingURL=review.model.js.map
