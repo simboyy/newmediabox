@@ -1,0 +1,37 @@
+{
+  "name": "smdatetimerangepicker",
+  "version": "2.0.10",
+  "description": "angular material Date Time Range Picker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mominsamir/smDateTimeRangePicker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mominsamir/smDateTimeRangePicker/issues"
+  },
+  "homepage": "https://github.com/mominsamir/smDateTimeRangePicker#readme",
+  "devDependencies": {
+    "add-stream": "^1.0.0",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^1.8.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^3.2.2",
+    "gulp-html-replace": "^1.5.5",
+    "gulp-ng-templates": "0.0.6",
+    "gulp-order": "^1.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-watch": "^4.3.5",
+    "main-bower-files": "^2.11.1"
+  },
+  "dependencies": {
+    "moment": "^2.17.0"
+  }
+}

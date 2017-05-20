@@ -1,0 +1,103 @@
+<md-content class="md-whiteframe-z2" layout-padding>
+
+	<div layout="row" layout-margin> 
+		<h2 flex class="md-headline">Welcome to Date Time Picker</h2>
+		<h5  class="md-title">&nbsp;Support by  <!-- Place this tag where you want the button to render. -->
+			<a class="github-button" href="https://github.com/mominsamir/smDateTimeRangePicker" data-icon="octicon-star" data-style="mega" data-count-href="/mominsamir/smDateTimeRangePicker/stargazers" data-count-api="/repos/mominsamir/smDateTimeRangePicker#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star mominsamir/smDateTimeRangePicker on GitHub">Star</a>
+		</h5>
+		<h5  class="md-title">&nbsp;Track issue at 
+			<a class="github-button" href="https://github.com/mominsamir/smDateTimeRangePicker/issues" data-icon="octicon-issue-opened" data-style="mega" data-count-api="/repos/mominsamir/smDateTimeRangePicker#open_issues_count" data-count-aria-label="# issues on GitHub" aria-label="Issue mominsamir/smDateTimeRangePicker on GitHub">Issue</a>				
+		</h5>	
+		<h5 class="md-title">
+			<a class="github-button" href="https://github.com/mominsamir/smDateTimeRangePicker/archive/master.zip" data-icon="octicon-cloud-download" data-style="mega" aria-label="Download mominsamir/smDateTimeRangePicker on GitHub">Download</a>			
+		</h5>
+	</div>
+	
+	<div layout="column" > 
+		<p style="font-size:16px;">
+			smPicker allows you to pick date and time and Range .  				
+		</p>
+	</div>		
+
+	</div>
+	<div  layout="column" >
+		<h2 class="md-headline">How to Install</h2>
+		<code ><p>bower install --save smDateTimeRangePicker</p></code>
+	</div>
+	<div  layout="column" >
+		<h2 class="md-headline">How to Use</h2>
+		<code><p>angular.module('Your App',["ngMaterial","smDateTimeRangePicker"]);</p></code>
+	</div>	
+	<div  layout="column" >
+		<h2 class="md-headline">How to configure</h2>
+		<code>
+
+			<p>angular.module('Your App',["ngMaterial","smDateTimeRangePicker"]);
+			  </br>&nbsp;&nbsp;&nbsp;.config(function ($mdThemingProvider,pickerProvider) {
+			  </br>	
+    		   </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pickerProvider.setOkLabel('Save');    
+    		   </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pickerProvider.setCancelLabel('Close');    
+				</p>
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Over ride day names by changing here
+
+    		   <p>
+			   </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pickerProvider.setDayHeader('single');  //Options 'single','shortName', 'fullName'
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;picker.setDaysNames([
+        		</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'single':'S','shortName':'Su','fullName':'Sunday'}, 
+        		</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'single':'M','shortName':'Mo','fullName':'MonDay'}, 
+        		</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'single':'T','shortName':'Tu','fullName':'TuesDay'}, 
+        		</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'single':'W','shortName':'We','fullName':'Wednesday'}, 
+        		</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'single':'T','shortName':'Th','fullName':'Thursday'}, 
+        		</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'single':'F','shortName':'Fr','fullName':'Friday'}, 
+        		</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'single':'S','shortName':'Sa','fullName':'Saturday'}
+            	</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]);
+            	</p>
+            	</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Range Picker Configuration
+            	<p>
+
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;picker.setDivider('To');
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;picker.setMonthNames(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;picker.setRangeDefaultList([
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{	
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label:'Today',
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; startDate:moment().startOf('day'),
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; endDate:moment().endOf('day')
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  label:'Last 7 Days',
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  startDate: moment().subtract(7,'d'),
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  endDate:moment()
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;			            },
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{	
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  label:'This Month',
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  startDate:moment().startOf('month'), 
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  endDate: moment().endOf('month')
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  label:'Last Month',
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  startDate:moment().subtract(1,'month').startOf('month'),
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  endDate: moment()
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  label: 'This Quarter',
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  startDate: moment().startOf('quarter'),
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  endDate: moment().endOf('quarter')
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  label:  'Year To Date',
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  startDate:  moment().startOf('year'),
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  endDate:  moment()
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  label:  'This Year',
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  startDate:  moment().startOf('year'),
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  endDate:  moment().endOf('year')
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+				</br>&nbsp;&nbsp;&nbsp;]);
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;picker.setRangeCustomStartEnd(['Start Date', 'End Date']);      
+				</br>&nbsp;&nbsp;&nbsp;}
+		</p>
+
+		</code>
+	</div>		
+</md-content>		

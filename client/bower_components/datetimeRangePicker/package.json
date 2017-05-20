@@ -1,0 +1,34 @@
+{
+  "name": "datetime-range-picker",
+  "version": "1.3.1",
+  "main":"range-picker.js",
+  "description": "A datetime picker for range between two calendars and time sliders ",
+  "homepage": "https://github.com/RGkevin/datetimeRangePicker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RGkevin/datetimeRangePicker"
+  },
+  "author": "Kevin Eduardo <rgkevin.lopez@gmail.com>",
+  "contributors": [
+    "Miguel Chacon <mmrchacon92@gmail.com>",
+    "Carlos Hernandez <learnercys@gmail.com>",
+    "Nick Tsitlakidis <nick@nicktsitlakidis.com>"
+  ],
+  "keywords": [
+    "calendar",
+    "angular",
+    "slides",
+    "range",
+    "picker",
+    "ui"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.2.0",
+    "angular-animate": "~1.2.0",
+    "angular-sanitize": "~1.2.0",
+    "angular-touch": "~1.2.0",
+    "jquery": "~2.1.1",
+    "aventurocket-angular-slider":"git+https://git@github.com/Venturocket/angular-slider.git#master"
+  }
+}

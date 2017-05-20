@@ -1,0 +1,127 @@
+<form name="test" ng-submit="vm.save()" novalidate>
+<md-content  class="md-whiteframe-z2" layout-padding>
+    <div>
+    	<h2 class="md-title">Demo For Default Date Range Picker (ALLOW-CLEAR and ALLOW-EMPTY set to TRUE)</h2>
+	    <div layout="row">
+	        <sm-range-picker-input
+	            fname="Date of Pay"
+	            label="Date of Pay"
+	            form="test"
+	            ng-model="vm.employee.default"
+	            flex="50"
+				format="DD-MMM-YYYY"
+				floating-label="true"
+	            divider="To"
+	            week-start-day="Monday"
+	            custom-to-home="true"
+	            allow-clear="true"
+	            allow-empty="true"
+	            on-range-select="vm.dayofPaySelected(range)">
+	        </sm-range-picker-input>
+	    </div>
+	   selected range via call back = <pre>{{ vm.rangeObj | json }}</pre>
+    </div>
+    <div>
+    	<h2 class="md-title">Close on Select : Custom view without floating label</h2>
+	    <div layout="row">
+	        <sm-range-picker-input
+			    fname="Date of Pay"
+	            label="Date of Pay"
+				no-floating-label="true"
+	            ng-model="vm.employee.dateOfPay"
+	            flex="50"
+	            format="DD-MM-YYYY"
+	            divider="To"
+	            mode="date"
+	            week-start-day="Monday"
+	            custom-to-home="true"
+	            close-on-select="true"
+	            show-custom="true">
+	        </sm-range-picker-input>
+	    </div>
+    </div>
+    <div>
+    	<h2 class="md-title">Date-Time Range Picker</h2>
+	    <div layout="row">
+	        <sm-range-picker-input
+	                fname="dayOfPay"
+	                label="Date of Pay"
+	                form="test"
+	                min-date="11-10-2015"
+	                ng-model="vm.employee.dateOfPay1"
+	                flex="50"
+	                is-required="true"
+	                format="DD-MM-YYYY HH:mm"
+	                divider="To"
+	                mode="date-time"
+	                week-start-day="Monday"
+	                custom-to-home="true"
+	                show-custom="true">
+	        </sm-range-picker-input>
+	    </div>
+    </div>
+
+    <div>
+    	<h2 class="md-title">Close on Select Date-Time Range Picker</h2>
+	    <div layout="row">
+	        <sm-range-picker-input
+	                fname="dayOfPay"
+	                label="Date of Pay 2"
+	                form="test"
+	                min-date="11-10-2015"
+	                ng-model="vm.dateOfPay2"
+	                flex="50"
+	                is-required="true"
+	                format="DD-MM-YYYY HH:mm"
+	                divider="To"
+	                mode="date-time"
+	                week-start-day="Monday"
+	                custom-to-home="true"
+	                close-on-select="true"
+	                on-range-select="vm.dayofPay2Selected(range)">
+	        </sm-range-picker-input>
+	    </div>
+        <pre><code>ngModel = {{ vm.dateOfPay2 | json }}</code></pre>
+        <pre><code>data parameter on callback = {{ vm.rangeObj2 | json }}</code></pre>
+    </div>
+
+    <div>
+    	<h2 class="md-title">Override  custom list for specific picker element Date Range Picker</h2>
+	    <div layout="row">
+	        <sm-range-picker-input
+	            fname="Date of Paya"
+	            label="Date of Paya"
+	            form="test"
+	            ng-model="vm.employee.default1dd"
+	            flex="50"
+				format="DD-MM-YYYY"
+	            divider="To"
+	            week-start-day="Monday"
+	            custom-list="vm.overrideList"
+	            custom-to-home="true">
+	        </sm-range-picker-input>
+	    </div>
+    </div>
+
+    <div>
+    	<h2 class="md-title">Min and Max Date Support</h2>
+	    <div layout="row">
+	        <sm-range-picker-input
+	            fname="Date of Paya"
+	            label="Date of Paya"
+	            form="test"
+	            ng-model="vm.employee.default1dd"
+	            flex="50"
+				min-date="11-10-2015"
+				format="DD-MM-YYYY"
+				max-date="11-10-2016"
+	            divider="To"
+	            week-start-day="Monday"
+	            custom-list="vm.overrideList"
+	            custom-to-home="true">
+	        </sm-range-picker-input>
+	    </div>
+    </div>
+
+	</md-content>
+</form>
