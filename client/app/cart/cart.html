@@ -45,9 +45,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Publisher</th>
-                                <th>Media Option </th>
+                                <th>Media Option and upload </th>
                                 <th style="width: 250px">Start and End Date</th>
-                                <th style="width: 100px">Upload Advert</th>
+                                <th style="width: 100px">Availability</th>
                                 <th>Price</th>
                                 <th>Inserts</th>
                                 <th>Total</th>
@@ -66,23 +66,13 @@
                                 <td class="product-thumbnail">
                                     <a>
                                         <img data-ng-src="data:image/png;base64,{{item.image}}" alt="{{item.publisher}}" style="width: 100px;">
-                                    </a>
+                                    </a><br>&nbsp;
                                     <br> {{item.publisher}}
                                 </td>
                                 <td class="product-name">
-                                    {{item.name}}
-                                </td>
-                                <td class="product-name">
-                                    <div class="col-md-12 demo">
-                                        <div class="form-group has-feedback">
-                                            <label class="control-label">&nbsp;</label>
-                                            <input type="text" class="form-control" id="config-demo" name="daterange" value="" ng-model="item.category" placeholder="Start and End Date" ng-change="cart.querySearch(item.category,item)" />
-                                            <i class="glyphicon glyphicon-calendar form-control-feedback"></i>
-                                        </div>
-                                </td>
-                                <td>
+                                    {{item.name}}<br>
                                     <md-input-container flex>
-                                        <img style="width: 100px;" ng-src="{{item.creative}}" err-SRC="/assets/images/material-shop.jpg">
+                                        <img style="width: 100px;border: none;" ng-src="{{item.creative}}" err-SRC="/assets/images/material-shop.jpg">
                                     </md-input-container>
                                     <div ng-hide="item.creative">
                                         <button class="btn btn-danger" ng-hide="isAdmin()" ng-click="cart.mediaLibrary($index)"><i class="fa fa-image"></i><span class="glyphicon glyphicon-upload"></span></button>
@@ -90,6 +80,22 @@
                                     <div ng-show="item.creative">
                                         <button class="btn btn-success" ng-hide="isAdmin()" ng-click="cart.mediaLibrary($index)"><i class="fa fa-image"></i><span class="glyphicon glyphicon-upload"></span></button>
                                     </div>
+                                </td>
+                                <td class="product-name">
+                                    <div class="col-md-12 demo">
+                                        <div class="form-group has-feedback">
+                                            <label class="control-label">&nbsp;</label>
+                                            <input type="text" class="form-control" id="config-demo" name="daterange" value="" ng-model="item.category" placeholder="Start and End Date" ng-change="cart.querySearch(item.category,item,$index)" />
+                                            <i class="glyphicon glyphicon-calendar form-control-feedback"></i>
+                                        </div>
+                                </td>
+                                <td>
+                                    <div id="mydiv" ng-hide="cart.loaded[$index]" >
+                                        <img src="/assets/images/AjaxLoader.gif"  style="border: none;" alt="">
+                                        
+                                    </div>
+                                    <ng-md-icon icon="check_circle" ng-show="cart.loaded[$index]=='available'" class="material-icons md-96 success"></ng-md-icon><br>
+                                    <ng-md-icon icon="highlight_off" ng-show="cart.loaded[$index]=='notavailable'"  class="material-icons md-96 cancel"></ng-md-icon>
                                 </td>
                                 <td>{{item.price | currency}}</td>
                                 <td>

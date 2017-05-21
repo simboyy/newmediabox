@@ -58,6 +58,14 @@ body,
   -moz-osx-font-smoothing: grayscale;
 }
 
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-96 { font-size: 96px; }
+.material-icons.cancel {color: #d9534f;margin: 10px}
+.material-icons.success {color: #006400;margin: 10px}
+
 .icon-info:before {
   content: "\e600";
 }
