@@ -1,8 +1,16 @@
 'use strict';
 
-import mongoose from 'mongoose';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var BrandSchema = new mongoose.Schema({
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var BrandSchema = new _mongoose2.default.Schema({
   name: String,
   slug: String,
   info: String,
@@ -11,7 +19,8 @@ var BrandSchema = new mongoose.Schema({
   uid: String,
   brand: Number,
   active: { type: Boolean, default: true },
-  updated: {type: Date, default: Date.now}
+  updated: { type: Date, default: Date.now }
 });
 
-export default mongoose.model('Brand', BrandSchema);
+exports.default = _mongoose2.default.model('Brand', BrandSchema);
+//# sourceMappingURL=brand.model.js.map

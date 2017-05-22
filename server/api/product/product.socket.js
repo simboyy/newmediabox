@@ -4,31 +4,40 @@
 
 'use strict';
 
-import ProductEvents from './product.events';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.register = register;
+
+var _product = require('./product.events');
+
+var _product2 = _interopRequireDefault(_product);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Model events to emit
 var events = ['save', 'remove'];
 
-export function register(socket) {
+function register(socket) {
   // Bind model events to socket events
   for (var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
     var listener = createListener('product:' + event, socket);
 
-    ProductEvents.on(event, listener);
+    _product2.default.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));
   }
 }
 
-
 function createListener(event, socket) {
-  return function(doc) {
+  return function (doc) {
     socket.emit(event, doc);
   };
 }
 
 function removeListener(event, listener) {
-  return function() {
-    ProductEvents.removeListener(event, listener);
+  return function () {
+    _product2.default.removeListener(event, listener);
   };
 }
+//# sourceMappingURL=product.socket.js.map

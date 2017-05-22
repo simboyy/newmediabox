@@ -4,9 +4,19 @@
 
 'use strict';
 
-import {EventEmitter} from 'events';
-import brandMG from './brandmg.model';
-var BrandMGEvents = new EventEmitter();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _events = require('events');
+
+var _brandmg = require('./brandmg.model');
+
+var _brandmg2 = _interopRequireDefault(_brandmg);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var BrandMGEvents = new _events.EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 BrandMGEvents.setMaxListeners(0);
@@ -20,14 +30,15 @@ var events = {
 // Register the event emitter to the model events
 for (var e in events) {
   var event = events[e];
-  brandMG.schema.post(e, emitEvent(event));
+  _brandmg2.default.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function(doc) {
+  return function (doc) {
     BrandMGEvents.emit(event + ':' + doc._id, doc);
     BrandMGEvents.emit(event, doc);
-  }
+  };
 }
 
-export default BrandMGEvents;
+exports.default = BrandMGEvents;
+//# sourceMappingURL=brandmg.events.js.map

@@ -4,9 +4,19 @@
 
 'use strict';
 
-import {EventEmitter} from 'events';
-import BrandTV from './brandtv.model';
-var BrandTVEvents = new EventEmitter();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _events = require('events');
+
+var _brandtv = require('./brandtv.model');
+
+var _brandtv2 = _interopRequireDefault(_brandtv);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var BrandTVEvents = new _events.EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 BrandTVEvents.setMaxListeners(0);
@@ -20,14 +30,15 @@ var events = {
 // Register the event emitter to the model events
 for (var e in events) {
   var event = events[e];
-  BrandTV.schema.post(e, emitEvent(event));
+  _brandtv2.default.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function(doc) {
+  return function (doc) {
     BrandTVEvents.emit(event + ':' + doc._id, doc);
     BrandTVEvents.emit(event, doc);
-  }
+  };
 }
 
-export default BrandTVEvents;
+exports.default = BrandTVEvents;
+//# sourceMappingURL=brandtv.events.js.map

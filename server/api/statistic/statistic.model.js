@@ -1,12 +1,21 @@
 'use strict';
 
-import mongoose from 'mongoose';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var StatisticSchema = new mongoose.Schema({
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var StatisticSchema = new _mongoose2.default.Schema({
   key: String,
   val: String,
   info: String,
   active: Boolean
 });
 
-export default mongoose.model('Statistic', StatisticSchema);
+exports.default = _mongoose2.default.model('Statistic', StatisticSchema);
+//# sourceMappingURL=statistic.model.js.map

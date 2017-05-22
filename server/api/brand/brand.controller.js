@@ -9,12 +9,28 @@
 
 'use strict';
 
-import _ from 'lodash';
-import Brand from './brand.model';
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.index = index;
+exports.show = show;
+exports.create = create;
+exports.update = update;
+exports.destroy = destroy;
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _brand = require('./brand.model');
+
+var _brand2 = _interopRequireDefault(_brand);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function(entity) {
+  return function (entity) {
     if (entity) {
       res.status(statusCode).json(entity);
     }
@@ -22,28 +38,26 @@ function respondWithResult(res, statusCode) {
 }
 
 function saveUpdates(updates) {
-  return function(entity) {
-    var updated = _.merge(entity, updates);
-    return updated.save()
-      .then(updated => {
-        return updated;
-      });
+  return function (entity) {
+    var updated = _lodash2.default.merge(entity, updates);
+    return updated.save().then(function (updated) {
+      return updated;
+    });
   };
 }
 
 function removeEntity(res) {
-  return function(entity) {
+  return function (entity) {
     if (entity) {
-      return entity.remove()
-        .then(() => {
-          res.status(204).end();
-        });
+      return entity.remove().then(function () {
+        res.status(204).end();
+      });
     }
   };
 }
 
 function handleEntityNotFound(res) {
-  return function(entity) {
+  return function (entity) {
     if (!entity) {
       res.status(404).end();
       return null;
@@ -54,67 +68,52 @@ function handleEntityNotFound(res) {
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
-  return function(err) {
+  return function (err) {
     res.status(statusCode).send(err);
   };
 }
 
 // Gets a list of Brands
-export function index(req, res) {
-  Brand.find(req.query)
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+function index(req, res) {
+  _brand2.default.find(req.query).then(respondWithResult(res)).catch(handleError(res));
 }
 
 // Gets a single Brand from the DB
-export function show(req, res) {
-  return Brand.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+function show(req, res) {
+  return _brand2.default.findById(req.params.id).exec().then(handleEntityNotFound(res)).then(respondWithResult(res)).catch(handleError(res));
 }
 
 // Creates a new Brand in the DB
-export function create(req, res) {
+function create(req, res) {
   req.body.uid = req.user.email; // id change on every login hence email is used
   req.body.updated = Date.now();
-  if(!req.body.slug && req.body.info)
-  req.body.slug = req.body.info.toString().toLowerCase()
-                      .replace(/\s+/g, '-')        // Replace spaces with -
-                      .replace(/[^\w\-]+/g, '')   // Remove all non-word chars
-                      .replace(/\-\-+/g, '-')      // Replace multiple - with single -
-                      .replace(/^-+/, '')          // Trim - from start of text
-                      .replace(/-+$/, '');
+  if (!req.body.slug && req.body.info) req.body.slug = req.body.info.toString().toLowerCase().replace(/\s+/g, '-') // Replace spaces with -
+  .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+  .replace(/\-\-+/g, '-') // Replace multiple - with single -
+  .replace(/^-+/, '') // Trim - from start of text
+  .replace(/-+$/, '');
 
-  return Brand.create(req.body)
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+  return _brand2.default.create(req.body).then(respondWithResult(res, 201)).catch(handleError(res));
 }
 
 // Updates an existing Brand in the DB
-export function update(req, res) {
-  if(req.body._id) { delete req.body._id; }
+function update(req, res) {
+  if (req.body._id) {
+    delete req.body._id;
+  }
   req.body.uid = req.user.email; // id change on every login hence email is used
   req.body.updated = Date.now();
-  if(!req.body.slug && req.body.info)
-  req.body.slug = req.body.info.toString().toLowerCase()
-                      .replace(/\s+/g, '-')        // Replace spaces with -
-                      .replace(/[^\w\-]+/g, '')   // Remove all non-word chars
-                      .replace(/\-\-+/g, '-')      // Replace multiple - with single -
-                      .replace(/^-+/, '')          // Trim - from start of text
-                      .replace(/-+$/, '');
+  if (!req.body.slug && req.body.info) req.body.slug = req.body.info.toString().toLowerCase().replace(/\s+/g, '-') // Replace spaces with -
+  .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+  .replace(/\-\-+/g, '-') // Replace multiple - with single -
+  .replace(/^-+/, '') // Trim - from start of text
+  .replace(/-+$/, '');
 
-  return Brand.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  return _brand2.default.findById(req.params.id).exec().then(handleEntityNotFound(res)).then(saveUpdates(req.body)).then(respondWithResult(res)).catch(handleError(res));
 }
 
 // Deletes a Brand from the DB
-export function destroy(req, res) {
-  return Brand.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+function destroy(req, res) {
+  return _brand2.default.findById(req.params.id).exec().then(handleEntityNotFound(res)).then(removeEntity(res)).catch(handleError(res));
 }
+//# sourceMappingURL=brand.controller.js.map
