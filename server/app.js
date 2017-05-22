@@ -30,7 +30,7 @@ _mongoose2.default.Promise = require('bluebird');
 
 
 // Connect to MongoDB
-_mongoose2.default.connect('mongodb://127.0.0.1:27017/mediaboxzim');
+_mongoose2.default.connect('mongodb://simba:1994kingsss@ds135797.mlab.com:35797/mediaboxzim');
 _mongoose2.default.connection.on('error', function (err) {
   console.error('MongoDB connection error: ' + err);
   process.exit(-1);
@@ -54,7 +54,7 @@ require('./routes').default(app);
 
 // Start server
 function startServer() {
-  app.angularFullstack = server.listen(_environment2.default.port, _environment2.default.ip, function () {
+  app.angularFullstack = server.listen(process.env.PORT, function () {
     console.log('Express server listening on %d, in %s mode', _environment2.default.port, app.get('env'));
   });
 }
