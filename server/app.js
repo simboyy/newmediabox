@@ -43,6 +43,8 @@ if (_environment2.default.seedDB) {
 
 // Setup server
 var app = (0, _express2.default)();
+var path = require('path')
+app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')))
 var server = _http2.default.createServer(app);
 var socketio = require('socket.io')(server, {
   serveClient: _environment2.default.env !== 'production',
