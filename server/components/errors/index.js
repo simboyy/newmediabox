@@ -12,7 +12,7 @@ module.exports[404] = function pageNotFound(req, res) {
   };
 
   res.status(result.status);
-  res.render(viewFilePath, {}, function (err, html) {
+  res.render(viewFilePath, {}, function(err, html) {
     if (err) {
       return res.status(result.status).json(result);
     }
@@ -20,4 +20,3 @@ module.exports[404] = function pageNotFound(req, res) {
     res.send(html);
   });
 };
-//# sourceMappingURL=index.js.map

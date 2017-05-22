@@ -2,7 +2,6 @@
 
 // Test specific configuration
 // ===========================
-
 module.exports = {
   // MongoDB connection options
   mongo: {
@@ -19,4 +18,3 @@ module.exports = {
     }
   }
 };
-//# sourceMappingURL=test.js.map

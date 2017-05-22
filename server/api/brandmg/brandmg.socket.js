@@ -4,40 +4,31 @@
 
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.register = register;
-
-var _brandmg = require('./brandmg.events');
-
-var _brandmg2 = _interopRequireDefault(_brandmg);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+import BrandMGEvents from './brandmg.events';
 
 // Model events to emit
 var events = ['save', 'remove'];
 
-function register(socket) {
+export function register(socket) {
   // Bind model events to socket events
   for (var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
     var listener = createListener('brandmg:' + event, socket);
 
-    _brandmg2.default.on(event, listener);
+    BrandMGEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));
   }
 }
 
+
 function createListener(event, socket) {
-  return function (doc) {
+  return function(doc) {
     socket.emit(event, doc);
   };
 }
 
 function removeListener(event, listener) {
-  return function () {
-    _brandmg2.default.removeListener(event, listener);
+  return function() {
+    BrandMGEvents.removeListener(event, listener);
   };
 }
-//# sourceMappingURL=brandmg.socket.js.map

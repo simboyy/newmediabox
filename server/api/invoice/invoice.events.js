@@ -4,19 +4,9 @@
 
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _events = require('events');
-
-var _invoice = require('./invoice.model');
-
-var _invoice2 = _interopRequireDefault(_invoice);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var InvoiceEvents = new _events.EventEmitter();
+import {EventEmitter} from 'events';
+import Invoice from './invoice.model';
+var InvoiceEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 InvoiceEvents.setMaxListeners(0);
@@ -30,15 +20,14 @@ var events = {
 // Register the event emitter to the model events
 for (var e in events) {
   var event = events[e];
-  _invoice2.default.schema.post(e, emitEvent(event));
+  Invoice.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function (doc) {
+  return function(doc) {
     InvoiceEvents.emit(event + ':' + doc._id, doc);
     InvoiceEvents.emit(event, doc);
-  };
+  }
 }
 
-exports.default = InvoiceEvents;
-//# sourceMappingURL=invoice.events.js.map
+export default InvoiceEvents;

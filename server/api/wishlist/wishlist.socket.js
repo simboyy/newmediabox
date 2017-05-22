@@ -4,40 +4,31 @@
 
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.register = register;
-
-var _wishlist = require('./wishlist.events');
-
-var _wishlist2 = _interopRequireDefault(_wishlist);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+import WishlistEvents from './wishlist.events';
 
 // Model events to emit
 var events = ['save', 'remove'];
 
-function register(socket) {
+export function register(socket) {
   // Bind model events to socket events
-  for (var i = 0, eventsLength = events.length; i < eventsLength; i++) {
+  for(var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
-    var listener = createListener('wishlist:' + event, socket);
+    var listener = createListener(`wishlist:${event}`, socket);
 
-    _wishlist2.default.on(event, listener);
+    WishlistEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));
   }
 }
 
+
 function createListener(event, socket) {
-  return function (doc) {
+  return function(doc) {
     socket.emit(event, doc);
   };
 }
 
 function removeListener(event, listener) {
-  return function () {
-    _wishlist2.default.removeListener(event, listener);
+  return function() {
+    WishlistEvents.removeListener(event, listener);
   };
 }
-//# sourceMappingURL=wishlist.socket.js.map

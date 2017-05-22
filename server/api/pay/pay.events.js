@@ -4,19 +4,9 @@
 
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _events = require('events');
-
-var _pay = require('./pay.model');
-
-var _pay2 = _interopRequireDefault(_pay);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var PayEvents = new _events.EventEmitter();
+import {EventEmitter} from 'events';
+import Pay from './pay.model';
+var PayEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 PayEvents.setMaxListeners(0);
@@ -28,17 +18,16 @@ var events = {
 };
 
 // Register the event emitter to the model events
-for (var e in events) {
-  var event = events[e];
-  _pay2.default.schema.post(e, emitEvent(event));
+for(var e in events) {
+  let event = events[e];
+  Pay.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function (doc) {
+  return function(doc) {
     PayEvents.emit(event + ':' + doc._id, doc);
     PayEvents.emit(event, doc);
   };
 }
 
-exports.default = PayEvents;
-//# sourceMappingURL=pay.events.js.map
+export default PayEvents;

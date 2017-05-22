@@ -88,14 +88,17 @@
                                             <input type="text" class="form-control" id="config-demo" name="daterange" value="" ng-model="item.category" placeholder="Start and End Date" ng-change="cart.querySearch(item.category,item,$index)" />
                                             <i class="glyphicon glyphicon-calendar form-control-feedback"></i>
                                         </div>
+                                        <p><ng-md-icon icon="highlight_off" ng-show="cart.loaded[$index]=='notavailable'"  class="material-icons md-96 cancel"></ng-md-icon><span ng-show="cart.loaded[$index]=='notavailable'"><small><b>select different dates</b></small></span></p>
                                 </td>
                                 <td>
                                     <div id="mydiv" ng-hide="cart.loaded[$index]" >
                                         <img src="/assets/images/AjaxLoader.gif"  style="border: none;" alt="">
                                         
                                     </div>
-                                    <ng-md-icon icon="check_circle" ng-show="cart.loaded[$index]=='available'" class="material-icons md-96 success"></ng-md-icon><br>
-                                    <ng-md-icon icon="highlight_off" ng-show="cart.loaded[$index]=='notavailable'"  class="material-icons md-96 cancel"></ng-md-icon>
+                                    <!-- <ng-md-icon icon="check_circle" ng-show="cart.loaded[$index]=='available'" class="material-icons md-96 success"></ng-md-icon><br>
+                                    <ng-md-icon icon="highlight_off" ng-show="cart.loaded[$index]=='notavailable'"  class="material-icons md-96 cancel"></ng-md-icon> -->
+                                    &nbsp;&nbsp;&nbsp;<span ng-show="cart.loaded[$index]=='notavailable'" class="red">{{cart.available[$index]}}</span>
+                                    <span ng-show="cart.loaded[$index]=='available'" class="green">{{cart.available[$index]}}</span>
                                 </td>
                                 <td>{{item.price | currency}}</td>
                                 <td>

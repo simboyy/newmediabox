@@ -14,4 +14,3 @@ router.patch('/:id', auth.hasRole('admin'), controller.update);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 
 module.exports = router;
-//# sourceMappingURL=index.js.map

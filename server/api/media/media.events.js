@@ -4,19 +4,9 @@
 
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _events = require('events');
-
-var _media = require('./media.model');
-
-var _media2 = _interopRequireDefault(_media);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var MediaEvents = new _events.EventEmitter();
+import {EventEmitter} from 'events';
+import Media from './media.model';
+var MediaEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
 MediaEvents.setMaxListeners(0);
@@ -30,15 +20,14 @@ var events = {
 // Register the event emitter to the model events
 for (var e in events) {
   var event = events[e];
-  _media2.default.schema.post(e, emitEvent(event));
+  Media.schema.post(e, emitEvent(event));
 }
 
 function emitEvent(event) {
-  return function (doc) {
+  return function(doc) {
     MediaEvents.emit(event + ':' + doc._id, doc);
     MediaEvents.emit(event, doc);
-  };
+  }
 }
 
-exports.default = MediaEvents;
-//# sourceMappingURL=media.events.js.map
+export default MediaEvents;

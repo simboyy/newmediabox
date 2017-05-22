@@ -8,21 +8,25 @@
 
 
             /* autocomplete */
-            vm.simulateQuery = true;
-            vm.querySearch = querySearch;
+            vm.simulateQuery      = true;
+            vm.querySearch        = querySearch;
             vm.selectedItemChange = selectedItemChange;
-            vm.searchTextChange = searchTextChange;
-            vm.products = [];
-            vm.product = {};
-            vm.product.variants = [];
-            vm.cart = Cart.cart;
-            vm.Settings = Settings;
-            vm.$mdMedia = $mdMedia;
-            vm.$filter = $filter;
-            vm.Media = Media;
-            this.Media = Media;
-            vm.Toast = Toast;
-            vm.loaded = [];
+            vm.searchTextChange   = searchTextChange;
+            vm.products           = [];
+            vm.product            = {};
+            vm.product.variants   = [];
+            vm.cart               = Cart.cart;
+            vm.Settings           = Settings;
+            vm.$mdMedia           = $mdMedia;
+            vm.$filter            = $filter;
+            vm.Media              = Media;
+            this.Media            = Media;
+            vm.Toast              = Toast;
+            vm.loaded             = [];
+            vm.available          = []; //store the inventory available for each item
+            vm.notAvailable       = [];
+            vm.notAvailableObj    = {};
+
 
 
 
@@ -149,20 +153,29 @@
 
                             if (res[0]) {
                                 if (res[0].available > 0) {
-                                    vm.loaded[index] = 'available';
+                                    vm.loaded[index]   = 'available';
+                                    vm.available[index]= res[0].available;
+                                    if(vm.notAvailable.indexOf(index) != -1){
+                                        vm.notAvailable.remove(index);
+                                    }
                                 } else {
-                                    vm.loaded[index] = 'notavailable';
+                                    vm.loaded[index]   = 'notavailable';
+                                    vm.available[index]= 0;
+                                    vm.notAvailable.push(index);
                                 }
                             } else {
-                                vm.loaded[index] = 'notavailable';
+                                vm.loaded[index]    = 'notavailable';
+                                vm.available[index]= 0;
+                                vm.notAvailable.push(index);
+
                             }
 
-                        }, 4000)
+                        }, 2000)
 
                     });
                 }
 
-                console.log(vm.loaded);
+                console.log(vm.notAvailable);
                 return data;
             }
 

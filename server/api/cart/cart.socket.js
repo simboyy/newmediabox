@@ -4,40 +4,31 @@
 
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.register = register;
-
-var _cart = require('./cart.events');
-
-var _cart2 = _interopRequireDefault(_cart);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+import CartEvents from './cart.events';
 
 // Model events to emit
 var events = ['save', 'remove'];
 
-function register(socket) {
+export function register(socket) {
   // Bind model events to socket events
   for (var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
     var listener = createListener('cart:' + event, socket);
 
-    _cart2.default.on(event, listener);
+    CartEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));
   }
 }
 
+
 function createListener(event, socket) {
-  return function (doc) {
+  return function(doc) {
     socket.emit(event, doc);
   };
 }
 
 function removeListener(event, listener) {
-  return function () {
-    _cart2.default.removeListener(event, listener);
+  return function() {
+    CartEvents.removeListener(event, listener);
   };
 }
-//# sourceMappingURL=cart.socket.js.map

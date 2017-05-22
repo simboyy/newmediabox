@@ -1,21 +1,12 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+import mongoose from 'mongoose';
 
-var _mongoose = require('mongoose');
-
-var _mongoose2 = _interopRequireDefault(_mongoose);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var PaymentMethodSchema = new _mongoose2.default.Schema({
+var PaymentMethodSchema = new mongoose.Schema({
   name: String,
   email: String,
   options: Object,
-  active: { type: Boolean, default: true }
+  active: {type: Boolean, default:true}
 });
 
-exports.default = _mongoose2.default.model('PaymentMethod', PaymentMethodSchema);
-//# sourceMappingURL=PaymentMethod.model.js.map
+export default mongoose.model('PaymentMethod', PaymentMethodSchema);
