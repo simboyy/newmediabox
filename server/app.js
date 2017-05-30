@@ -28,9 +28,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _mongoose2.default.Promise = require('bluebird');
 
-
+var options = { 
+  server: { 
+    socketOptions: { 
+      keepAlive: 300000, connectTimeoutMS: 30000 
+    } 
+  }, 
+  replset: { 
+    socketOptions: { 
+      keepAlive: 300000, 
+      connectTimeoutMS : 30000 
+    } 
+  } 
+};
 // Connect to MongoDB
-_mongoose2.default.connect('mongodb://simba:1994kingsss@ds135797.mlab.com:35797/mediaboxzim');
+_mongoose2.default.connect('mongodb://simba:1994kingsss@ds135797.mlab.com:35797/mediaboxzim',options);
 _mongoose2.default.connection.on('error', function (err) {
   console.error('MongoDB connection error: ' + err);
   process.exit(-1);
@@ -54,7 +66,7 @@ require('./routes').default(app);
 
 // Start server
 function startServer() {
-  app.angularFullstack = server.listen(process.env.PORT, function () {
+  app.angularFullstack = server.listen(process.env.PORT || 8081, function () {
     console.log('Express server listening on %d, in %s mode', _environment2.default.port, app.get('env'));
   });
 }
