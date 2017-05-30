@@ -63,7 +63,7 @@ var socketio = require('socket.io')(server, {
 require('./config/socketio').default(socketio);
 require('./config/express').default(app);
 require('./routes').default(app);
-app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use('/bower_components', _express2.static(__dirname + '/bower_components'));
 
 // Start server
 function startServer() {
